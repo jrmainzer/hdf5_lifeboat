@@ -9749,6 +9749,9 @@ test_dataset_vlen_io(void)
     hvl_t wbuf[DATASET_VLEN_IO_DSET_DIMS];
     hvl_t rbuf[DATASET_VLEN_IO_DSET_DIMS];
 
+    memset(wbuf, 0, sizeof(hvl_t) * DATASET_VLEN_IO_DSET_DIMS);
+    memset(rbuf, 0, sizeof(hvl_t) * DATASET_VLEN_IO_DSET_DIMS);
+
     TESTING_MULTIPART(
         "verification of dataset data with H5Dwrite and then H5D read with variable length sequence data");
 
@@ -9897,7 +9900,7 @@ test_dataset_vlen_io(void)
             if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0)
                 PART_TEST_ERROR(rw_all_int);
 
-            if ((container_group = H5Gopen(file_id, DATASET_TEST_GROUP_NAME, H5P_DEFAULT)) < 0)
+            if ((container_group = H5Gopen2(file_id, DATASET_TEST_GROUP_NAME, H5P_DEFAULT)) < 0)
                 PART_TEST_ERROR(rw_all_int);
 
             if ((dset_int = H5Dopen2(container_group, DATASET_VLEN_IO_DSET_NAME "_int", H5P_DEFAULT)) < 0)
@@ -10114,6 +10117,7 @@ test_dataset_vlen_io(void)
 
         PART_BEGIN(rw_point_selection)
         {
+            TESTING_2("write with point selection");
             /* Select even-indexed points */
             for (size_t i = 0; i < DATASET_VLEN_IO_DSET_DIMS / 2; i++)
                 point_coords[i] = i * 2;
@@ -10211,6 +10215,7 @@ test_dataset_vlen_io(void)
 
         PART_BEGIN(rw_hyperslab_selection)
         {
+            TESTING_2("write with hyperslab selection");
             /* Select hyperslab of every 3rd element */
             const hsize_t start[1]  = {0};
             const hsize_t stride[1] = {3};
@@ -10318,6 +10323,7 @@ test_dataset_vlen_io(void)
         TEST_ERROR;
     if (H5Sclose(space_id) < 0)
         TEST_ERROR;
+
     /* In case of memory allocation error, not all hvl_t buffers in array may be allocated.
      * Free one-by-one */
     for (size_t i = 0; i < DATASET_VLEN_IO_DSET_DIMS; i++) {
@@ -10351,9 +10357,12 @@ error:
     {
         H5Fclose(file_id);
         H5Gclose(container_group);
-        H5Dclose(dset_int);
-        H5Dclose(dset_float);
-        H5Dclose(dset_string);
+        if (dset_int != H5I_INVALID_HID)
+            H5Dclose(dset_int);
+        if (dset_float != H5I_INVALID_HID)
+            H5Dclose(dset_float);
+        if (dset_string != H5I_INVALID_HID)
+            H5Dclose(dset_string);
         H5Sclose(space_id);
         for (size_t i = 0; i < DATASET_VLEN_IO_DSET_DIMS; i++) {
             if (wbuf[i].p) {
