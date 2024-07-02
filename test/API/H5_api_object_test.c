@@ -4728,7 +4728,6 @@ test_object_copy_between_files(void)
         TEST_ERROR;
     if (H5Fclose(file_id) < 0)
         TEST_ERROR;
-
     if (remove_test_file(NULL, obj_copy_filename) < 0)
         TEST_ERROR;
     free(obj_copy_filename);

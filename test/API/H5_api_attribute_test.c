@@ -8781,15 +8781,11 @@ test_attribute_string_encodings(void)
             PASSED();
         }
         PART_END(UTF8_cset);
-
-        PASSED();
     }
     END_MULTIPART;
 
     TESTING_2("test cleanup");
 
-    if (H5Fclose(file_id) < 0)
-        TEST_ERROR;
     if (H5Gclose(container_group) < 0)
         TEST_ERROR;
     if (H5Dclose(dset_id1) < 0)
@@ -8804,6 +8800,8 @@ test_attribute_string_encodings(void)
         TEST_ERROR;
     if (H5Aclose(attr_id2) < 0)
         TEST_ERROR;
+    if (H5Fclose(file_id) < 0)
+        TEST_ERROR;
     if (write_buf)
         free(write_buf);
     if (read_buf)
@@ -8816,7 +8814,6 @@ test_attribute_string_encodings(void)
 error:
     H5E_BEGIN_TRY
     {
-        H5Fclose(file_id);
         H5Gclose(container_group);
         H5Dclose(dset_id1);
         H5Dclose(dset_id2);
@@ -8824,6 +8821,7 @@ error:
         H5Tclose(type_id2);
         H5Aclose(attr_id1);
         H5Aclose(attr_id2);
+        H5Fclose(file_id);
         if (write_buf)
             free(write_buf);
         if (read_buf)
