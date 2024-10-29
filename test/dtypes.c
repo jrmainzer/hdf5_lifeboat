@@ -11999,7 +11999,7 @@ verify_version(hid_t dtype, H5F_libver_t low, H5F_libver_t high, unsigned *highe
             H5T_t *base_dtypep = NULL; /* Internal structure of a datatype */
 
             if (low == H5F_LIBVER_EARLIEST) {
-                if (high >= H5F_LIBVER_V116) {
+                if (high >= H5F_LIBVER_V200) {
                     /* Complex number type will upgrade other compound fields */
                     if (dtypep->shared->version != H5O_DTYPE_VERSION_5)
                         TEST_ERROR;
@@ -12010,7 +12010,7 @@ verify_version(hid_t dtype, H5F_libver_t low, H5F_libver_t high, unsigned *highe
                 }
             }
             else {
-                if (high >= H5F_LIBVER_V116) {
+                if (high >= H5F_LIBVER_V200) {
                     /* Complex number type will upgrade other compound fields */
                     if (dtypep->shared->version != MAX(H5O_DTYPE_VERSION_5, H5O_dtype_ver_bounds[low]))
                         TEST_ERROR;
@@ -12096,7 +12096,7 @@ verify_version(hid_t dtype, H5F_libver_t low, H5F_libver_t high, unsigned *highe
             break;
         }
         case H5T_ENUM:
-            if (high >= H5F_LIBVER_V116) {
+            if (high >= H5F_LIBVER_V200) {
                 /* Insertion order of compound fields changes whether or not other
                  * fields get upgraded. Until this is fixed, special-case the logic
                  * for the enum datatype. Assumes complex number type gets inserted
@@ -12113,7 +12113,7 @@ verify_version(hid_t dtype, H5F_libver_t low, H5F_libver_t high, unsigned *highe
         case H5T_COMPLEX: {
             H5T_t *base_dtypep = NULL;
 
-            if (high < H5F_LIBVER_V116)
+            if (high < H5F_LIBVER_V200)
                 PUTS_ERROR("invalid high version bound for complex number datatype");
             if (H5O_dtype_ver_bounds[high] < H5O_DTYPE_VERSION_5)
                 PUTS_ERROR("invalid datatype encoding version for complex number datatype");
@@ -12251,7 +12251,7 @@ test_versionbounds_create_datatype(H5F_libver_t low, H5F_libver_t high, hid_t *d
     if (arr_chartype < 0)
         PUTS_ERROR("couldn't create array datatype");
 
-    if (high >= H5F_LIBVER_V116) {
+    if (high >= H5F_LIBVER_V200) {
         /* Create a float complex datatype */
         float_cpxtype = H5Tcomplex_create(H5T_NATIVE_FLOAT);
         if (float_cpxtype < 0)
@@ -12275,7 +12275,7 @@ test_versionbounds_create_datatype(H5F_libver_t low, H5F_libver_t high, hid_t *d
     if (ret < 0)
         PUTS_ERROR("couldn't insert compound datatype member");
 
-    if (high >= H5F_LIBVER_V116) {
+    if (high >= H5F_LIBVER_V200) {
         /* Insert created float complex field */
         ret = H5Tinsert(simple_cmp_type, "float_complex", HOFFSET(simple_cmp_t, float_complex_sim),
                         float_cpxtype);
@@ -12367,7 +12367,7 @@ test_versionbounds_create_datatype(H5F_libver_t low, H5F_libver_t high, hid_t *d
 
     if (H5Tclose(arr_chartype) < 0)
         PUTS_ERROR("couldn't close datatype");
-    if (high >= H5F_LIBVER_V116) {
+    if (high >= H5F_LIBVER_V200) {
         if (H5Tclose(float_cpxtype) < 0)
             PUTS_ERROR("couldn't close datatype");
     }
@@ -12546,7 +12546,7 @@ static int
 test_complex_type_versionbounds(void)
 {
     H5F_libver_t versions[]     = {H5F_LIBVER_EARLIEST, H5F_LIBVER_V18,  H5F_LIBVER_V110,
-                                   H5F_LIBVER_V112,     H5F_LIBVER_V114, H5F_LIBVER_V116};
+                                   H5F_LIBVER_V112,     H5F_LIBVER_V114, H5F_LIBVER_V200};
     hsize_t      arr_dim[]      = {5};             /* Length of the array */
     hid_t        file           = H5I_INVALID_HID; /* File ID */
     hid_t        space          = H5I_INVALID_HID; /* Dataspace ID */
@@ -12607,9 +12607,9 @@ test_complex_type_versionbounds(void)
             if (file < 0)
                 TEST_ERROR;
 
-            if (high < H5F_LIBVER_V116) {
+            if (high < H5F_LIBVER_V200) {
                 /* Ensure that complex number type objects can't be created with
-                 * a library version bounds "high" setting < 1.16.
+                 * a library version bounds "high" setting < 2.0.
                  */
 
                 H5E_BEGIN_TRY

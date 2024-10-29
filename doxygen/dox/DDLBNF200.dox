@@ -1,13 +1,13 @@
-/** \page DDLBNF116 DDL in BNF for HDF5 1.16.0 and above
+/** \page DDLBNF200 DDL in BNF for HDF5 2.0.0 and above
 
 \todo Revise this & break it up!
 
-\section intro116 Introduction
+\section intro200 Introduction
 
 This document contains the data description language (DDL) for an HDF5 file. The
 description is in Backus-Naur Form (BNF).
 
-\section expo116 Explanation of Symbols
+\section expo200 Explanation of Symbols
 
 This section contains a brief explanation of the symbols used in the DDL.
 
@@ -23,7 +23,7 @@ This section contains a brief explanation of the symbols used in the DDL.
  TBD                      To Be Decided
 \endcode
 
-\section ddl116 The DDL
+\section ddl200 The DDL
 
 \code{.unparsed}
 <file> ::= HDF5 <file_name> { <file_super_block>opt <root_group> }
@@ -526,7 +526,7 @@ This section contains a brief explanation of the symbols used in the DDL.
 <hex_value> ::= 0x[0-F][0-F]+ | [0-F][0-F]+
 \endcode
 
-\section example116 An Example of an HDF5 File in DDL
+\section example200 An Example of an HDF5 File in DDL
 
 \code{.unparsed}
 HDF5 "example.h5" {

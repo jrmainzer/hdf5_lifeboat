@@ -158,7 +158,7 @@ New Features
       platforms/compilers that support them. These types have been implemented with a
       new datatype class, H5T_COMPLEX. Note that any datatypes of class H5T_COMPLEX
       will not be readable with previous versions of HDF5. If a file is accessed with
-      a library version bounds "high" setting less than H5F_LIBVER_V116, an error will
+      a library version bounds "high" setting less than H5F_LIBVER_V200, an error will
       occur if the application tries to create an object with a complex number datatype.
       If compatibility with previous versions of HDF5 is desired, applications should
       instead consider adopting one of the existing conventions at
@@ -340,9 +340,9 @@ New Features
       Simple example programs showing how to use complex number datatypes have
       been added in the following files:
 
-        - HDF5Examples/C/H5T/116/h5ex_t_complex.c        (Uses C99 complex number types)
-        - HDF5Examples/C/H5T/116/h5ex_t_complex_msvc.c   (Uses MSVC complex number types)
-        - HDF5Examples/C/H5T/116/h5ex_t_complex_custom.c (Uses H5Tcomplex_create to create
+        - HDF5Examples/C/H5T/200/h5ex_t_complex.c        (Uses C99 complex number types)
+        - HDF5Examples/C/H5T/200/h5ex_t_complex_msvc.c   (Uses MSVC complex number types)
+        - HDF5Examples/C/H5T/200/h5ex_t_complex_custom.c (Uses H5Tcomplex_create to create
                                                           a custom complex number type)
 
     - The H5VLstart_lib_state / H5VLfinish_lib_state API routines for pass-

@@ -1807,7 +1807,7 @@ H5_DLL int H5Tget_array_dims2(hid_t type_id, hsize_t dims[]);
  *          The datatype identifier returned from this function should be
  *          released with H5Tclose() or resource leaks will result.
  *
- * \since 1.16.0
+ * \since 2.0.0
  *
  */
 H5_DLL hid_t H5Tcomplex_create(hid_t base_type_id);

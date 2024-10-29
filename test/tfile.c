@@ -7163,9 +7163,9 @@ test_libver_bounds_datatype_check(hid_t fapl, hid_t tid)
     ret = H5Pget_libver_bounds(fapl, &low, &high);
     CHECK(ret, FAIL, "H5Pget_libver_bounds");
 
-    /* Complex numbers can't be created with a high version bound < 1.16 */
+    /* Complex numbers can't be created with a high version bound < 2.0 */
     is_complex = (H5T_COMPLEX == H5Tget_class(tid));
-    if (is_complex && high < H5F_LIBVER_V116)
+    if (is_complex && high < H5F_LIBVER_V200)
         return;
 
     /* Create the file with the input fapl */
@@ -7267,8 +7267,8 @@ test_libver_bounds_datatype_check(hid_t fapl, hid_t tid)
             if (ret < 0) /* Invalid low/high combinations */
                 continue;
 
-            /* Complex numbers can't be created with a high version bound < 1.16 */
-            if (is_complex && high < H5F_LIBVER_V116)
+            /* Complex numbers can't be created with a high version bound < 2.0 */
+            if (is_complex && high < H5F_LIBVER_V200)
                 continue;
 
             /* Open the file */
