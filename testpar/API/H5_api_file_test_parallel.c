@@ -320,9 +320,10 @@ void
 H5_api_file_test_parallel_add(void)
 {
     /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_file_test_header", print_file_test_header, NULL, "Prints header for file tests", NULL);
+    AddTest("print_file_test_header", print_file_test_header, NULL, "Prints header for file tests", NULL, 0);
 
-    AddTest("test_create_file", test_create_file, NULL, "H5Fcreate", NULL);
-    AddTest("test_open_file", test_open_file, NULL, "H5Fopen", NULL);
-    AddTest("test_split_comm_file_access", test_split_comm_file_access, NULL, "file access with a split communicator", NULL);
+    AddTest("test_create_file", test_create_file, NULL, "H5Fcreate", NULL, 0);
+    AddTest("test_open_file", test_open_file, NULL, "H5Fopen", NULL, 0);
+    AddTest("test_split_comm_file_access", test_split_comm_file_access, NULL, "file access with a split communicator", NULL, 0);
+
 }

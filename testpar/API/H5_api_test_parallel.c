@@ -27,7 +27,7 @@
 
 char H5_api_test_parallel_filename[H5_API_TEST_FILENAME_MAX_LENGTH];
 
-const char *test_path_prefix;
+const char *test_path_prefix_g;
 
 size_t n_tests_run_g;
 size_t n_tests_passed_g;
@@ -289,10 +289,10 @@ main(int argc, char **argv)
 
     srand(seed);
 
-    if (NULL == (test_path_prefix = HDgetenv(HDF5_API_TEST_PATH_PREFIX)))
-        test_path_prefix = "";
+    if (NULL == (test_path_prefix_g = HDgetenv(HDF5_API_TEST_PATH_PREFIX)))
+        test_path_prefix_g = "";
 
-    HDsnprintf(H5_api_test_parallel_filename, H5_API_TEST_FILENAME_MAX_LENGTH, "%s%s", test_path_prefix,
+    HDsnprintf(H5_api_test_parallel_filename, H5_API_TEST_FILENAME_MAX_LENGTH, "%s%s", test_path_prefix_g,
                PARALLEL_TEST_FILE_NAME);
 
     if (NULL == (vol_connector_string = HDgetenv(HDF5_VOL_CONNECTOR))) {
@@ -425,11 +425,11 @@ main(int argc, char **argv)
     BEGIN_INDEPENDENT_OP(create_test_container)
     {
         if (MAINPROCESS) {
-            if (create_test_container(H5_api_test_parallel_filename, vol_cap_flags_g) < 0) {
+            if (create_test_container((const char *)(H5_api_test_parallel_filename), vol_cap_flags_g) < 0) {
                 fprintf(stderr, "    failed to create testing container file '%s'\n",
                         H5_api_test_parallel_filename);
                 INDEPENDENT_OP_ERROR(create_test_container);
-            }
+                }
         }
     }
     END_INDEPENDENT_OP(create_test_container);

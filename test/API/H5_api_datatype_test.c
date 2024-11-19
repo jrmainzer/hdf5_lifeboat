@@ -76,9 +76,9 @@ test_create_committed_datatype(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -95,7 +95,7 @@ test_create_committed_datatype(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype to commit\n");
         goto error;
@@ -159,9 +159,9 @@ test_create_committed_datatype_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -179,7 +179,7 @@ test_create_committed_datatype_invalid_params(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype to commit\n");
         goto error;
@@ -378,9 +378,9 @@ test_create_anonymous_committed_datatype(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -397,7 +397,7 @@ test_create_anonymous_committed_datatype(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -460,9 +460,9 @@ test_create_anonymous_committed_datatype_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -480,7 +480,7 @@ test_create_anonymous_committed_datatype_invalid_params(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -626,9 +626,9 @@ test_create_committed_datatype_empty_types(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -782,7 +782,7 @@ error:
 static void
 test_recommit_committed_type(void)
 {
-    htri_t is_committed = FALSE;
+    htri_t is_committed = false;
     herr_t err_ret;
     hid_t  file_id         = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
@@ -799,9 +799,9 @@ test_recommit_committed_type(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -904,9 +904,9 @@ test_open_committed_datatype(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -923,7 +923,7 @@ test_open_committed_datatype(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype to commit\n");
         goto error;
@@ -995,9 +995,9 @@ test_open_committed_datatype_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -1015,7 +1015,7 @@ test_open_committed_datatype_invalid_params(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype to commit\n");
         goto error;
@@ -1169,9 +1169,9 @@ test_reopen_committed_datatype_indirect(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -1188,7 +1188,7 @@ test_reopen_committed_datatype_indirect(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(DATATYPE_REOPEN_TEST_SPACE_RANK, NULL, NULL, FALSE)) < 0)
+    if ((space_id = generate_random_dataspace(DATATYPE_REOPEN_TEST_SPACE_RANK, NULL, NULL, false)) < 0)
         TEST_ERROR;
 
     PASSED();
@@ -1631,9 +1631,9 @@ test_close_committed_datatype_invalid_id(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -1692,9 +1692,9 @@ test_datatype_property_lists(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -1711,13 +1711,13 @@ test_datatype_property_lists(void)
         goto error;
     }
 
-    if ((type_id1 = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
+    if ((type_id1 = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
     }
 
-    if ((type_id2 = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
+    if ((type_id2 = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -1907,9 +1907,9 @@ test_create_dataset_with_committed_type(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -1926,7 +1926,7 @@ test_create_dataset_with_committed_type(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -1948,9 +1948,9 @@ test_create_dataset_with_committed_type(void)
     if (H5Fclose(file_id) < 0)
         TEST_ERROR;
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -1973,7 +1973,7 @@ test_create_dataset_with_committed_type(void)
         goto error;
     }
 
-    if ((fspace_id = generate_random_dataspace(DATATYPE_CREATE_TEST_DATASET_DIMS, NULL, NULL, FALSE)) < 0)
+    if ((fspace_id = generate_random_dataspace(DATATYPE_CREATE_TEST_DATASET_DIMS, NULL, NULL, false)) < 0)
         TEST_ERROR;
 
     if ((dset_id = H5Dcreate2(group_id, DATASET_CREATE_WITH_DATATYPE_TEST_DSET_NAME, type_id, fspace_id,
@@ -2051,9 +2051,9 @@ test_create_attribute_with_committed_type(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2070,7 +2070,7 @@ test_create_attribute_with_committed_type(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, true)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -2093,7 +2093,7 @@ test_create_attribute_with_committed_type(void)
     }
 
     if ((space_id =
-             generate_random_dataspace(ATTRIBUTE_CREATE_WITH_DATATYPE_TEST_SPACE_RANK, NULL, NULL, TRUE)) < 0)
+             generate_random_dataspace(ATTRIBUTE_CREATE_WITH_DATATYPE_TEST_SPACE_RANK, NULL, NULL, true)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_CREATE_WITH_DATATYPE_TEST_ATTR_NAME, type_id, space_id,
@@ -2182,9 +2182,9 @@ test_delete_committed_type(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s\n", H5_api_test_filename);
+        printf("    couldn't open file '%s\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2201,7 +2201,7 @@ test_delete_committed_type(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -2294,9 +2294,9 @@ test_resurrect_datatype(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2360,9 +2360,9 @@ test_resurrect_datatype(void)
         TEST_ERROR;
 
     /* Re-open the file */
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2476,9 +2476,9 @@ test_cant_commit_predefined(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2538,7 +2538,7 @@ error:
 static void
 test_cant_modify_committed_type(void)
 {
-    htri_t is_committed = FALSE;
+    htri_t is_committed = false;
     herr_t err_ret;
     hid_t  file_id         = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID;
@@ -2556,9 +2556,9 @@ test_cant_modify_committed_type(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2642,36 +2642,61 @@ error:
 void
 H5_api_datatype_test_add(void)
 {
+    int64_t testframe_flags = 0;
+
+    if (GetTestMaxNumThreads() > 1)
+        testframe_flags |= RUN_TEST_MULTITHREADED;
+
     /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_datatype_test_header", print_datatype_test_header, NULL, "Prints header for datatype tests", NULL);
+    AddTest("print_datatype_test_header", print_datatype_test_header, NULL,
+            "Prints header for datatype tests", NULL, 0);
 
-    AddTest("test_create_committed_datatype", test_create_committed_datatype, NULL, "creation of a committed datatype", NULL);
-    AddTest("test_create_committed_datatype_invalid_params", test_create_committed_datatype_invalid_params, NULL, "H5Tcommit2 with invalid parameters", NULL);
-    AddTest("test_create_anonymous_committed_datatype", test_create_anonymous_committed_datatype, NULL, "creation of anonymous committed datatype", NULL);
-    AddTest("test_create_anonymous_committed_datatype_invalid_params", test_create_anonymous_committed_datatype_invalid_params, NULL, "H5Tcommit_anon with invalid parameters", NULL);
-
-#ifndef PROBLEMATIC_TESTS
-    AddTest("test_create_committed_datatype_empty_types", test_create_committed_datatype_empty_types, NULL, "creation of committed datatype with empty types", NULL);
-#endif
-
-    AddTest("test_recommit_committed_type", test_recommit_committed_type, NULL, "inability to re-commit a committed datatype", NULL);
-    AddTest("test_open_committed_datatype", test_open_committed_datatype, NULL, "H5Topen2", NULL);
-    AddTest("test_open_committed_datatype_invalid_params", test_open_committed_datatype_invalid_params, NULL, "H5Topen2 with invalid parameters", NULL);
-    AddTest("test_reopen_committed_datatype_indirect", test_reopen_committed_datatype_indirect, NULL, "reopening open committed datatypes using H5Dget_type", NULL);
-    AddTest("test_close_committed_datatype_invalid_id", test_close_committed_datatype_invalid_id, NULL, "H5Tclose with an invalid committed datatype ID", NULL);
-    AddTest("test_datatype_property_lists", test_datatype_property_lists, NULL, "datatype property list operations", NULL);
-    AddTest("test_create_dataset_with_committed_type", test_create_dataset_with_committed_type, NULL, "dataset creation with a committed datatype", NULL);
-    AddTest("test_create_attribute_with_committed_type", test_create_attribute_with_committed_type, NULL, "attribute creation with a committed datatype", NULL);
-    AddTest("test_delete_committed_type", test_delete_committed_type, NULL, "committed datatype deletion", NULL);
-    AddTest("test_resurrect_datatype", test_resurrect_datatype, NULL, "resurrecting datatype after deletion", NULL);
-    AddTest("test_flush_committed_datatype", test_flush_committed_datatype, NULL, "H5Tflush", NULL);
-    AddTest("test_flush_committed_datatype_invalid_params", test_flush_committed_datatype_invalid_params, NULL, "H5Tflush with invalid parameters", NULL);
-    AddTest("test_refresh_committed_datatype", test_refresh_committed_datatype, NULL, "H5Trefresh", NULL);
-    AddTest("test_refresh_committed_datatype_invalid_params", test_refresh_committed_datatype_invalid_params, NULL, "H5Trefresh with invalid parameters", NULL);
+    AddTest("test_create_committed_datatype", MT_API_TEST_FUNC_OUTER(test_create_committed_datatype), NULL,
+            "creation of a committed datatype", NULL, testframe_flags);
+    AddTest("test_create_committed_datatype_invalid_params", MT_API_TEST_FUNC_OUTER(test_create_committed_datatype_invalid_params),
+            NULL, "H5Tcommit2 with invalid parameters", NULL, testframe_flags);
+    AddTest("test_create_anonymous_committed_datatype", MT_API_TEST_FUNC_OUTER(test_create_anonymous_committed_datatype), NULL,
+            "creation of anonymous committed datatype", NULL, testframe_flags);
+    AddTest("test_create_anonymous_committed_datatype_invalid_params",
+            MT_API_TEST_FUNC_OUTER(test_create_anonymous_committed_datatype_invalid_params), NULL,
+            "H5Tcommit_anon with invalid parameters", NULL, testframe_flags);
 
 #ifndef PROBLEMATIC_TESTS
-    AddTest("test_cant_commit_predefined", test_cant_commit_predefined, NULL, "inability to commit predefined types directly", NULL);
+    AddTest("test_create_committed_datatype_empty_types", MT_API_TEST_FUNC_OUTER(test_create_committed_datatype_empty_types), NULL,
+            "creation of committed datatype with empty types", NULL, testframe_flags);
 #endif
 
-    AddTest("test_cant_modify_committed_type", test_cant_modify_committed_type, NULL, "inability to modify a committed datatype", NULL);
+    AddTest("test_recommit_committed_type", MT_API_TEST_FUNC_OUTER(test_recommit_committed_type), NULL,
+            "inability to re-commit a committed datatype", NULL, testframe_flags);
+    AddTest("test_open_committed_datatype",  MT_API_TEST_FUNC_OUTER(test_open_committed_datatype),  NULL,  "H5Topen2",  NULL, testframe_flags);
+    AddTest("test_open_committed_datatype_invalid_params", MT_API_TEST_FUNC_OUTER(test_open_committed_datatype_invalid_params), NULL,
+            "H5Topen2 with invalid parameters", NULL, testframe_flags);
+    AddTest("test_reopen_committed_datatype_indirect", MT_API_TEST_FUNC_OUTER(test_reopen_committed_datatype_indirect), NULL,
+            "reopening open committed datatypes using H5Dget_type", NULL, testframe_flags);
+    AddTest("test_close_committed_datatype_invalid_id", MT_API_TEST_FUNC_OUTER(test_close_committed_datatype_invalid_id), NULL,
+            "H5Tclose with an invalid committed datatype ID", NULL, testframe_flags);
+    AddTest("test_datatype_property_lists", MT_API_TEST_FUNC_OUTER(test_datatype_property_lists), NULL,
+            "datatype property list operations", NULL, testframe_flags);
+    AddTest("test_create_dataset_with_committed_type", MT_API_TEST_FUNC_OUTER(test_create_dataset_with_committed_type), NULL,
+            "dataset creation with a committed datatype", NULL, testframe_flags);
+    AddTest("test_create_attribute_with_committed_type", MT_API_TEST_FUNC_OUTER(test_create_attribute_with_committed_type), NULL,
+            "attribute creation with a committed datatype", NULL, testframe_flags);
+    AddTest("test_delete_committed_type", MT_API_TEST_FUNC_OUTER(test_delete_committed_type), NULL, "committed datatype deletion",
+            NULL, testframe_flags);
+    AddTest("test_resurrect_datatype", MT_API_TEST_FUNC_OUTER(test_resurrect_datatype), NULL, "resurrecting datatype after deletion",
+            NULL, testframe_flags);
+    AddTest("test_flush_committed_datatype",  MT_API_TEST_FUNC_OUTER(test_flush_committed_datatype),  NULL,  "H5Tflush",  NULL, testframe_flags);
+    AddTest("test_flush_committed_datatype_invalid_params", MT_API_TEST_FUNC_OUTER(test_flush_committed_datatype_invalid_params),
+            NULL, "H5Tflush with invalid parameters", NULL, testframe_flags);
+    AddTest("test_refresh_committed_datatype",  MT_API_TEST_FUNC_OUTER(test_refresh_committed_datatype),  NULL,  "H5Trefresh",  NULL, testframe_flags);
+    AddTest("test_refresh_committed_datatype_invalid_params", MT_API_TEST_FUNC_OUTER(test_refresh_committed_datatype_invalid_params),
+            NULL, "H5Trefresh with invalid parameters", NULL, testframe_flags);
+
+#ifndef PROBLEMATIC_TESTS
+    AddTest("test_cant_commit_predefined", MT_API_TEST_FUNC_OUTER(test_cant_commit_predefined), NULL,
+            "inability to commit predefined types directly", NULL, testframe_flags);
+#endif
+
+    AddTest("test_cant_modify_committed_type", MT_API_TEST_FUNC_OUTER(test_cant_modify_committed_type), NULL,
+            "inability to modify a committed datatype", NULL, testframe_flags);
 }

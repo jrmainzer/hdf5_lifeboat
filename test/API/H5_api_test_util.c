@@ -76,15 +76,18 @@
 #define COMPACT_SPACE_MAX_DIM_SIZE 4
 #define COMPACT_SPACE_MAX_DIMS     3
 
-typedef hid_t (*generate_datatype_func)(H5T_class_t parent_class, hbool_t is_compact);
+typedef hid_t (*generate_datatype_func)(H5T_class_t parent_class, hbool_t is_compact, size_t depth);
+static hid_t generate_random_datatype_internal(H5T_class_t parent_class, hbool_t is_compact, size_t depth);
+static hid_t generate_random_datatype_integer(H5T_class_t parent_class, hbool_t is_compact, size_t depth);
+static hid_t generate_random_datatype_float(H5T_class_t parent_class, hbool_t is_compact, size_t depth);
+static hid_t generate_random_datatype_string(H5T_class_t parent_class, hbool_t is_compact, size_t depth);
+static hid_t generate_random_datatype_compound(H5T_class_t parent_class, hbool_t is_compact, size_t depth);
+static hid_t generate_random_datatype_reference(H5T_class_t parent_class, hbool_t is_compact, size_t depth);
+static hid_t generate_random_datatype_enum(H5T_class_t parent_class, hbool_t is_compact, size_t depth);
+static hid_t generate_random_datatype_array(H5T_class_t parent_class, hbool_t is_compact, size_t depth);
 
-static hid_t generate_random_datatype_integer(H5T_class_t parent_class, hbool_t is_compact);
-static hid_t generate_random_datatype_float(H5T_class_t parent_class, hbool_t is_compact);
-static hid_t generate_random_datatype_string(H5T_class_t parent_class, hbool_t is_compact);
-static hid_t generate_random_datatype_compound(H5T_class_t parent_class, hbool_t is_compact);
-static hid_t generate_random_datatype_reference(H5T_class_t parent_class, hbool_t is_compact);
-static hid_t generate_random_datatype_enum(H5T_class_t parent_class, hbool_t is_compact);
-static hid_t generate_random_datatype_array(H5T_class_t parent_class, hbool_t is_compact);
+static int H5_api_test_create_containers_internal(const char *filename, uint64_t vol_cap_flags);
+static int destroy_test_container_internal(const char *filename, uint64_t vol_cap_flags);
 
 /*
  * Helper function to generate a random HDF5 datatype in order to thoroughly
@@ -95,8 +98,14 @@ static hid_t generate_random_datatype_array(H5T_class_t parent_class, hbool_t is
 hid_t
 generate_random_datatype(H5T_class_t parent_class, hbool_t is_compact)
 {
+    return generate_random_datatype_internal(parent_class, is_compact, 0);
+}
+
+// TODO
+static hid_t
+generate_random_datatype_internal(H5T_class_t parent_class, hbool_t is_compact, size_t depth)
+{
     generate_datatype_func gen_func;
-    static int             depth = 0;
     size_t                 type_size;
     hid_t                  datatype  = H5I_INVALID_HID;
     hid_t                  ret_value = H5I_INVALID_HID;
@@ -172,7 +181,7 @@ roll_datatype:
             break;
     }
 
-    if ((datatype = (gen_func)(parent_class, is_compact)) < 0) {
+    if ((datatype = (gen_func)(parent_class, is_compact, depth)) < 0) {
         printf("    couldn't generate datatype\n");
         goto done;
     }
@@ -183,35 +192,33 @@ roll_datatype:
      * the maximum compact datatype size if a compact datatype
      * was requested.
      */
-    if (depth == 1) {
-        if (0 == (type_size = H5Tget_size(datatype))) {
-            printf("    failed to retrieve datatype's size\n");
-            H5Tclose(datatype);
-            datatype = H5I_INVALID_HID;
-            goto done;
-        }
+    if (0 == (type_size = H5Tget_size(datatype))) {
+        printf("    failed to retrieve datatype's size\n");
+        H5Tclose(datatype);
+        datatype = H5I_INVALID_HID;
+        goto done;
+    }
 
-        if ((type_size > GENERATED_DATATYPE_MAX_SIZE) ||
-            (is_compact && (type_size > COMPACT_DATATYPE_MAX_SIZE))) {
-            /*
-             * Generate a new datatype.
-             */
-            H5Tclose(datatype);
-            datatype = H5I_INVALID_HID;
-            goto roll_datatype;
-        }
+    if ((type_size > GENERATED_DATATYPE_MAX_SIZE) ||
+        (is_compact && (type_size > COMPACT_DATATYPE_MAX_SIZE))) {
+        /*
+         * Generate a new datatype.
+         */
+        H5Tclose(datatype);
+        datatype = H5I_INVALID_HID;
+        goto roll_datatype;
     }
 
     ret_value = datatype;
 
 done:
     depth--;
-
-    return ret_value;
+    return (ret_value);
 }
 
 static hid_t
-generate_random_datatype_integer(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t H5_ATTR_UNUSED is_compact)
+generate_random_datatype_integer(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t H5_ATTR_UNUSED is_compact,
+                                 H5_ATTR_UNUSED size_t depth)
 {
     hid_t type_to_copy = H5I_INVALID_HID;
     hid_t datatype     = H5I_INVALID_HID;
@@ -288,7 +295,8 @@ done:
 }
 
 static hid_t
-generate_random_datatype_float(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t H5_ATTR_UNUSED is_compact)
+generate_random_datatype_float(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t H5_ATTR_UNUSED is_compact,
+                               H5_ATTR_UNUSED size_t depth)
 {
     hid_t type_to_copy = H5I_INVALID_HID;
     hid_t datatype     = H5I_INVALID_HID;
@@ -330,7 +338,8 @@ done:
 }
 
 static hid_t
-generate_random_datatype_string(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t H5_ATTR_UNUSED is_compact)
+generate_random_datatype_string(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t H5_ATTR_UNUSED is_compact,
+                                H5_ATTR_UNUSED size_t depth)
 {
     hid_t datatype  = H5I_INVALID_HID;
     hid_t ret_value = H5I_INVALID_HID;
@@ -387,7 +396,7 @@ done:
 }
 
 static hid_t
-generate_random_datatype_compound(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t is_compact)
+generate_random_datatype_compound(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t is_compact, size_t depth)
 {
     size_t num_members   = 0;
     size_t next_offset   = 0;
@@ -412,7 +421,7 @@ generate_random_datatype_compound(H5T_class_t H5_ATTR_UNUSED parent_class, hbool
 
         HDsnprintf(member_name, 256, "compound_member%zu", i);
 
-        if ((compound_members[i] = generate_random_datatype(H5T_COMPOUND, is_compact)) < 0) {
+        if ((compound_members[i] = generate_random_datatype_internal(H5T_COMPOUND, is_compact, depth)) < 0) {
             printf("    couldn't create compound datatype member %zu\n", i);
             goto done;
         }
@@ -455,7 +464,8 @@ done:
 }
 
 static hid_t
-generate_random_datatype_reference(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t H5_ATTR_UNUSED is_compact)
+generate_random_datatype_reference(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t H5_ATTR_UNUSED is_compact,
+                                   H5_ATTR_UNUSED size_t depth)
 {
     hid_t datatype  = H5I_INVALID_HID;
     hid_t ret_value = H5I_INVALID_HID;
@@ -490,7 +500,8 @@ done:
 }
 
 static hid_t
-generate_random_datatype_enum(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t H5_ATTR_UNUSED is_compact)
+generate_random_datatype_enum(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t H5_ATTR_UNUSED is_compact,
+                              H5_ATTR_UNUSED size_t depth)
 {
     size_t num_members      = 0;
     hid_t  datatype         = H5I_INVALID_HID;
@@ -548,7 +559,7 @@ done:
 }
 
 static hid_t
-generate_random_datatype_array(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t is_compact)
+generate_random_datatype_array(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t is_compact, size_t depth)
 {
     unsigned ndims         = 0;
     hsize_t *array_dims    = NULL;
@@ -566,7 +577,7 @@ generate_random_datatype_array(H5T_class_t H5_ATTR_UNUSED parent_class, hbool_t 
     for (size_t i = 0; i < ndims; i++)
         array_dims[i] = (hsize_t)(rand() % MAX_DIM_SIZE + 1);
 
-    if ((base_datatype = generate_random_datatype(H5T_ARRAY, is_compact)) < 0) {
+    if ((base_datatype = generate_random_datatype_internal(H5T_ARRAY, is_compact, depth)) < 0) {
         printf("    couldn't create array base datatype\n");
         goto done;
     }
@@ -637,17 +648,9 @@ error:
 }
 
 int
-create_test_container(char *filename, uint64_t vol_cap_flags)
-{
+H5_api_test_create_containers_internal(const char *filename, uint64_t vol_cap_flags) {
     hid_t file_id  = H5I_INVALID_HID;
     hid_t group_id = H5I_INVALID_HID;
-
-    printf("Creating container file for tests\n");
-
-    if (!(vol_cap_flags & H5VL_CAP_FLAG_FILE_BASIC)) {
-        printf("   VOL connector doesn't support file creation\n");
-        goto error;
-    }
 
     if ((file_id = H5Fcreate(filename, H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT)) < 0) {
         printf("    couldn't create testing container file '%s'\n", filename);
@@ -662,54 +665,46 @@ create_test_container(char *filename, uint64_t vol_cap_flags)
          */
         if ((group_id = H5Gcreate2(file_id, GROUP_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT)) >=
             0) {
-            printf("    created container group for Group tests\n");
             H5Gclose(group_id);
         }
 
         if ((group_id = H5Gcreate2(file_id, ATTRIBUTE_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT,
                                    H5P_DEFAULT)) >= 0) {
-            printf("    created container group for Attribute tests\n");
             H5Gclose(group_id);
         }
 
         if ((group_id =
                  H5Gcreate2(file_id, DATASET_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT)) >= 0) {
-            printf("    created container group for Dataset tests\n");
             H5Gclose(group_id);
         }
 
         if ((group_id =
                  H5Gcreate2(file_id, DATATYPE_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT)) >= 0) {
-            printf("    created container group for Datatype tests\n");
             H5Gclose(group_id);
         }
 
         if ((group_id = H5Gcreate2(file_id, LINK_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT)) >=
             0) {
-            printf("    created container group for Link tests\n");
             H5Gclose(group_id);
         }
 
         if ((group_id = H5Gcreate2(file_id, OBJECT_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT)) >=
             0) {
-            printf("    created container group for Object tests\n");
             H5Gclose(group_id);
         }
 
         if ((group_id = H5Gcreate2(file_id, MISCELLANEOUS_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT,
                                    H5P_DEFAULT)) >= 0) {
-            printf("    created container group for Miscellaneous tests\n");
             H5Gclose(group_id);
         }
     }
 
     if (H5Fclose(file_id) < 0) {
-        printf("    failed to close testing container\n");
+        printf("    failed to close testing container %s\n", filename);
         goto error;
     }
 
     return 0;
-
 error:
     H5E_BEGIN_TRY
     {
@@ -719,18 +714,122 @@ error:
     H5E_END_TRY
 
     return -1;
+
+}
+
+int
+H5_api_test_create_containers(const char *filename, uint64_t vol_cap_flags)
+{
+    int max_threads = GetTestMaxNumThreads();
+    char *tl_filename = NULL;
+
+    if (!(vol_cap_flags & H5VL_CAP_FLAG_FILE_BASIC)) {
+        printf("   VOL connector doesn't support file creation\n");
+        goto error;
+    }
+
+    if (max_threads > 1) {
+#ifdef H5_HAVE_MULTITHREAD
+        for (int i = 0; i < max_threads; i++) {
+            if ((tl_filename = generate_threadlocal_filename(test_path_prefix_g, i, filename)) == NULL) {
+                printf("    failed to generate thread-local API test filename\n");
+                goto error;
+            }
+
+            if (H5_api_test_create_containers_internal((const char *)tl_filename, vol_cap_flags) < 0) {
+                printf("    failed to create thread-local API test container");
+                goto error;
+            }
+
+        }
+
+        free(tl_filename);
+#else
+        printf("    thread-specific filename requested, but multithread support not enabled\n");
+        goto error;
+#endif
+
+    } else {
+        if (H5_api_test_create_containers_internal((const char *)filename, vol_cap_flags) < 0) {
+            printf("    failed to create test container\n");
+            goto error;
+        }
+    }
+
+    return 0;
+
+error:
+    free(tl_filename);
+    return -1;
+}
+
+static int
+destroy_test_container_internal(const char *filename, uint64_t vol_cap_flags) {
+
+    int max_threads = GetTestMaxNumThreads();
+    char *tl_filename = NULL;
+
+    if (!(vol_cap_flags & H5VL_CAP_FLAG_FILE_BASIC)) {
+        printf("   container should not have been created\n");
+        goto error;
+    }
+
+    if (max_threads > 1) {
+#ifndef H5_HAVE_MULTITHREAD
+        printf("    thread-specific cleanup requested, but multithread support not enabled\n");
+        goto error;
+#endif
+        
+        for (int i = 0; i < max_threads; i++) {
+            if ((tl_filename = generate_threadlocal_filename(test_path_prefix_g, i, filename)) == NULL) {
+                printf("    failed to generate thread-local API test filename\n");
+                goto error;
+            }
+
+            H5E_BEGIN_TRY {
+                if (H5Fis_accessible(tl_filename, H5P_DEFAULT) > 0) {
+                    if (H5Fdelete(tl_filename, H5P_DEFAULT) < 0) {
+                        printf("    failed to destroy thread-local API test container");
+                        free(tl_filename);
+                        goto error;
+                    }
+                }
+            }
+            H5E_END_TRY
+
+            free(tl_filename);
+        }
+    } else {
+        H5E_BEGIN_TRY {
+            if (H5Fis_accessible(filename, H5P_DEFAULT) > 0) {
+                if (H5Fdelete(filename, H5P_DEFAULT) < 0) {
+                    printf("    failed to destroy thread-local API test container");
+                    goto error;
+                }
+            }
+        }
+        H5E_END_TRY
+    }
+
+    return 0;
+error:
+    return -1;
 }
 
 /*
- * Add a prefix to the given filename. The caller
+ * Add a thread-specific prefix to the given filename. The caller
  * is responsible for freeing the returned filename
  * pointer with free().
  */
 herr_t
 prefix_filename(const char *prefix, const char *filename, char **filename_out)
 {
-    char  *out_buf   = NULL;
-    herr_t ret_value = SUCCEED;
+    char  *out_buf       = NULL;
+    herr_t ret_value     = SUCCEED;
+    int    chars_written = 0;
+#ifdef H5_HAVE_MULTITHREAD
+    thread_info_t *tinfo = NULL;
+#endif
 
     if (!prefix) {
         printf("    invalid file prefix\n");
@@ -748,17 +847,53 @@ prefix_filename(const char *prefix, const char *filename, char **filename_out)
         goto done;
     }
 
-    if (NULL == (out_buf = malloc(H5_API_TEST_FILENAME_MAX_LENGTH))) {
-        printf("    couldn't allocated filename buffer\n");
+    if (GetTestMaxNumThreads() > 1) {
+#ifdef H5_HAVE_MULTITHREAD
+
+        if ((tinfo = (thread_info_t *)pthread_getspecific(test_thread_info_key_g)) == NULL) {
+            printf("    failed to retrieve thread-specific info\n");
+            ret_value = FAIL;
+            goto done;
+        }
+
+        if ((out_buf = generate_threadlocal_filename(prefix, tinfo->thread_idx, filename)) == NULL) {
+            printf("    failed to generate thread-specific filename\n");
+            ret_value = FAIL;
+            goto done;
+        }
+
+#else
+        printf("    thread-specific filename requested, but multithread support not enabled\n");
+        ret_value = FAIL;
+        goto done;
+#endif
+    } else {
+        if (NULL == (out_buf = malloc(H5_API_TEST_FILENAME_MAX_LENGTH))) {
+            printf("    couldn't allocated filename buffer\n");
+            ret_value = FAIL;
+            goto done;
+        }
+
+        if ((chars_written = HDsnprintf(out_buf, H5_API_TEST_FILENAME_MAX_LENGTH, "%s%s", prefix, filename)) <
+            0) {
+            printf("    couldn't prefix filename\n");
+            ret_value = FAIL;
+            goto done;
+        }
+    }
+
+    if ((size_t)chars_written >= H5_API_TEST_FILENAME_MAX_LENGTH) {
+        printf("    filename buffer too small\n");
         ret_value = FAIL;
         goto done;
     }
 
-    HDsnprintf(out_buf, H5_API_TEST_FILENAME_MAX_LENGTH, "%s%s", prefix, filename);
-
     *filename_out = out_buf;
 
 done:
+    if (ret_value < 0)
+        free(out_buf);
+
     return ret_value;
 }
 
@@ -796,4 +931,224 @@ done:
     free(prefixed_filename);
 
     return ret_value;
+}
+
+int H5_api_test_display_information(void) {
+    unsigned seed = 0;
+    const char *vol_connector_name = NULL;
+    char *vol_connector_name_copy = NULL;
+    char *vol_connector_info = NULL;
+
+    seed = (unsigned)HDtime(NULL);
+    srand(seed);
+
+    if (NULL == (vol_connector_name = HDgetenv(HDF5_VOL_CONNECTOR))) {
+        vol_connector_name = "native";
+        vol_connector_info = NULL;
+    }
+    else {
+        char *token;
+
+        vol_connector_name_copy = HDstrdup(vol_connector_name);
+
+        if (NULL == (token = HDstrtok(vol_connector_name_copy, " "))) {
+            printf("    cannot parse VOL connector name string\n");
+            goto error;
+        }
+
+        vol_connector_name = token;
+
+        if (NULL != (token = HDstrtok(NULL, " "))) {
+            vol_connector_info = token;
+        }
+    }
+
+    printf("Running API tests with VOL connector '%s' and info string '%s'\n\n", vol_connector_name,
+           vol_connector_info ? vol_connector_info : "");
+    printf("Test parameters:\n");
+    printf("  - Test file name: '%s'\n", TEST_FILE_NAME);
+    printf("  - Test seed: %u\n", seed);
+    printf("  - Test path prefix: '%s'\n", test_path_prefix_g);
+    printf("\n\n");
+
+    free(vol_connector_name_copy);
+    return 0;
+error:
+    free(vol_connector_name_copy);
+    return -1;
+}
+
+int
+H5_api_test_destroy_container_files(void) {
+    hid_t fapl_id = H5I_INVALID_HID;
+
+    if ((fapl_id = H5Pcreate(H5P_FILE_ACCESS)) < 0) {
+        printf("    couldn't create FAPL\n");
+        goto error;
+    }
+
+    if (H5Pget_vol_cap_flags(fapl_id, &vol_cap_flags_g) < 0) {
+        printf("    unable to retrieve VOL connector capability flags\n");
+        goto error;
+    }
+
+    if (destroy_test_container_internal(TEST_FILE_NAME, vol_cap_flags_g) < 0) {
+        printf("    unable to destroy testing container file with basename '%s'\n", TEST_FILE_NAME);
+        goto error;
+    }
+
+    if (H5Pclose(fapl_id) < 0) {
+        printf("    unable to close FAPL\n");
+        goto error;
+    }
+
+    return 0;
+
+error:
+    H5Pclose(fapl_id);
+    return -1;
+}
+
+int H5_api_check_vol_registration(void) {
+    hid_t default_con_id = H5I_INVALID_HID;
+    hid_t registered_con_id = H5I_INVALID_HID;
+    hid_t fapl_id = H5I_INVALID_HID;
+
+    const char *vol_connector_name;
+    char *vol_connector_string = NULL;
+    char *vol_connector_string_copy = NULL;
+
+    /* Get active VOL connector name */
+    if (NULL == (vol_connector_string = getenv(HDF5_VOL_CONNECTOR))) {
+        printf("No VOL connector selected; using native VOL connector\n");
+        vol_connector_name = "native";
+    }
+    else {
+
+        if (NULL == (vol_connector_string_copy = strdup(vol_connector_string))) {
+            fprintf(stderr, "Unable to copy VOL connector string\n");
+            goto error;
+        }
+
+        if (NULL == (vol_connector_name = (const char*) strtok(vol_connector_string_copy, " "))) {
+            fprintf(stderr, "Error while parsing VOL connector string\n");
+            goto error;
+        }
+
+    }
+
+    /* If VOL is not native, make sure it is registered properly */
+    if (0 != strcmp(vol_connector_name, "native")) {
+        htri_t is_registered;
+
+        if ((is_registered = H5VLis_connector_registered_by_name(vol_connector_name)) < 0) {
+            fprintf(stderr, "Unable to determine if VOL connector is registered\n");
+            goto error;
+        }
+
+        if (!is_registered) {
+            fprintf(stderr, "Specified VOL connector '%s' wasn't correctly registered!\n",
+                    vol_connector_name);
+            goto error;
+        }
+        else {
+            /*
+             * If the connector was successfully registered, check that
+             * the connector ID set on the default FAPL matches the ID
+             * for the registered connector before running the tests.
+             */
+            if ((fapl_id = H5Pcreate(H5P_FILE_ACCESS)) < 0) {
+                fprintf(stderr, "Couldn't create FAPL\n");
+                goto error;
+            }
+
+            if (H5Pget_vol_id(fapl_id, &default_con_id) < 0) {
+                fprintf(stderr, "Couldn't retrieve ID of VOL connector set on default FAPL\n");
+                goto error;
+            }
+
+            if ((registered_con_id = H5VLget_connector_id_by_name(vol_connector_name)) < 0) {
+                fprintf(stderr, "Couldn't retrieve ID of registered VOL connector\n");
+                goto error;
+            }
+
+            if (default_con_id != registered_con_id) {
+                fprintf(stderr, "VOL connector set on default FAPL didn't match specified VOL connector\n");
+                goto error;
+            }
+        }
+    }
+
+    if (registered_con_id > 0 && H5VLclose(registered_con_id) < 0) {
+        fprintf(stderr, "Unable to close registered VOL connector\n");
+        goto error;
+    }
+
+    if (default_con_id > 0 && H5VLclose(default_con_id) < 0) {
+        fprintf(stderr, "Unable to close default VOL connector\n");
+        goto error;
+    }
+
+    if (fapl_id > 0 && H5Pclose(fapl_id) < 0) {
+        fprintf(stderr, "Unable to close FAPL\n");
+        goto error;
+    }
+
+    free(vol_connector_string_copy);
+
+    return 0;
+
+error:
+    H5E_BEGIN_TRY {
+        H5VLclose(registered_con_id);
+        H5VLclose(default_con_id);
+        H5Pclose(fapl_id);
+        free(vol_connector_string_copy);
+    } H5E_END_TRY;
+
+    return -1;
+}
+
+void H5_api_test_display_results(void) {
+    const char *vol_connector_name = NULL;
+
+    if (NULL == (vol_connector_name = HDgetenv(HDF5_VOL_CONNECTOR)))
+        vol_connector_name = "native";
+    
+    printf("%zu/%zu (%.2f%%) API tests passed with VOL connector '%s'\n", n_tests_passed_g, n_tests_run_g,
+            ((double)n_tests_passed_g / (double)n_tests_run_g * 100.0), vol_connector_name);
+    printf("%zu/%zu (%.2f%%) API tests did not pass with VOL connector '%s'\n", n_tests_failed_g,
+            n_tests_run_g, ((double)n_tests_failed_g / (double)n_tests_run_g * 100.0), vol_connector_name);
+    printf("%zu/%zu (%.2f%%) API tests were skipped with VOL connector '%s'\n", n_tests_skipped_g,
+            n_tests_run_g, ((double)n_tests_skipped_g / (double)n_tests_run_g * 100.0),
+            vol_connector_name);
+}
+
+int H5_api_test_setup_vol_cap_flags(void) {
+    hid_t fapl_id = H5I_INVALID_HID;
+
+    /* Retrieve the VOL cap flags - work around an HDF5
+     * library issue by creating a FAPL
+     */
+    if ((fapl_id = H5Pcreate(H5P_FILE_ACCESS)) < 0) {
+        printf("    couldn't create FAPL\n");
+        goto error;
+    }
+
+    vol_cap_flags_g = H5VL_CAP_FLAG_NONE;
+    if (H5Pget_vol_cap_flags(fapl_id, &vol_cap_flags_g) < 0) {
+        printf(" unable to retrieve VOL connector capability flags\n");
+        goto error;
+    }
+
+    if (H5Pclose(fapl_id) < 0) {
+        printf("    unable to close FAPL\n");
+        goto error;
+    }
+
+    return 0;
+
+error:
+    H5Pclose(fapl_id);
+    return -1;
 }

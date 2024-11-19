@@ -51,7 +51,7 @@ test_open_link_without_leading_slash(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -63,11 +63,11 @@ test_open_link_without_leading_slash(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(OPEN_LINK_WITHOUT_SLASH_DSET_SPACE_RANK, NULL, NULL, FALSE)) <
+    if ((space_id = generate_random_dataspace(OPEN_LINK_WITHOUT_SLASH_DSET_SPACE_RANK, NULL, NULL, false)) <
         0)
         TEST_ERROR;
 
-    if ((dset_dtype = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0)
+    if ((dset_dtype = generate_random_datatype(H5T_NO_CLASS, false)) < 0)
         TEST_ERROR;
 
     if ((dset_id = H5Dcreate2(container_group, OPEN_LINK_WITHOUT_SLASH_DSET_NAME, dset_dtype, space_id,
@@ -86,7 +86,7 @@ test_open_link_without_leading_slash(void)
     if (H5Fclose(file_id) < 0)
         TEST_ERROR;
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -158,7 +158,7 @@ test_object_creation_by_absolute_path(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -238,13 +238,13 @@ test_object_creation_by_absolute_path(void)
 
             /* Try to create a dataset nested at the end of this group chain by using an absolute pathname */
             if ((fspace_id = generate_random_dataspace(OBJECT_CREATE_BY_ABSOLUTE_PATH_TEST_DSET_SPACE_RANK,
-                                                       NULL, NULL, FALSE)) < 0) {
+                                                       NULL, NULL, false)) < 0) {
                 H5_FAILED();
                 printf("    failed to generate dataspace\n");
                 PART_ERROR(H5Dcreate_using_absolute_path);
             }
 
-            if ((dset_dtype = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
+            if ((dset_dtype = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
                 H5_FAILED();
                 printf("    failed to generate datatype\n");
                 PART_ERROR(H5Dcreate_using_absolute_path);
@@ -287,7 +287,7 @@ test_object_creation_by_absolute_path(void)
             TESTING_2("creation of committed datatype using absolute pathname");
 
             /* Try to create a committed datatype in the same fashion as the preceding dataset */
-            if ((dtype_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
+            if ((dtype_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
                 H5_FAILED();
                 printf("    couldn't create datatype\n");
                 PART_ERROR(H5Tcommit_using_absolute_path);
@@ -393,7 +393,7 @@ test_absolute_vs_relative_path(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -414,20 +414,20 @@ test_absolute_vs_relative_path(void)
     }
 
     if ((fspace_id = generate_random_dataspace(ABSOLUTE_VS_RELATIVE_PATH_TEST_DSET_SPACE_RANK, NULL, NULL,
-                                               FALSE)) < 0)
+                                               false)) < 0)
         TEST_ERROR;
 
-    if ((dset_dtype1 = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0)
+    if ((dset_dtype1 = generate_random_datatype(H5T_NO_CLASS, false)) < 0)
         TEST_ERROR;
-    if ((dset_dtype2 = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0)
+    if ((dset_dtype2 = generate_random_datatype(H5T_NO_CLASS, false)) < 0)
         TEST_ERROR;
-    if ((dset_dtype3 = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0)
+    if ((dset_dtype3 = generate_random_datatype(H5T_NO_CLASS, false)) < 0)
         TEST_ERROR;
-    if ((dset_dtype4 = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0)
+    if ((dset_dtype4 = generate_random_datatype(H5T_NO_CLASS, false)) < 0)
         TEST_ERROR;
-    if ((dset_dtype5 = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0)
+    if ((dset_dtype5 = generate_random_datatype(H5T_NO_CLASS, false)) < 0)
         TEST_ERROR;
-    if ((dset_dtype6 = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0)
+    if ((dset_dtype6 = generate_random_datatype(H5T_NO_CLASS, false)) < 0)
         TEST_ERROR;
 
     PASSED();
@@ -738,9 +738,9 @@ test_dot_for_object_name(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -927,7 +927,7 @@ test_symbols_in_compound_field_name(void)
     for (i = 0; i < COMPOUND_WITH_SYMBOLS_IN_MEMBER_NAMES_TEST_NUM_SUBTYPES; i++)
         type_pool[i] = H5I_INVALID_HID;
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -947,19 +947,19 @@ test_symbols_in_compound_field_name(void)
     }
 
     for (i = 0, total_type_size = 0; i < COMPOUND_WITH_SYMBOLS_IN_MEMBER_NAMES_TEST_NUM_SUBTYPES; i++) {
-        type_pool[i] = generate_random_datatype(H5T_NO_CLASS, FALSE);
+        type_pool[i] = generate_random_datatype(H5T_NO_CLASS, false);
         total_type_size += H5Tget_size(type_pool[i]);
     }
 
-    HDsnprintf(member_names[0], 256, "{{{ member0");
-    HDsnprintf(member_names[1], 256, "member1 }}}");
-    HDsnprintf(member_names[2], 256, "{{{ member2 }}");
-    HDsnprintf(member_names[3], 256, "{{ member3 }}}");
-    HDsnprintf(member_names[4], 256, "\\\"member4");
-    HDsnprintf(member_names[5], 256, "member5\\\"");
-    HDsnprintf(member_names[6], 256, "mem\\\"ber6");
-    HDsnprintf(member_names[7], 256, "{{ member7\\\" }");
-    HDsnprintf(member_names[8], 256, "{{ member8\\\\");
+    snprintf(member_names[0], 256, "{{{ member0");
+    snprintf(member_names[1], 256, "member1 }}}");
+    snprintf(member_names[2], 256, "{{{ member2 }}");
+    snprintf(member_names[3], 256, "{{ member3 }}}");
+    snprintf(member_names[4], 256, "\\\"member4");
+    snprintf(member_names[5], 256, "member5\\\"");
+    snprintf(member_names[6], 256, "mem\\\"ber6");
+    snprintf(member_names[7], 256, "{{ member7\\\" }");
+    snprintf(member_names[8], 256, "{{ member8\\\\");
 
     if ((compound_type = H5Tcreate(H5T_COMPOUND, total_type_size)) < 0) {
         H5_FAILED();
@@ -981,7 +981,7 @@ test_symbols_in_compound_field_name(void)
         TEST_ERROR;
 
     if ((fspace_id = generate_random_dataspace(COMPOUND_WITH_SYMBOLS_IN_MEMBER_NAMES_TEST_DSET_RANK, NULL,
-                                               NULL, FALSE)) < 0)
+                                               NULL, false)) < 0)
         TEST_ERROR;
 
     if ((dset_id = H5Dcreate2(group_id, COMPOUND_WITH_SYMBOLS_IN_MEMBER_NAMES_TEST_DSET_NAME, compound_type,
@@ -1042,13 +1042,24 @@ error:
 void
 H5_api_misc_test_add(void)
 {
-    /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_misc_test_header", print_misc_test_header, NULL, "Prints header for miscellaneous tests", NULL);
+    int64_t testframe_flags = 0;
 
-    AddTest("test_open_link_without_leading_slash", test_open_link_without_leading_slash, NULL, "opening a link without a leading slash", NULL);
-    AddTest("test_object_creation_by_absolute_path", test_object_creation_by_absolute_path, NULL, "object creation by absolute path", NULL);
-    AddTest("test_absolute_vs_relative_path", test_absolute_vs_relative_path, NULL, "absolute vs. relative pathnames", NULL);
-    AddTest("test_dot_for_object_name", test_dot_for_object_name, NULL, "creating objects with \".\" as the name", NULL);
-    AddTest("test_symbols_in_compound_field_name", test_symbols_in_compound_field_name, NULL, "usage of '{', '}' and '\\\"' symbols in compound field name", NULL);
-    AddTest("test_double_init_term", test_double_init_term, NULL, "double init/term correctness", NULL);
+    if (GetTestMaxNumThreads() > 1)
+        testframe_flags |= RUN_TEST_MULTITHREADED;
+
+    /* Add a fake test to print out a header to distinguish different test interfaces */
+    AddTest("print_misc_test_header", print_misc_test_header, NULL, "Prints header for miscellaneous tests",
+            NULL, 0);
+
+    AddTest("test_open_link_without_leading_slash", MT_API_TEST_FUNC_OUTER(test_open_link_without_leading_slash), NULL,
+            "opening a link without a leading slash", NULL, testframe_flags);
+    AddTest("test_object_creation_by_absolute_path", MT_API_TEST_FUNC_OUTER(test_object_creation_by_absolute_path), NULL,
+            "object creation by absolute path", NULL, testframe_flags);
+    AddTest("test_absolute_vs_relative_path", MT_API_TEST_FUNC_OUTER(test_absolute_vs_relative_path), NULL,
+            "absolute vs. relative pathnames", NULL, testframe_flags);
+    AddTest("test_dot_for_object_name", MT_API_TEST_FUNC_OUTER(test_dot_for_object_name), NULL,
+            "creating objects with \".\" as the name", NULL, testframe_flags);
+    AddTest("test_symbols_in_compound_field_name", MT_API_TEST_FUNC_OUTER(test_symbols_in_compound_field_name), NULL,
+            "usage of '{', '}' and '\\\"' symbols in compound field name", NULL, testframe_flags);
+    AddTest("test_double_init_term", MT_API_TEST_FUNC_OUTER(test_double_init_term), NULL, "double init/term correctness", NULL, testframe_flags);
 }

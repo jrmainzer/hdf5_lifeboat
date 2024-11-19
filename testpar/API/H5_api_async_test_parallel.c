@@ -3657,7 +3657,7 @@ void
 H5_api_async_test_parallel_add(void)
 {
     /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_async_test_header", print_async_test_header, NULL, "Prints header for async tests", NULL);
+    AddTest("print_async_test_header", print_async_test_header, NULL, "Prints header for async tests", NULL, 0);
 }
 
 #endif
