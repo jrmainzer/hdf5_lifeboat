@@ -1042,10 +1042,7 @@ error:
 void
 H5_api_misc_test_add(void)
 {
-    int64_t testframe_flags = 0;
-
-    if (GetTestMaxNumThreads() > 1)
-        testframe_flags |= RUN_TEST_MULTITHREADED;
+    int64_t testframe_flags = ALLOW_MULTITHREAD;
 
     /* Add a fake test to print out a header to distinguish different test interfaces */
     AddTest("print_misc_test_header", print_misc_test_header, NULL, "Prints header for miscellaneous tests",

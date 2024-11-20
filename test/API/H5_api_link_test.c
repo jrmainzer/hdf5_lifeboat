@@ -27128,10 +27128,7 @@ link_visit_0_links_cb(hid_t group_id, const char *name, const H5L_info2_t *info,
 void
 H5_api_link_test_add(void)
 {
-    int64_t testframe_flags = 0;
-
-    if (GetTestMaxNumThreads() > 1)
-        testframe_flags |= RUN_TEST_MULTITHREADED;
+    int64_t testframe_flags = ALLOW_MULTITHREAD;
 
     /* Add a fake test to print out a header to distinguish different test interfaces */
     AddTest("print_link_test_header",  print_link_test_header,  NULL,  "Prints header for link tests",  NULL, 0);

@@ -210,6 +210,27 @@ main(int argc, char **argv)
     // TODO
     UNUSED(testExpress);
 
+
+    /* Display generic testing information */
+    TestInfo(argv[0]);
+
+    /* TODO: Refactor TestAlarmOn to accept specific timeout */
+    TestAlarmOn();
+
+    /*
+     * If using a VOL connector other than the native
+     * connector, check whether the VOL connector was
+     * successfully registered before running the tests.
+     * Otherwise, HDF5 will default to running the tests
+     * with the native connector, which could be misleading.
+     */
+    if (H5_api_check_vol_registration() < 0) {
+        fprintf(stderr, "Active VOL connector not properly registered\n");
+        return EXIT_FAILURE;
+    }
+
+    H5_api_test_add();
+
     /* Parse command line arguments */
     TestParseCmdLine(argc, argv);
 
@@ -263,26 +284,6 @@ main(int argc, char **argv)
     }
 
     active_thread_ct = (size_t) GetTestMaxNumThreads();
-
-    /* Display generic testing information */
-    TestInfo(argv[0]);
-
-    /* TODO: Refactor TestAlarmOn to accept specific timeout */
-    TestAlarmOn();
-
-    /*
-     * If using a VOL connector other than the native
-     * connector, check whether the VOL connector was
-     * successfully registered before running the tests.
-     * Otherwise, HDF5 will default to running the tests
-     * with the native connector, which could be misleading.
-     */
-    if (H5_api_check_vol_registration() < 0) {
-        fprintf(stderr, "Active VOL connector not properly registered\n");
-        return EXIT_FAILURE;
-    }
-
-    H5_api_test_add();
 
     /* Perform requested testing */
     PerformTests();

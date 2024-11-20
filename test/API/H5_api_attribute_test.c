@@ -11026,10 +11026,7 @@ attr_iter_callback2(hid_t location_id, const char *attr_name, const H5A_info_t *
 void
 H5_api_attribute_test_add(void)
 {
-    int64_t testframe_flags = 0;
-
-    if (GetTestMaxNumThreads() > 1)
-        testframe_flags |= RUN_TEST_MULTITHREADED;
+    int64_t testframe_flags = ALLOW_MULTITHREAD;
 
     /* Add a fake test to print out a header to distinguish different test interfaces */
     AddTest("print_attribute_test_header", print_attribute_test_header, NULL,

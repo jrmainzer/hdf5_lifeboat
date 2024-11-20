@@ -7357,10 +7357,7 @@ object_visit_noop_callback(hid_t o_id, const char *name, const H5O_info2_t *obje
 void
 H5_api_object_test_add(void)
 {
-    int64_t testframe_flags = 0;
-
-    if (GetTestMaxNumThreads() > 1)
-        testframe_flags |= RUN_TEST_MULTITHREADED;
+    int64_t testframe_flags = ALLOW_MULTITHREAD;
 
     /* Add a fake test to print out a header to distinguish different test interfaces */
     AddTest("print_object_test_header", print_object_test_header, NULL, "Prints header for object tests",

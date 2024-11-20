@@ -349,12 +349,13 @@ PerformTests(void)
     bool is_test_mt = false;
     bool mt_initialized = false;
     int test_num_errs = 0;
+    int max_num_threads = GetTestMaxNumThreads();
 
     /* Silence compiler warnings */
     (void) mt_initialized;
 
     for (Loop = 0; Loop < Index; Loop++) {
-        is_test_mt = (Test[Loop].TestFrameworkFlags & RUN_TEST_MULTITHREADED) ? true : false;
+        is_test_mt = (Test[Loop].TestFrameworkFlags & ALLOW_MULTITHREAD) && (max_num_threads > 1);
 
         if (Test[Loop].SkipFlag) {
             MESSAGE(2, ("Skipping -- %s (%s) \n", Test[Loop].Description, Test[Loop].Name));
@@ -376,15 +377,14 @@ PerformTests(void)
                 MESSAGE(5, ("There were %d errors detected.\n\n", (int)H5_ATOMIC_LOAD(Test[Loop].NumErrors)));
             } else {
 #ifndef H5_HAVE_MULTITHREAD
-                if (Test[Loop].TestFrameworkFlags & RUN_TEST_MULTITHREADED) {
-                    MESSAGE(2, ("Multi-threaded tests are not supported in this configuration; Skipping \n"));
+                if (Test[Loop].TestFrameworkFlags & ALLOW_MULTITHREAD) {
+                    MESSAGE(2, ("HDF5 was not built with multi-threaded support; Skipping test\n"));
                     TestAlarmOff();
                     continue;
                 }      
 #else
             pthread_t *threads;
             TestThreadArgs *thread_args;
-            int max_num_threads = GetTestMaxNumThreads();
             int ret = 0;
 
             if (max_num_threads <= 0) {
@@ -404,7 +404,7 @@ PerformTests(void)
                 mt_initialized = true;
             }
 
-            for (int i = 0; i < GetTestMaxNumThreads(); i++) {
+            for (int i = 0; i < max_num_threads; i++) {
                     thread_args[i].ThreadIndex = i;
                     thread_args[i].Call = Test[Loop].Call;
 
@@ -416,7 +416,7 @@ PerformTests(void)
                     }
             }
 
-            for (int i = 0; i < GetTestMaxNumThreads(); i++) {
+            for (int i = 0; i < max_num_threads; i++) {
                     ret = pthread_join(threads[i], NULL);
 
                     if (ret != 0) {

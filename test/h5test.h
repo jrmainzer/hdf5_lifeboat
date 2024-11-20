@@ -109,7 +109,7 @@ extern pthread_key_t test_thread_info_key_g;
 #endif /* H5_HAVE_MULTITHREAD */
 
 /* Flag values for TestFrameworkFlags */
-#define RUN_TEST_MULTITHREADED 0x00000001 /* Run the test in a multi-threaded environment */
+#define ALLOW_MULTITHREAD 0x00000001 /* Run the test in a multi-threaded environment */
 
 /*
  * Print the current location on the standard output stream.
