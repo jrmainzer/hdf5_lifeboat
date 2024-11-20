@@ -1533,7 +1533,7 @@ test_attribute_io(void)
     hid_t   es_id    = H5I_INVALID_HID;
     hsize_t dims[2]  = {6, 10};
     size_t  num_in_progress;
-    hbool_t  op_failed;
+    hbool_t op_failed;
     int     wbuf[6][10];
     int     rbuf[6][10];
     int     i, j;
@@ -1675,7 +1675,7 @@ test_attribute_io_tconv(void)
     hid_t   es_id    = H5I_INVALID_HID;
     hsize_t dims[2]  = {6, 10};
     size_t  num_in_progress;
-    hbool_t  op_failed;
+    hbool_t op_failed;
     int     wbuf[6][10];
     int     rbuf[6][10];
     int     i, j;
@@ -2287,18 +2287,18 @@ error:
 static void
 test_link(void)
 {
-    hid_t  file_id         = H5I_INVALID_HID;
-    hid_t  parent_group_id = H5I_INVALID_HID;
-    hid_t  group_id        = H5I_INVALID_HID;
-    hid_t  gcpl_id         = H5I_INVALID_HID;
-    hid_t  es_id           = H5I_INVALID_HID;
+    hid_t   file_id         = H5I_INVALID_HID;
+    hid_t   parent_group_id = H5I_INVALID_HID;
+    hid_t   group_id        = H5I_INVALID_HID;
+    hid_t   gcpl_id         = H5I_INVALID_HID;
+    hid_t   es_id           = H5I_INVALID_HID;
     hbool_t existsh1;
     hbool_t existsh2;
     hbool_t existsh3;
     hbool_t existss1;
     hbool_t existss2;
     hbool_t existss3;
-    size_t num_in_progress;
+    size_t  num_in_progress;
     hbool_t op_failed;
 
     TESTING("link operations");
@@ -2491,7 +2491,7 @@ test_ocopy_orefresh(void)
     hid_t   es_id           = H5I_INVALID_HID;
     hsize_t dims[2]         = {6, 10};
     size_t  num_in_progress;
-    hbool_t  op_failed;
+    hbool_t op_failed;
 
     TESTING("H5Ocopy() and H5Orefresh()");
 
@@ -2599,10 +2599,10 @@ error:
 static void
 test_file_reopen(void)
 {
-    hid_t  file_id          = H5I_INVALID_HID;
-    hid_t  reopened_file_id = H5I_INVALID_HID;
-    hid_t  es_id            = H5I_INVALID_HID;
-    size_t num_in_progress;
+    hid_t   file_id          = H5I_INVALID_HID;
+    hid_t   reopened_file_id = H5I_INVALID_HID;
+    hid_t   es_id            = H5I_INVALID_HID;
+    size_t  num_in_progress;
     hbool_t op_failed;
 
     TESTING("H5Freopen()");

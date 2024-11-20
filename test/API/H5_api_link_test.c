@@ -884,12 +884,6 @@ test_create_hard_link_invalid_params(void)
                 PART_ERROR(H5Lcreate_hard_across_files);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lcreate_hard_across_files);
-            }
-
             PASSED();
         }
         PART_END(H5Lcreate_hard_across_files);
@@ -3850,12 +3844,6 @@ test_delete_link(void)
                 PART_ERROR(H5Ldelete_external);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Ldelete_external);
-            }
-
             PASSED();
         }
         PART_END(H5Ldelete_external);
@@ -3888,12 +3876,6 @@ test_delete_link(void)
         PART_BEGIN(H5Ldelete_by_idx_hard_crt_order_increasing)
         {
             TESTING_2("H5Ldelete_by_idx on hard link by creation order in increasing order");
-
-            if (!(vol_cap_flags_g & H5VL_CAP_FLAG_BY_IDX)) {
-                SKIPPED();
-                printf("    by index isn't supported with this VOL connector\n");
-                PART_EMPTY(H5Ldelete_by_idx_hard_crt_order_increasing);
-            }
 
             if (!(vol_cap_flags_g & H5VL_CAP_FLAG_CREATION_ORDER)) {
                 SKIPPED();
@@ -4128,12 +4110,6 @@ test_delete_link(void)
         {
             TESTING_2("H5Ldelete_by_idx on hard link by creation order in decreasing order");
 
-            if (!(vol_cap_flags_g & H5VL_CAP_FLAG_BY_IDX)) {
-                SKIPPED();
-                printf("    by index isn't supported with this VOL connector\n");
-                PART_EMPTY(H5Ldelete_by_idx_hard_crt_order_decreasing);
-            }
-
             if (!(vol_cap_flags_g & H5VL_CAP_FLAG_CREATION_ORDER)) {
                 SKIPPED();
                 printf("    creation order tracking isn't supported with this VOL connector\n");
@@ -4367,12 +4343,6 @@ test_delete_link(void)
         {
             TESTING_2("H5Ldelete_by_idx on hard link by alphabetical order in increasing order");
 
-            if (!(vol_cap_flags_g & H5VL_CAP_FLAG_BY_IDX)) {
-                SKIPPED();
-                printf("    by index isn't supported with this VOL connector\n");
-                PART_EMPTY(H5Ldelete_by_idx_hard_name_order_increasing);
-            }
-
             if ((subgroup_id = H5Gcreate2(group_id, LINK_DELETE_TEST_SUBGROUP7_NAME, H5P_DEFAULT, gcpl_id,
                                           H5P_DEFAULT)) < 0) {
                 H5_FAILED();
@@ -4600,12 +4570,6 @@ test_delete_link(void)
         {
             TESTING_2("H5Ldelete_by_idx on hard link by alphabetical order in decreasing order");
 
-            if (!(vol_cap_flags_g & H5VL_CAP_FLAG_BY_IDX)) {
-                SKIPPED();
-                printf("    by index isn't supported with this VOL connector\n");
-                PART_EMPTY(H5Ldelete_by_idx_hard_name_order_decreasing);
-            }
-
             if ((subgroup_id = H5Gcreate2(group_id, LINK_DELETE_TEST_SUBGROUP8_NAME, H5P_DEFAULT, gcpl_id,
                                           H5P_DEFAULT)) < 0) {
                 H5_FAILED();
@@ -4832,12 +4796,6 @@ test_delete_link(void)
         PART_BEGIN(H5Ldelete_by_idx_soft_crt_order_increasing)
         {
             TESTING_2("H5Ldelete_by_idx on soft link by creation order in increasing order");
-
-            if (!(vol_cap_flags_g & H5VL_CAP_FLAG_BY_IDX)) {
-                SKIPPED();
-                printf("    by index isn't supported with this VOL connector\n");
-                PART_EMPTY(H5Ldelete_by_idx_soft_crt_order_increasing);
-            }
 
             if (!(vol_cap_flags_g & H5VL_CAP_FLAG_CREATION_ORDER)) {
                 SKIPPED();
@@ -5075,12 +5033,6 @@ test_delete_link(void)
         {
             TESTING_2("H5Ldelete_by_idx on soft link by creation order in decreasing order");
 
-            if (!(vol_cap_flags_g & H5VL_CAP_FLAG_BY_IDX)) {
-                SKIPPED();
-                printf("    by index isn't supported with this VOL connector\n");
-                PART_EMPTY(H5Ldelete_by_idx_soft_crt_order_decreasing);
-            }
-
             if (!(vol_cap_flags_g & H5VL_CAP_FLAG_CREATION_ORDER)) {
                 SKIPPED();
                 printf("    creation order tracking isn't supported with this VOL connector\n");
@@ -5317,12 +5269,6 @@ test_delete_link(void)
         {
             TESTING_2("H5Ldelete_by_idx on soft link by alphabetical order in increasing order");
 
-            if (!(vol_cap_flags_g & H5VL_CAP_FLAG_BY_IDX)) {
-                SKIPPED();
-                printf("    by index isn't supported with this VOL connector\n");
-                PART_EMPTY(H5Ldelete_by_idx_soft_name_order_increasing);
-            }
-
             if ((subgroup_id = H5Gcreate2(group_id, LINK_DELETE_TEST_SUBGROUP11_NAME, H5P_DEFAULT, gcpl_id,
                                           H5P_DEFAULT)) < 0) {
                 H5_FAILED();
@@ -5553,12 +5499,6 @@ test_delete_link(void)
         {
             TESTING_2("H5Ldelete_by_idx on soft link by alphabetical order in decreasing order");
 
-            if (!(vol_cap_flags_g & H5VL_CAP_FLAG_BY_IDX)) {
-                SKIPPED();
-                printf("    by index isn't supported with this VOL connector\n");
-                PART_EMPTY(H5Ldelete_by_idx_soft_name_order_decreasing);
-            }
-
             if ((subgroup_id = H5Gcreate2(group_id, LINK_DELETE_TEST_SUBGROUP12_NAME, H5P_DEFAULT, gcpl_id,
                                           H5P_DEFAULT)) < 0) {
                 H5_FAILED();
@@ -5788,12 +5728,6 @@ test_delete_link(void)
         PART_BEGIN(H5Ldelete_by_idx_external_crt_order_increasing)
         {
             TESTING_2("H5Ldelete_by_idx on external link by creation order in increasing order");
-
-            if (!(vol_cap_flags_g & H5VL_CAP_FLAG_CREATION_ORDER)) {
-                SKIPPED();
-                printf("    creation order tracking isn't supported with this VOL connector\n");
-                PART_EMPTY(H5Ldelete_by_idx_external_crt_order_increasing);
-            }
 
             if (!(vol_cap_flags_g & H5VL_CAP_FLAG_CREATION_ORDER)) {
                 SKIPPED();
@@ -6044,12 +5978,6 @@ test_delete_link(void)
                 PART_ERROR(H5Ldelete_by_idx_external_crt_order_increasing);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Ldelete_by_idx_external_crt_order_increasing);
-            }
-
             PASSED();
         }
         PART_END(H5Ldelete_by_idx_external_crt_order_increasing);
@@ -6064,12 +5992,6 @@ test_delete_link(void)
         PART_BEGIN(H5Ldelete_by_idx_external_crt_order_decreasing)
         {
             TESTING_2("H5Ldelete_by_idx on external link by creation order in decreasing order");
-
-            if (!(vol_cap_flags_g & H5VL_CAP_FLAG_CREATION_ORDER)) {
-                SKIPPED();
-                printf("    creation order tracking isn't supported with this VOL connector\n");
-                PART_EMPTY(H5Ldelete_by_idx_external_crt_order_decreasing);
-            }
 
             if (!(vol_cap_flags_g & H5VL_CAP_FLAG_CREATION_ORDER)) {
                 SKIPPED();
@@ -6320,12 +6242,6 @@ test_delete_link(void)
                 PART_ERROR(H5Ldelete_by_idx_external_crt_order_decreasing);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Ldelete_by_idx_external_crt_order_decreasing);
-            }
-
             PASSED();
         }
         PART_END(H5Ldelete_by_idx_external_crt_order_decreasing);
@@ -6340,12 +6256,6 @@ test_delete_link(void)
         PART_BEGIN(H5Ldelete_by_idx_external_name_order_increasing)
         {
             TESTING_2("H5Ldelete_by_idx on external link by alphabetical order in increasing order");
-
-            if (!(vol_cap_flags_g & H5VL_CAP_FLAG_BY_IDX)) {
-                SKIPPED();
-                printf("    by index isn't supported with this VOL connector\n");
-                PART_EMPTY(H5Ldelete_by_idx_external_name_order_increasing);
-            }
 
             if ((subgroup_id = H5Gcreate2(group_id, LINK_DELETE_TEST_SUBGROUP15_NAME, H5P_DEFAULT, gcpl_id,
                                           H5P_DEFAULT)) < 0) {
@@ -6590,12 +6500,6 @@ test_delete_link(void)
                 PART_ERROR(H5Ldelete_by_idx_external_name_order_increasing);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Ldelete_by_idx_external_name_order_increasing);
-            }
-
             PASSED();
         }
         PART_END(H5Ldelete_by_idx_external_name_order_increasing);
@@ -6610,12 +6514,6 @@ test_delete_link(void)
         PART_BEGIN(H5Ldelete_by_idx_external_name_order_decreasing)
         {
             TESTING_2("H5Ldelete_by_idx on external link by alphabetical order in decreasing order");
-
-            if (!(vol_cap_flags_g & H5VL_CAP_FLAG_BY_IDX)) {
-                SKIPPED();
-                printf("    by index isn't supported with this VOL connector\n");
-                PART_EMPTY(H5Ldelete_by_idx_external_name_order_decreasing);
-            }
 
             if ((subgroup_id = H5Gcreate2(group_id, LINK_DELETE_TEST_SUBGROUP16_NAME, H5P_DEFAULT, gcpl_id,
                                           H5P_DEFAULT)) < 0) {
@@ -6857,12 +6755,6 @@ test_delete_link(void)
             if (H5Gclose(subgroup_id) < 0) {
                 H5_FAILED();
                 printf("    failed to close group '%s'\n", LINK_DELETE_TEST_SUBGROUP16_NAME);
-                PART_ERROR(H5Ldelete_by_idx_external_name_order_decreasing);
-            }
-
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
                 PART_ERROR(H5Ldelete_by_idx_external_name_order_decreasing);
             }
 
@@ -8404,12 +8296,6 @@ test_copy_link(void)
                 PART_ERROR(H5Lcopy_external_no_check);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lcopy_external_no_check);
-            }
-
             PASSED();
         }
         PART_END(H5Lcopy_external_no_check);
@@ -8599,12 +8485,6 @@ test_copy_link(void)
                 PART_ERROR(H5Lcopy_external_check);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lcopy_external_check);
-            }
-
             PASSED();
         }
         PART_END(H5Lcopy_external_check);
@@ -8723,12 +8603,6 @@ test_copy_link(void)
             if (!link_exists) {
                 H5_FAILED();
                 printf("    original external link did not exist\n");
-                PART_ERROR(H5Lcopy_external_same_loc);
-            }
-
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
                 PART_ERROR(H5Lcopy_external_same_loc);
             }
 
@@ -10179,12 +10053,6 @@ test_move_link(void)
                 PART_ERROR(H5Lmove_external_no_check);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lmove_external_no_check);
-            }
-
             PASSED();
         }
         PART_END(H5Lmove_external_no_check);
@@ -10374,12 +10242,6 @@ test_move_link(void)
                 PART_ERROR(H5Lmove_external_check);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lmove_external_check);
-            }
-
             PASSED();
         }
         PART_END(H5Lmove_external_check);
@@ -10497,12 +10359,6 @@ test_move_link(void)
                 PART_ERROR(H5Lmove_external_same_loc);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lmove_external_same_loc);
-            }
-
             PASSED();
         }
         PART_END(H5Lmove_external_same_loc);
@@ -10580,12 +10436,6 @@ test_move_link(void)
             if (link_exists) {
                 H5_FAILED();
                 printf("    old external link exists\n");
-                PART_ERROR(H5Lmove_external_rename);
-            }
-
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
                 PART_ERROR(H5Lmove_external_rename);
             }
 
@@ -11713,12 +11563,6 @@ test_get_link_val(void)
                 PART_ERROR(H5Lget_val_external);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lget_val_external);
-            }
-
             PASSED();
         }
         PART_END(H5Lget_val_external);
@@ -12734,12 +12578,6 @@ test_get_link_val(void)
                 PART_ERROR(H5Lget_val_by_idx_external_crt_order_increasing);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lget_val_by_idx_external_crt_order_increasing);
-            }
-
             PASSED();
         }
         PART_END(H5Lget_val_by_idx_external_crt_order_increasing);
@@ -12973,12 +12811,6 @@ test_get_link_val(void)
                 PART_ERROR(H5Lget_val_by_idx_external_crt_order_decreasing);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lget_val_by_idx_external_crt_order_decreasing);
-            }
-
             PASSED();
         }
         PART_END(H5Lget_val_by_idx_external_crt_order_decreasing);
@@ -13206,12 +13038,6 @@ test_get_link_val(void)
                 PART_ERROR(H5Lget_val_by_idx_external_name_order_increasing);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lget_val_by_idx_external_name_order_increasing);
-            }
-
             PASSED();
         }
         PART_END(H5Lget_val_by_idx_external_name_order_increasing);
@@ -13436,12 +13262,6 @@ test_get_link_val(void)
             if (H5Gclose(subgroup_id) < 0) {
                 H5_FAILED();
                 printf("    failed to close group '%s'\n", GET_LINK_VAL_TEST_SUBGROUP11_NAME);
-                PART_ERROR(H5Lget_val_by_idx_external_name_order_decreasing);
-            }
-
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
                 PART_ERROR(H5Lget_val_by_idx_external_name_order_decreasing);
             }
 
@@ -14203,12 +14023,6 @@ test_get_link_info(void)
             if (H5Gclose(subgroup_id) < 0) {
                 H5_FAILED();
                 printf("    failed to close group '%s'\n", GET_LINK_INFO_TEST_SUBGROUP3_NAME);
-                PART_ERROR(H5Lget_info_external);
-            }
-
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
                 PART_ERROR(H5Lget_info_external);
             }
 
@@ -15867,12 +15681,6 @@ test_get_link_info(void)
                 PART_ERROR(H5Lget_info_by_idx_external_crt_order_increasing);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lget_info_by_idx_external_crt_order_increasing);
-            }
-
             PASSED();
         }
         PART_END(H5Lget_info_by_idx_external_crt_order_increasing);
@@ -16059,12 +15867,6 @@ test_get_link_info(void)
             if (H5Gclose(subgroup_id) < 0) {
                 H5_FAILED();
                 printf("    failed to close group '%s'\n", GET_LINK_INFO_TEST_SUBGROUP14_NAME);
-                PART_ERROR(H5Lget_info_by_idx_external_crt_order_decreasing);
-            }
-
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
                 PART_ERROR(H5Lget_info_by_idx_external_crt_order_decreasing);
             }
 
@@ -16257,12 +16059,6 @@ test_get_link_info(void)
                 PART_ERROR(H5Lget_info_by_idx_external_name_order_increasing);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lget_info_by_idx_external_name_order_increasing);
-            }
-
             PASSED();
         }
         PART_END(H5Lget_info_by_idx_external_name_order_increasing);
@@ -16449,12 +16245,6 @@ test_get_link_info(void)
             if (H5Gclose(subgroup_id) < 0) {
                 H5_FAILED();
                 printf("    failed to close group '%s'\n", GET_LINK_INFO_TEST_SUBGROUP16_NAME);
-                PART_ERROR(H5Lget_info_by_idx_external_name_order_decreasing);
-            }
-
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
                 PART_ERROR(H5Lget_info_by_idx_external_name_order_decreasing);
             }
 
@@ -18470,12 +18260,6 @@ test_get_link_name(void)
                 PART_ERROR(H5Lget_name_by_idx_external_crt_order_increasing);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lget_name_by_idx_external_crt_order_increasing);
-            }
-
             PASSED();
         }
         PART_END(H5Lget_name_by_idx_external_crt_order_increasing);
@@ -18647,12 +18431,6 @@ test_get_link_name(void)
                 PART_ERROR(H5Lget_name_by_idx_external_crt_order_decreasing);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lget_name_by_idx_external_crt_order_decreasing);
-            }
-
             PASSED();
         }
         PART_END(H5Lget_name_by_idx_external_crt_order_decreasing);
@@ -18818,12 +18596,6 @@ test_get_link_name(void)
                 PART_ERROR(H5Lget_name_by_idx_external_name_order_increasing);
             }
 
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
-                PART_ERROR(H5Lget_name_by_idx_external_name_order_increasing);
-            }
-
             PASSED();
         }
         PART_END(H5Lget_name_by_idx_external_name_order_increasing);
@@ -18986,12 +18758,6 @@ test_get_link_name(void)
             if (H5Gclose(subgroup_id) < 0) {
                 H5_FAILED();
                 printf("    failed to close group\n");
-                PART_ERROR(H5Lget_name_by_idx_external_name_order_decreasing);
-            }
-
-            if (remove_test_file(NULL, ext_link_filename) < 0) {
-                H5_FAILED();
-                printf("    failed to delete external file '%s'\n", ext_link_filename);
                 PART_ERROR(H5Lget_name_by_idx_external_name_order_decreasing);
             }
 
@@ -26985,109 +26751,109 @@ H5_api_link_test_add(void)
 
     /* Add a fake test to print out a header to distinguish different test interfaces */
     AddTest("print_link_test_header",  print_link_test_header,  NULL,  "Prints header for link tests",  NULL, 0);
-    AddTest("test_create_hard_link",  MT_API_TEST_FUNC_OUTER(test_create_hard_link),  NULL,  "hard link creation",  NULL, testframe_flags);
-    AddTest("test_create_hard_link_long_name", MT_API_TEST_FUNC_OUTER(test_create_hard_link_long_name), NULL,
+    AddTest("test_create_hard_link",  test_create_hard_link,  NULL,  "hard link creation",  NULL, testframe_flags);
+    AddTest("test_create_hard_link_long_name", test_create_hard_link_long_name, NULL,
             "hard link creation with a long name", NULL, testframe_flags);
-    AddTest("test_create_hard_link_many", MT_API_TEST_FUNC_OUTER(test_create_hard_link_many), NULL,
+    AddTest("test_create_hard_link_many", test_create_hard_link_many, NULL,
             "hard link creation of many links", NULL, testframe_flags);
-    AddTest("test_create_hard_link_same_loc", MT_API_TEST_FUNC_OUTER(test_create_hard_link_same_loc), NULL,
+    AddTest("test_create_hard_link_same_loc", test_create_hard_link_same_loc, NULL,
             "hard link creation with H5L_SAME_LOC", NULL, testframe_flags);
-    AddTest("test_create_hard_link_invalid_params", MT_API_TEST_FUNC_OUTER(test_create_hard_link_invalid_params), NULL,
+    AddTest("test_create_hard_link_invalid_params", test_create_hard_link_invalid_params, NULL,
             "hard link creation with invalid parameters", NULL, testframe_flags);
-    AddTest("test_create_soft_link_existing_relative", MT_API_TEST_FUNC_OUTER(test_create_soft_link_existing_relative), NULL,
+    AddTest("test_create_soft_link_existing_relative", test_create_soft_link_existing_relative, NULL,
             "soft link creation to existing object by relative path", NULL, testframe_flags);
-    AddTest("test_create_soft_link_existing_absolute", MT_API_TEST_FUNC_OUTER(test_create_soft_link_existing_absolute), NULL,
+    AddTest("test_create_soft_link_existing_absolute", test_create_soft_link_existing_absolute, NULL,
             "soft link creation to existing object by absolute path", NULL, testframe_flags);
-    AddTest("test_create_soft_link_dangling_relative", MT_API_TEST_FUNC_OUTER(test_create_soft_link_dangling_relative), NULL,
+    AddTest("test_create_soft_link_dangling_relative", test_create_soft_link_dangling_relative, NULL,
             "dangling soft link creation to object by relative path", NULL, testframe_flags);
-    AddTest("test_create_soft_link_dangling_absolute", MT_API_TEST_FUNC_OUTER(test_create_soft_link_dangling_absolute), NULL,
+    AddTest("test_create_soft_link_dangling_absolute", test_create_soft_link_dangling_absolute, NULL,
             "dangling soft link creation to object by absolute path", NULL, testframe_flags);
-    AddTest("test_create_soft_link_long_name", MT_API_TEST_FUNC_OUTER(test_create_soft_link_long_name), NULL,
+    AddTest("test_create_soft_link_long_name", test_create_soft_link_long_name, NULL,
             "soft link creation with a long name", NULL, testframe_flags);
-    AddTest("test_create_soft_link_many", MT_API_TEST_FUNC_OUTER(test_create_soft_link_many), NULL,
+    AddTest("test_create_soft_link_many", test_create_soft_link_many, NULL,
             "soft link creation of many links", NULL, testframe_flags);
-    AddTest("test_create_soft_link_invalid_params", MT_API_TEST_FUNC_OUTER(test_create_soft_link_invalid_params), NULL,
+    AddTest("test_create_soft_link_invalid_params", test_create_soft_link_invalid_params, NULL,
             "soft link creation with invalid parameters", NULL, testframe_flags);
-    AddTest("test_create_external_link", MT_API_TEST_FUNC_OUTER(test_create_external_link), NULL,
+    AddTest("test_create_external_link", test_create_external_link, NULL,
             "external link creation to existing object", NULL, testframe_flags);
-    AddTest("test_create_external_link_dangling", MT_API_TEST_FUNC_OUTER(test_create_external_link_dangling), NULL,
+    AddTest("test_create_external_link_dangling", test_create_external_link_dangling, NULL,
             "dangling external link creation", NULL, testframe_flags);
-    AddTest("test_create_external_link_multi", MT_API_TEST_FUNC_OUTER(test_create_external_link_multi), NULL,
+    AddTest("test_create_external_link_multi", test_create_external_link_multi, NULL,
             "external link creation to an object across several files", NULL, testframe_flags);
-    AddTest("test_create_external_link_ping_pong", MT_API_TEST_FUNC_OUTER(test_create_external_link_ping_pong), NULL,
+    AddTest("test_create_external_link_ping_pong", test_create_external_link_ping_pong, NULL,
             "external link creation to an object in ping pong style", NULL, testframe_flags);
-    AddTest("test_create_external_link_invalid_params", MT_API_TEST_FUNC_OUTER(test_create_external_link_invalid_params), NULL,
+    AddTest("test_create_external_link_invalid_params", test_create_external_link_invalid_params, NULL,
             "H5Lcreate_external with invalid parameters", NULL, testframe_flags);
-    AddTest("test_create_user_defined_link", MT_API_TEST_FUNC_OUTER(test_create_user_defined_link), NULL,
+    AddTest("test_create_user_defined_link", test_create_user_defined_link, NULL,
             "user-defined link creation", NULL, testframe_flags);
-    AddTest("test_create_user_defined_link_invalid_params", MT_API_TEST_FUNC_OUTER(test_create_user_defined_link_invalid_params),
+    AddTest("test_create_user_defined_link_invalid_params", test_create_user_defined_link_invalid_params,
             NULL, "H5Lcreate_ud with invalid parameters", NULL, testframe_flags);
-    AddTest("test_delete_link",  MT_API_TEST_FUNC_OUTER(test_delete_link),  NULL,  "link deletion",  NULL, testframe_flags);
-    AddTest("test_delete_link_reset_grp_max_crt_order", MT_API_TEST_FUNC_OUTER(test_delete_link_reset_grp_max_crt_order), NULL,
+    AddTest("test_delete_link",  test_delete_link,  NULL,  "link deletion",  NULL, testframe_flags);
+    AddTest("test_delete_link_reset_grp_max_crt_order", test_delete_link_reset_grp_max_crt_order, NULL,
             "H5Ldelete of all links in group resets group's maximum link creation order value", NULL, testframe_flags);
-    AddTest("test_delete_link_invalid_params", MT_API_TEST_FUNC_OUTER(test_delete_link_invalid_params), NULL,
+    AddTest("test_delete_link_invalid_params", test_delete_link_invalid_params, NULL,
             "H5Ldelete with invalid parameters", NULL, testframe_flags);
-    AddTest("test_copy_link",  MT_API_TEST_FUNC_OUTER(test_copy_link),  NULL,  "link copying",  NULL, testframe_flags);
-    AddTest("test_copy_links_into_group_with_links", MT_API_TEST_FUNC_OUTER(test_copy_links_into_group_with_links), NULL,
+    AddTest("test_copy_link",  test_copy_link,  NULL,  "link copying",  NULL, testframe_flags);
+    AddTest("test_copy_links_into_group_with_links", test_copy_links_into_group_with_links, NULL,
             "H5Lcopy adjusting creation order values for copied links", NULL, testframe_flags);
-    AddTest("test_copy_link_across_files", MT_API_TEST_FUNC_OUTER(test_copy_link_across_files), NULL, "link copying across files",
+    AddTest("test_copy_link_across_files", test_copy_link_across_files, NULL, "link copying across files",
             NULL, testframe_flags);
-    AddTest("test_copy_link_invalid_params", MT_API_TEST_FUNC_OUTER(test_copy_link_invalid_params), NULL,
+    AddTest("test_copy_link_invalid_params", test_copy_link_invalid_params, NULL,
             "H5Lcopy with invalid parameters", NULL, testframe_flags);
-    AddTest("test_move_link",  MT_API_TEST_FUNC_OUTER(test_move_link),  NULL,  "link moving",  NULL, testframe_flags);
-    AddTest("test_move_links_into_group_with_links", MT_API_TEST_FUNC_OUTER(test_move_links_into_group_with_links), NULL,
+    AddTest("test_move_link",  test_move_link,  NULL,  "link moving",  NULL, testframe_flags);
+    AddTest("test_move_links_into_group_with_links", test_move_links_into_group_with_links, NULL,
             "H5Lmove adjusting creation order values for moved links", NULL, testframe_flags);
-    AddTest("test_move_link_across_files", MT_API_TEST_FUNC_OUTER(test_move_link_across_files), NULL, "link moving across files",
+    AddTest("test_move_link_across_files", test_move_link_across_files, NULL, "link moving across files",
             NULL, testframe_flags);
-    AddTest("test_move_link_reset_grp_max_crt_order", MT_API_TEST_FUNC_OUTER(test_move_link_reset_grp_max_crt_order), NULL,
+    AddTest("test_move_link_reset_grp_max_crt_order", test_move_link_reset_grp_max_crt_order, NULL,
             "H5Lmove of all links out of group resets group's maximum link creation order value", NULL, testframe_flags);
-    AddTest("test_move_link_invalid_params", MT_API_TEST_FUNC_OUTER(test_move_link_invalid_params), NULL,
+    AddTest("test_move_link_invalid_params", test_move_link_invalid_params, NULL,
             "H5Lmove with invalid parameters", NULL, testframe_flags);
-    AddTest("test_get_link_val",  MT_API_TEST_FUNC_OUTER(test_get_link_val),  NULL,  "link value retrieval",  NULL, testframe_flags);
-    AddTest("test_get_link_val_invalid_params", MT_API_TEST_FUNC_OUTER(test_get_link_val_invalid_params), NULL,
+    AddTest("test_get_link_val",  test_get_link_val,  NULL,  "link value retrieval",  NULL, testframe_flags);
+    AddTest("test_get_link_val_invalid_params", test_get_link_val_invalid_params, NULL,
             "link value retrieval with invalid parameters", NULL, testframe_flags);
-    AddTest("test_get_link_info",  MT_API_TEST_FUNC_OUTER(test_get_link_info),  NULL,  "link info retrieval",  NULL, testframe_flags);
-    AddTest("test_get_link_info_invalid_params", MT_API_TEST_FUNC_OUTER(test_get_link_info_invalid_params), NULL,
+    AddTest("test_get_link_info",  test_get_link_info,  NULL,  "link info retrieval",  NULL, testframe_flags);
+    AddTest("test_get_link_info_invalid_params", test_get_link_info_invalid_params, NULL,
             "link info retrieval with invalid parameters", NULL, testframe_flags);
-    AddTest("test_get_link_name",  MT_API_TEST_FUNC_OUTER(test_get_link_name),  NULL,  "link name retrieval",  NULL, testframe_flags);
-    AddTest("test_get_link_name_invalid_params", MT_API_TEST_FUNC_OUTER(test_get_link_name_invalid_params), NULL,
+    AddTest("test_get_link_name",  test_get_link_name,  NULL,  "link name retrieval",  NULL, testframe_flags);
+    AddTest("test_get_link_name_invalid_params", test_get_link_name_invalid_params, NULL,
             "link name retrieval with invalid parameters", NULL, testframe_flags);
-    AddTest("test_link_iterate_hard_links", MT_API_TEST_FUNC_OUTER(test_link_iterate_hard_links), NULL,
+    AddTest("test_link_iterate_hard_links", test_link_iterate_hard_links, NULL,
             "link iteration (only hard links)", NULL, testframe_flags);
-    AddTest("test_link_iterate_soft_links", MT_API_TEST_FUNC_OUTER(test_link_iterate_soft_links), NULL,
+    AddTest("test_link_iterate_soft_links", test_link_iterate_soft_links, NULL,
             "link iteration (only soft links)", NULL, testframe_flags);
-    AddTest("test_link_iterate_external_links", MT_API_TEST_FUNC_OUTER(test_link_iterate_external_links), NULL,
+    AddTest("test_link_iterate_external_links", test_link_iterate_external_links, NULL,
             "link iteration (only external links)", NULL, testframe_flags);
-    AddTest("test_link_iterate_ud_links", MT_API_TEST_FUNC_OUTER(test_link_iterate_ud_links), NULL,
+    AddTest("test_link_iterate_ud_links", test_link_iterate_ud_links, NULL,
             "link iteration (only user-defined links)", NULL, testframe_flags);
-    AddTest("test_link_iterate_mixed_links", MT_API_TEST_FUNC_OUTER(test_link_iterate_mixed_links), NULL,
+    AddTest("test_link_iterate_mixed_links", test_link_iterate_mixed_links, NULL,
             "link iteration (mixed link types)", NULL, testframe_flags);
-    AddTest("test_link_iterate_invalid_params", MT_API_TEST_FUNC_OUTER(test_link_iterate_invalid_params), NULL,
+    AddTest("test_link_iterate_invalid_params", test_link_iterate_invalid_params, NULL,
             "link iteration with invalid parameters", NULL, testframe_flags);
-    AddTest("test_link_iterate_0_links", MT_API_TEST_FUNC_OUTER(test_link_iterate_0_links), NULL,
+    AddTest("test_link_iterate_0_links", test_link_iterate_0_links, NULL,
             "link iteration on group with 0 links", NULL, testframe_flags);
-    AddTest("test_link_visit_hard_links_no_cycles", MT_API_TEST_FUNC_OUTER(test_link_visit_hard_links_no_cycles), NULL,
+    AddTest("test_link_visit_hard_links_no_cycles", test_link_visit_hard_links_no_cycles, NULL,
             "link visiting without cycles (only hard links)", NULL, testframe_flags);
-    AddTest("test_link_visit_soft_links_no_cycles", MT_API_TEST_FUNC_OUTER(test_link_visit_soft_links_no_cycles), NULL,
+    AddTest("test_link_visit_soft_links_no_cycles", test_link_visit_soft_links_no_cycles, NULL,
             "link visiting without cycles (only soft links)", NULL, testframe_flags);
-    AddTest("test_link_visit_external_links_no_cycles", MT_API_TEST_FUNC_OUTER(test_link_visit_external_links_no_cycles), NULL,
+    AddTest("test_link_visit_external_links_no_cycles", test_link_visit_external_links_no_cycles, NULL,
             "link visiting without cycles (only external links)", NULL, testframe_flags);
-    AddTest("test_link_visit_ud_links_no_cycles", MT_API_TEST_FUNC_OUTER(test_link_visit_ud_links_no_cycles), NULL,
+    AddTest("test_link_visit_ud_links_no_cycles", test_link_visit_ud_links_no_cycles, NULL,
             "link visiting without cycles (only user-defined links)", NULL, testframe_flags);
-    AddTest("test_link_visit_mixed_links_no_cycles", MT_API_TEST_FUNC_OUTER(test_link_visit_mixed_links_no_cycles), NULL,
+    AddTest("test_link_visit_mixed_links_no_cycles", test_link_visit_mixed_links_no_cycles, NULL,
             "link visiting without cycles (mixed link types)", NULL, testframe_flags);
-    AddTest("test_link_visit_hard_links_cycles", MT_API_TEST_FUNC_OUTER(test_link_visit_hard_links_cycles), NULL,
+    AddTest("test_link_visit_hard_links_cycles", test_link_visit_hard_links_cycles, NULL,
             "link visiting with cycles (only hard links)", NULL, testframe_flags);
-    AddTest("test_link_visit_soft_links_cycles", MT_API_TEST_FUNC_OUTER(test_link_visit_soft_links_cycles), NULL,
+    AddTest("test_link_visit_soft_links_cycles", test_link_visit_soft_links_cycles, NULL,
             "link visiting with cycles (only soft links)", NULL, testframe_flags);
-    AddTest("test_link_visit_external_links_cycles", MT_API_TEST_FUNC_OUTER(test_link_visit_external_links_cycles), NULL,
+    AddTest("test_link_visit_external_links_cycles", test_link_visit_external_links_cycles, NULL,
             "link visiting with cycles (only external links)", NULL, testframe_flags);
-    AddTest("test_link_visit_ud_links_cycles", MT_API_TEST_FUNC_OUTER(test_link_visit_ud_links_cycles), NULL,
+    AddTest("test_link_visit_ud_links_cycles", test_link_visit_ud_links_cycles, NULL,
             "link visiting with cycles (only user-defined links)", NULL, testframe_flags);
-    AddTest("test_link_visit_mixed_links_cycles", MT_API_TEST_FUNC_OUTER(test_link_visit_mixed_links_cycles), NULL,
+    AddTest("test_link_visit_mixed_links_cycles", test_link_visit_mixed_links_cycles, NULL,
             "link visiting with cycles (mixed link types)", NULL, testframe_flags);
-    AddTest("test_link_visit_invalid_params", MT_API_TEST_FUNC_OUTER(test_link_visit_invalid_params), NULL,
+    AddTest("test_link_visit_invalid_params", test_link_visit_invalid_params, NULL,
             "link visiting with invalid parameters", NULL, testframe_flags);
-    AddTest("test_link_visit_0_links", MT_API_TEST_FUNC_OUTER(test_link_visit_0_links), NULL,
+    AddTest("test_link_visit_0_links", test_link_visit_0_links, NULL,
             "link visiting on group with subgroups containing 0 links", NULL, testframe_flags);
 }

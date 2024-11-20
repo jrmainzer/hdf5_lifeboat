@@ -45,9 +45,6 @@
 #endif
 char H5_api_test_filename_g[H5_API_TEST_FILENAME_MAX_LENGTH];
 
-
-size_t active_thread_ct = 0;
-
 /* Margin of runtime for each subtest allocated to cleanup */
 #define API_TEST_MARGIN 1
 
@@ -194,25 +191,10 @@ main(int argc, char **argv)
     n_tests_failed_g  = 0;
     n_tests_skipped_g = 0;
 
-    /* Hide all output from testing framework and replace with our own */
-    SetTestVerbosity(VERBO_NONE);
-
-    /* Parse command line separately from the test framework since
-     * tests need to be added before TestParseCmdLine in order for
-     * the -help option to show them, but we need to know ahead of
-     * time which tests to add if only a specific interface's tests
-     * are going to be run.
-     */
-    parse_command_line(argc, argv);
-    
     testExpress = GetTestExpress();
 
     // TODO
     UNUSED(testExpress);
-
-
-    /* Display generic testing information */
-    TestInfo(argv[0]);
 
     /* TODO: Refactor TestAlarmOn to accept specific timeout */
     TestAlarmOn();
@@ -229,11 +211,6 @@ main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    H5_api_test_add();
-
-    /* Parse command line arguments */
-    TestParseCmdLine(argc, argv);
-
 #ifndef H5_HAVE_MULTITHREAD
     if (GetTestMaxNumThreads() > 1) {
         fprintf(stderr, "HDF5 must be built with multi-thread support to run multi-threaded API tests\n");
@@ -241,8 +218,9 @@ main(int argc, char **argv)
     }
 #endif
 
-    if (GetTestMaxNumThreads() <= 0)
+    if (GetTestMaxNumThreads() <= 0) {
         SetTestMaxNumThreads(API_TESTS_DEFAULT_NUM_THREADS);
+    }
 
     /* Display VOL information */
     if (H5_api_test_display_information() < 0) {
@@ -283,8 +261,6 @@ main(int argc, char **argv)
         return EXIT_FAILURE;
     }
 
-    active_thread_ct = (size_t) GetTestMaxNumThreads();
-
     /* Perform requested testing */
     PerformTests();
 
@@ -312,12 +288,6 @@ done:
 
     if (GetTestNumErrs() > 0)
         n_tests_failed_g += (size_t) GetTestNumErrs();
-
-    /* Release test infrastructure */
-    TestShutdown();
-
-    if (GetTestNumErrs() > 0)
-        n_tests_failed_g += (size_t)GetTestNumErrs();
 
     /* Release test infrastructure */
     TestShutdown();

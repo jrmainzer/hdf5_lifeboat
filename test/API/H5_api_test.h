@@ -42,7 +42,6 @@
 #define H5_API_TEST_FILENAME H5_api_test_filename_g
 #endif
 extern char H5_api_test_filename_g[];
-extern size_t active_thread_ct;
 
 /* The names of a set of container groups which hold objects
  * created by each of the different types of tests.
@@ -63,8 +62,5 @@ extern size_t active_thread_ct;
  * for this testing suite so as not to try to create too large
  * of a dataspace/datatype. */
 #define MAX_DIM_SIZE 16
-
-// TODO: Remove
-#define MT_API_TEST_FUNC_OUTER(func) func
 
 #endif

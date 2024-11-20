@@ -1620,7 +1620,7 @@ test_get_file_obj_count(void)
         return;
     }
 
-    if (active_thread_ct == 0) {
+    if (GetTestMaxNumThreads() == 0) {
         printf("    Active thread count is invalid\n");
         TEST_ERROR;
     }
@@ -1713,7 +1713,7 @@ test_get_file_obj_count(void)
             if (check_open_obj_count(obj_count, 2) < 0) {
                 H5_FAILED();
                 printf("    number of open files (%ld) did not match %s expected number (2)\n", obj_count,
-                       active_thread_ct > 1 ? "or exceed" : "");
+                       GetTestMaxNumThreads() > 1 ? "or exceed" : "");
                 PART_ERROR(H5Fget_obj_count_files);
             }
 
@@ -1757,7 +1757,7 @@ test_get_file_obj_count(void)
             if (check_open_obj_count(obj_count, 1) < 0) {
                 H5_FAILED();
                 printf("    number of open groups (%ld) did not match %s expected number (1)\n", obj_count,
-                       active_thread_ct > 1 ? "or exceed" : "");
+                       GetTestMaxNumThreads() > 1 ? "or exceed" : "");
                 PART_ERROR(H5Fget_obj_count_types);
             }
 
@@ -1779,7 +1779,7 @@ test_get_file_obj_count(void)
             if (check_open_obj_count(obj_count, 1) < 0) {
                 H5_FAILED();
                 printf("    number of open named datatypes (%ld) did not match %s expected number (1)\n", obj_count,
-                       active_thread_ct > 1 ? "or exceed" : "");
+                       GetTestMaxNumThreads() > 1 ? "or exceed" : "");
                 PART_ERROR(H5Fget_obj_count_types);
             }
 
@@ -1801,7 +1801,7 @@ test_get_file_obj_count(void)
             if (check_open_obj_count(obj_count, 1) < 0) {
                 H5_FAILED();
                 printf("    number of open attributes (%ld) did not match %s expected number (1)\n", obj_count,
-                       active_thread_ct > 1 ? "or exceed" : "");
+                       GetTestMaxNumThreads() > 1 ? "or exceed" : "");
                 PART_ERROR(H5Fget_obj_count_attrs);
             }
 
@@ -1823,7 +1823,7 @@ test_get_file_obj_count(void)
             if (check_open_obj_count(obj_count, 1) < 0) {
                 H5_FAILED();
                 printf("    number of open datasets (%ld) did not match %s expected number (1)\n", obj_count,
-                       active_thread_ct > 1 ? "or exceed" : "");
+                       GetTestMaxNumThreads() > 1 ? "or exceed" : "");
                 PART_ERROR(H5Fget_obj_count_dsets);
             }
 
@@ -1867,7 +1867,7 @@ test_get_file_obj_count(void)
             if (check_open_obj_count(obj_count, 6) < 0) {
                 H5_FAILED();
                 printf("    number of open objects (%ld) did not match %s expected number (6)\n", obj_count,
-                       active_thread_ct > 1 ? "or exceed" : "");
+                       GetTestMaxNumThreads() > 1 ? "or exceed" : "");
                 PART_ERROR(H5Fget_obj_count_all);
             }
 
@@ -2547,9 +2547,9 @@ herr_t
 check_open_obj_count(ssize_t obj_count, int expected) {
     herr_t ret_value = SUCCEED;
     /* If multiple threads are concurrently executing tests, then more objects than expected may be open in the library */
-    if (active_thread_ct > 1 && obj_count < expected) {
+    if (GetTestMaxNumThreads() > 1 && obj_count < expected) {
         ret_value = FAIL;
-    } else if (active_thread_ct == 1 && obj_count != expected) { /* Single thread, expect exact count */
+    } else if (GetTestMaxNumThreads() == 1 && obj_count != expected) { /* Single thread, expect exact count */
         ret_value = FAIL;
     }
 
@@ -2564,30 +2564,30 @@ H5_api_file_test_add(void)
     /* Add a fake test to print out a header to distinguish different test interfaces */
     AddTest("print_file_test_header",  print_file_test_header,  NULL,  "Prints header for file tests",  NULL, 0);
 
-    AddTest("test_create_file",  MT_API_TEST_FUNC_OUTER(test_create_file),  NULL,  "H5Fcreate",  NULL, testframe_flags);
-    AddTest("test_create_file_invalid_params", MT_API_TEST_FUNC_OUTER(test_create_file_invalid_params), NULL,
+    AddTest("test_create_file",  test_create_file,  NULL,  "H5Fcreate",  NULL, testframe_flags);
+    AddTest("test_create_file_invalid_params", test_create_file_invalid_params, NULL,
             "H5Fcreate with invalid parameters", NULL, testframe_flags);
-    AddTest("test_create_file_excl", MT_API_TEST_FUNC_OUTER(test_create_file_excl), NULL,
+    AddTest("test_create_file_excl", test_create_file_excl, NULL,
             "H5Fcreate with H5F_ACC_EXCL/H5F_ACC_TRUNC flag", NULL, testframe_flags);
-    AddTest("test_open_file",  MT_API_TEST_FUNC_OUTER(test_open_file),  NULL,  "H5Fopen",  NULL, testframe_flags);
-    AddTest("test_open_file_invalid_params", MT_API_TEST_FUNC_OUTER(test_open_file_invalid_params), NULL,
+    AddTest("test_open_file",  test_open_file,  NULL,  "H5Fopen",  NULL, testframe_flags);
+    AddTest("test_open_file_invalid_params", test_open_file_invalid_params, NULL,
             "H5Fopen with invalid parameters", NULL, testframe_flags);
-    AddTest("test_open_nonexistent_file", MT_API_TEST_FUNC_OUTER(test_open_nonexistent_file), NULL,
+    AddTest("test_open_nonexistent_file", test_open_nonexistent_file, NULL,
             "for invalid opening of a non-existent file", NULL, testframe_flags);
-    AddTest("test_file_open_overlap",  MT_API_TEST_FUNC_OUTER(test_file_open_overlap),  NULL,  "overlapping file opens",  NULL, testframe_flags);
-    AddTest("test_file_permission", MT_API_TEST_FUNC_OUTER(test_file_permission), NULL,
+    AddTest("test_file_open_overlap",  test_file_open_overlap,  NULL,  "overlapping file opens",  NULL, testframe_flags);
+    AddTest("test_file_permission", test_file_permission, NULL,
             "file permissions (invalid creation of objects in read-only file)", NULL, testframe_flags);
-    AddTest("test_reopen_file",  MT_API_TEST_FUNC_OUTER(test_reopen_file),  NULL,  "re-open of a file with H5Freopen",  NULL, testframe_flags);
-    AddTest("test_close_file_invalid_id", MT_API_TEST_FUNC_OUTER(test_close_file_invalid_id), NULL, "H5Fclose with an invalid ID",
+    AddTest("test_reopen_file",  test_reopen_file,  NULL,  "re-open of a file with H5Freopen",  NULL, testframe_flags);
+    AddTest("test_close_file_invalid_id", test_close_file_invalid_id, NULL, "H5Fclose with an invalid ID",
             NULL, testframe_flags);
-    AddTest("test_flush_file",  MT_API_TEST_FUNC_OUTER(test_flush_file),  NULL,  "H5Fflush",  NULL, testframe_flags);
-    AddTest("test_file_is_accessible",  MT_API_TEST_FUNC_OUTER(test_file_is_accessible),  NULL,  "H5Fis_accessible",  NULL, testframe_flags);
-    AddTest("test_file_property_lists", MT_API_TEST_FUNC_OUTER(test_file_property_lists), NULL, "file property list operations",
+    AddTest("test_flush_file",  test_flush_file,  NULL,  "H5Fflush",  NULL, testframe_flags);
+    AddTest("test_file_is_accessible",  test_file_is_accessible,  NULL,  "H5Fis_accessible",  NULL, testframe_flags);
+    AddTest("test_file_property_lists", test_file_property_lists, NULL, "file property list operations",
             NULL, testframe_flags);
-    AddTest("test_get_file_intent", MT_API_TEST_FUNC_OUTER(test_get_file_intent), NULL, "retrieval of file intent with H5Fget_intent",
+    AddTest("test_get_file_intent", test_get_file_intent, NULL, "retrieval of file intent with H5Fget_intent",
             NULL, testframe_flags);
-    AddTest("test_get_file_obj_count", MT_API_TEST_FUNC_OUTER(test_get_file_obj_count), NULL,
+    AddTest("test_get_file_obj_count", test_get_file_obj_count, NULL,
             "retrieval of open object number and IDs", NULL, testframe_flags);
-    AddTest("test_file_mounts", MT_API_TEST_FUNC_OUTER(test_file_mounts), NULL, "file mounting/unmounting", NULL, testframe_flags);
-    AddTest("test_get_file_name",  MT_API_TEST_FUNC_OUTER(test_get_file_name),  NULL,  "retrieval of file name",  NULL, testframe_flags);
+    AddTest("test_file_mounts", test_file_mounts, NULL, "file mounting/unmounting", NULL, testframe_flags);
+    AddTest("test_get_file_name",  test_get_file_name,  NULL,  "retrieval of file name",  NULL, testframe_flags);
 }

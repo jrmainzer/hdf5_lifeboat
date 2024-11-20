@@ -127,7 +127,6 @@ void H5_api_object_test_add(void);
 #define OBJECT_VISIT_TEST_GROUP_NAME            "object_visit_test_group"
 #define OBJECT_VISIT_TEST_DSET_NAME             "object_visit_test_dset"
 #define OBJECT_VISIT_TEST_TYPE_NAME             "object_visit_test_type"
-#define OBJECT_VISIT_TEST_FILE_NAME             "object_visit_test_file"
 
 #define OBJECT_VISIT_SOFT_LINK_TEST_NUM_OBJS_VISITED 1
 #define OBJECT_VISIT_SOFT_LINK_TEST_SUBGROUP_NAME    "object_visit_soft_link"

@@ -383,58 +383,58 @@ PerformTests(void)
                     continue;
                 }      
 #else
-            pthread_t *threads;
-            TestThreadArgs *thread_args;
-            int ret = 0;
+                pthread_t *threads;
+                TestThreadArgs *thread_args;
+                int ret = 0;
 
-            if (max_num_threads <= 0) {
-                fprintf(stderr, "Invalid number of threads specified\n");
-                exit(EXIT_FAILURE);
-            }
-
-            threads = (pthread_t *)calloc((size_t) max_num_threads, sizeof(pthread_t));
-            thread_args = (TestThreadArgs *)calloc((size_t) max_num_threads, sizeof(TestThreadArgs));
-
-            if (!mt_initialized) {
-                if (H5_mt_test_global_setup() < 0) {
-                    fprintf(stderr, "Error setting up global MT test info\n");
+                if (max_num_threads <= 0) {
+                    fprintf(stderr, "Invalid number of threads specified\n");
                     exit(EXIT_FAILURE);
                 }
 
-                mt_initialized = true;
-            }
+                threads = (pthread_t *)calloc((size_t) max_num_threads, sizeof(pthread_t));
+                thread_args = (TestThreadArgs *)calloc((size_t) max_num_threads, sizeof(TestThreadArgs));
 
-            for (int i = 0; i < max_num_threads; i++) {
-                    thread_args[i].ThreadIndex = i;
-                    thread_args[i].Call = Test[Loop].Call;
-
-                    ret = pthread_create(&threads[i], NULL, PerformThreadTest, (void*) &thread_args[i]);
-
-                    if (ret != 0) {
-                        fprintf(stderr, "Error creating thread %d\n", i);
+                if (!mt_initialized) {
+                    if (H5_mt_test_global_setup() < 0) {
+                        fprintf(stderr, "Error setting up global MT test info\n");
                         exit(EXIT_FAILURE);
                     }
-            }
 
-            for (int i = 0; i < max_num_threads; i++) {
-                    ret = pthread_join(threads[i], NULL);
-
-                    if (ret != 0) {
-                        fprintf(stderr, "Error joining thread %d\n", i);
-                        exit(EXIT_FAILURE);
-                    }
+                    mt_initialized = true;
                 }
-            
 
-            free(threads);
-            free(thread_args);
-            
-            TestAlarmOff();
+                for (int i = 0; i < max_num_threads; i++) {
+                        thread_args[i].ThreadIndex = i;
+                        thread_args[i].Call = Test[Loop].Call;
 
-            test_num_errs = H5_ATOMIC_LOAD(Test[Loop].NumErrors);
-            H5_ATOMIC_STORE(Test[Loop].NumErrors, num_errs_g - test_num_errs);
-            MESSAGE(5, ("===============================================\n"));
-            MESSAGE(5, ("There were %d errors detected.\n\n", (int)H5_ATOMIC_LOAD(Test[Loop].NumErrors)));
+                        ret = pthread_create(&threads[i], NULL, PerformThreadTest, (void*) &thread_args[i]);
+
+                        if (ret != 0) {
+                            fprintf(stderr, "Error creating thread %d\n", i);
+                            exit(EXIT_FAILURE);
+                        }
+                }
+
+                for (int i = 0; i < max_num_threads; i++) {
+                        ret = pthread_join(threads[i], NULL);
+
+                        if (ret != 0) {
+                            fprintf(stderr, "Error joining thread %d\n", i);
+                            exit(EXIT_FAILURE);
+                        }
+                    }
+                
+
+                free(threads);
+                free(thread_args);
+                
+                TestAlarmOff();
+
+                test_num_errs = H5_ATOMIC_LOAD(Test[Loop].NumErrors);
+                H5_ATOMIC_STORE(Test[Loop].NumErrors, num_errs_g - test_num_errs);
+                MESSAGE(5, ("===============================================\n"));
+                MESSAGE(5, ("There were %d errors detected.\n\n", (int)H5_ATOMIC_LOAD(Test[Loop].NumErrors)));
 #endif /* H5_HAVE_MULTITHREAD */
             }
         }
