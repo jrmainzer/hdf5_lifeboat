@@ -217,7 +217,7 @@ test_create_many_groups(void)
     printf("\n");
     for (i = 0; i < GROUP_NUMB_MANY; i++) {
         printf("\r %u/%u", i + 1, GROUP_NUMB_MANY);
-        snprintf(group_name, sizeof(group_name), "group %02u", i);
+        sprintf(group_name, "group %02u", i);
         if ((child_group_id =
                  H5Gcreate2(parent_group_id, group_name, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT)) < 0) {
             H5_FAILED();
@@ -330,11 +330,11 @@ create_group_recursive(hid_t parent_gid, unsigned counter)
 
     printf("\r %u/%u", counter, GROUP_DEPTH);
     if (counter == 1)
-        snprintf(gname, sizeof(gname), "2nd_child_group");
+        sprintf(gname, "2nd_child_group");
     else if (counter == 2)
-        snprintf(gname, sizeof(gname), "3rd_child_group");
+        sprintf(gname, "3rd_child_group");
     else
-        snprintf(gname, sizeof(gname), "%dth_child_group", counter + 1);
+        sprintf(gname, "%dth_child_group", counter + 1);
     if ((child_gid = H5Gcreate2(parent_gid, gname, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't create group '%s'\n", gname);
@@ -396,7 +396,7 @@ test_create_intermediate_group(void)
     /* Set up plist for creating intermediate groups */
     if ((crt_intmd_lcpl_id = H5Pcreate(H5P_LINK_CREATE)) < 0)
         TEST_ERROR;
-    if (H5Pset_create_intermediate_group(crt_intmd_lcpl_id, true) < 0)
+    if (H5Pset_create_intermediate_group(crt_intmd_lcpl_id, TRUE) < 0)
         TEST_ERROR;
 
     /* Create an intermediate group using a relative path */
@@ -1425,7 +1425,8 @@ test_get_group_info(void)
     /* Create multiple groups under the parent group */
     for (i = 0; i < GROUP_GET_INFO_TEST_GROUP_NUMB; i++) {
         /* Create the groups with a reverse-ordering naming scheme to test creation order */
-        snprintf(group_name, NAME_BUF_SIZE, "group %02u", (unsigned)(GROUP_GET_INFO_TEST_GROUP_NUMB - i - 1));
+        HDsnprintf(group_name, NAME_BUF_SIZE, "group %02u",
+                   (unsigned)(GROUP_GET_INFO_TEST_GROUP_NUMB - i - 1));
 
         if ((group_id = H5Gcreate2(parent_group_id, group_name, H5P_DEFAULT, gcpl_id, H5P_DEFAULT)) < 0) {
             H5_FAILED();
@@ -1461,17 +1462,15 @@ test_get_group_info(void)
                 PART_ERROR(H5Gget_info);
             }
 
-            if (vol_cap_flags_g & H5VL_CAP_FLAG_CREATION_ORDER) {
-                /*
-                 * For the purpose of this test, the max creation order should match
-                 * the number of links in the group.
-                 */
-                if (group_info.max_corder != GROUP_GET_INFO_TEST_GROUP_NUMB) {
-                    H5_FAILED();
-                    printf("    group's max creation order '%lld' doesn't match expected value '%lld'\n",
-                           (long long)group_info.max_corder, (long long)GROUP_GET_INFO_TEST_GROUP_NUMB);
-                    PART_ERROR(H5Gget_info);
-                }
+            /*
+             * For the purpose of this test, the max creation order should match
+             * the number of links in the group.
+             */
+            if (group_info.max_corder != GROUP_GET_INFO_TEST_GROUP_NUMB) {
+                H5_FAILED();
+                printf("    group's max creation order '%lld' doesn't match expected value '%lld'\n",
+                        (long long)group_info.max_corder, (long long)GROUP_GET_INFO_TEST_GROUP_NUMB);
+                PART_ERROR(H5Gget_info);
             }
 
             /* Ensure that the storage_type field is at least set to a meaningful value */
@@ -1484,10 +1483,10 @@ test_get_group_info(void)
                 PART_ERROR(H5Gget_info);
             }
 
-            /* Assume that mounted should be false in this case */
-            if (group_info.mounted != false) {
+            /* Assume that mounted should be FALSE in this case */
+            if (group_info.mounted != FALSE) {
                 H5_FAILED();
-                printf("    group info's 'mounted' field was true when it should have been false\n");
+                printf("    group info's 'mounted' field was TRUE when it should have been FALSE\n");
                 PART_ERROR(H5Gget_info);
             }
 
@@ -1516,17 +1515,15 @@ test_get_group_info(void)
                 PART_ERROR(H5Gget_info_by_name);
             }
 
-            if (vol_cap_flags_g & H5VL_CAP_FLAG_CREATION_ORDER) {
-                /*
-                 * For the purpose of this test, the max creation order should match
-                 * the number of links in the group.
-                 */
-                if (group_info.max_corder != GROUP_GET_INFO_TEST_GROUP_NUMB) {
-                    H5_FAILED();
-                    printf("    group's max creation order '%lld' doesn't match expected value '%lld'\n",
-                           (long long)group_info.max_corder, (long long)GROUP_GET_INFO_TEST_GROUP_NUMB);
-                    PART_ERROR(H5Gget_info_by_name);
-                }
+            /*
+             * For the purpose of this test, the max creation order should match
+             * the number of links in the group.
+             */
+            if (group_info.max_corder != GROUP_GET_INFO_TEST_GROUP_NUMB) {
+                H5_FAILED();
+                printf("    group's max creation order '%lld' doesn't match expected value '%lld'\n",
+                       (long long)group_info.max_corder, (long long)GROUP_GET_INFO_TEST_GROUP_NUMB);
+                PART_ERROR(H5Gget_info_by_name);
             }
 
             /* Ensure that the storage_type field is at least set to a meaningful value */
@@ -1539,10 +1536,10 @@ test_get_group_info(void)
                 PART_ERROR(H5Gget_info_by_name);
             }
 
-            /* Assume that mounted should be false in this case */
-            if (group_info.mounted != false) {
+            /* Assume that mounted should be FALSE in this case */
+            if (group_info.mounted != FALSE) {
                 H5_FAILED();
-                printf("    group info's 'mounted' field was true when it should have been false\n");
+                printf("    group info's 'mounted' field was TRUE when it should have been FALSE\n");
                 PART_ERROR(H5Gget_info_by_name);
             }
 
@@ -1595,10 +1592,10 @@ test_get_group_info(void)
                     PART_ERROR(H5Gget_info_by_idx_crt_order_increasing);
                 }
 
-                /* Assume that mounted should be false in this case */
-                if (group_info.mounted != false) {
+                /* Assume that mounted should be FALSE in this case */
+                if (group_info.mounted != FALSE) {
                     H5_FAILED();
-                    printf("    group info's 'mounted' field was true when it should have been false\n");
+                    printf("    group info's 'mounted' field was TRUE when it should have been FALSE\n");
                     PART_ERROR(H5Gget_info_by_idx_crt_order_increasing);
                 }
             }
@@ -1652,10 +1649,10 @@ test_get_group_info(void)
                     PART_ERROR(H5Gget_info_by_idx_crt_order_decreasing);
                 }
 
-                /* Assume that mounted should be false in this case */
-                if (group_info.mounted != false) {
+                /* Assume that mounted should be FALSE in this case */
+                if (group_info.mounted != FALSE) {
                     H5_FAILED();
-                    printf("    group info's 'mounted' field was true when it should have been false\n");
+                    printf("    group info's 'mounted' field was TRUE when it should have been FALSE\n");
                     PART_ERROR(H5Gget_info_by_idx_crt_order_decreasing);
                 }
             }
@@ -1703,10 +1700,10 @@ test_get_group_info(void)
                     PART_ERROR(H5Gget_info_by_idx_name_order_increasing);
                 }
 
-                /* Assume that mounted should be false in this case */
-                if (group_info.mounted != false) {
+                /* Assume that mounted should be FALSE in this case */
+                if (group_info.mounted != FALSE) {
                     H5_FAILED();
-                    printf("    group info's 'mounted' field was true when it should have been false\n");
+                    printf("    group info's 'mounted' field was TRUE when it should have been FALSE\n");
                     PART_ERROR(H5Gget_info_by_idx_name_order_increasing);
                 }
             }
@@ -1754,10 +1751,10 @@ test_get_group_info(void)
                     PART_ERROR(H5Gget_info_by_idx_name_order_decreasing);
                 }
 
-                /* Assume that mounted should be false in this case */
-                if (group_info.mounted != false) {
+                /* Assume that mounted should be FALSE in this case */
+                if (group_info.mounted != FALSE) {
                     H5_FAILED();
-                    printf("    group info's 'mounted' field was true when it should have been false\n");
+                    printf("    group info's 'mounted' field was TRUE when it should have been FALSE\n");
                     PART_ERROR(H5Gget_info_by_idx_name_order_decreasing);
                 }
             }

@@ -107,12 +107,12 @@ test_create_attribute_on_root(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_CREATE_ON_ROOT_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_CREATE_ON_ROOT_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype1 = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype1 = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
-    if ((attr_dtype2 = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype2 = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     PASSED();
@@ -265,17 +265,17 @@ test_create_attribute_on_dataset(void)
     }
 
     if ((dset_space_id =
-             generate_random_dataspace(ATTRIBUTE_CREATE_ON_DATASET_DSET_SPACE_RANK, NULL, NULL, false)) < 0)
+             generate_random_dataspace(ATTRIBUTE_CREATE_ON_DATASET_DSET_SPACE_RANK, NULL, NULL, FALSE)) < 0)
         TEST_ERROR;
     if ((attr_space_id =
-             generate_random_dataspace(ATTRIBUTE_CREATE_ON_DATASET_ATTR_SPACE_RANK, NULL, NULL, true)) < 0)
+             generate_random_dataspace(ATTRIBUTE_CREATE_ON_DATASET_ATTR_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((dset_dtype = generate_random_datatype(H5T_NO_CLASS, false)) < 0)
+    if ((dset_dtype = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0)
         TEST_ERROR;
-    if ((attr_dtype1 = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype1 = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
-    if ((attr_dtype2 = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype2 = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((dset_id = H5Dcreate2(group_id, ATTRIBUTE_CREATE_ON_DATASET_DSET_NAME, dset_dtype, dset_space_id,
@@ -448,7 +448,7 @@ test_create_attribute_on_datatype(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -461,12 +461,12 @@ test_create_attribute_on_datatype(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_CREATE_ON_DATATYPE_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_CREATE_ON_DATATYPE_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype1 = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype1 = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
-    if ((attr_dtype2 = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype2 = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     PASSED();
@@ -621,7 +621,7 @@ test_create_attribute_with_null_space(void)
     if ((space_id = H5Screate(H5S_NULL)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_CREATE_NULL_DATASPACE_TEST_ATTR_NAME, attr_dtype, space_id,
@@ -732,7 +732,7 @@ test_create_attribute_with_scalar_space(void)
     if ((space_id = H5Screate(H5S_SCALAR)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_CREATE_SCALAR_DATASPACE_TEST_ATTR_NAME, attr_dtype,
@@ -843,10 +843,10 @@ test_create_attribute_with_space_in_name(void)
     }
 
     if ((space_id =
-             generate_random_dataspace(ATTRIBUTE_CREATE_WITH_SPACE_IN_NAME_SPACE_RANK, NULL, NULL, true)) < 0)
+             generate_random_dataspace(ATTRIBUTE_CREATE_WITH_SPACE_IN_NAME_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_CREATE_WITH_SPACE_IN_NAME_ATTR_NAME, attr_dtype, space_id,
@@ -947,10 +947,10 @@ test_create_attribute_invalid_params(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_CREATE_INVALID_PARAMS_SPACE_RANK, NULL, NULL, true)) <
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_CREATE_INVALID_PARAMS_SPACE_RANK, NULL, NULL, TRUE)) <
         0)
         TEST_ERROR;
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     PASSED();
@@ -1405,10 +1405,10 @@ test_open_attribute(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_OPEN_TEST_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_OPEN_TEST_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_type = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_type = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     /* Create several attributes */
@@ -1795,10 +1795,10 @@ test_open_attribute_invalid_params(void)
     }
 
     if ((space_id =
-             generate_random_dataspace(ATTRIBUTE_OPEN_INVALID_PARAMS_TEST_SPACE_RANK, NULL, NULL, true)) < 0)
+             generate_random_dataspace(ATTRIBUTE_OPEN_INVALID_PARAMS_TEST_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_type = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_type = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_OPEN_INVALID_PARAMS_TEST_ATTR_NAME, attr_type, space_id,
@@ -2311,7 +2311,7 @@ test_write_attribute(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_WRITE_TEST_SPACE_RANK, NULL, dims, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_WRITE_TEST_SPACE_RANK, NULL, dims, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_WRITE_TEST_ATTR_NAME, ATTRIBUTE_WRITE_TEST_ATTR_DTYPE,
@@ -2444,7 +2444,7 @@ test_write_attribute_invalid_params(void)
     }
 
     if ((space_id =
-             generate_random_dataspace(ATTRIBUTE_WRITE_INVALID_PARAMS_TEST_SPACE_RANK, NULL, dims, true)) < 0)
+             generate_random_dataspace(ATTRIBUTE_WRITE_INVALID_PARAMS_TEST_SPACE_RANK, NULL, dims, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_WRITE_INVALID_PARAMS_TEST_ATTR_NAME,
@@ -2631,7 +2631,7 @@ test_read_attribute(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_READ_TEST_SPACE_RANK, NULL, dims, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_READ_TEST_SPACE_RANK, NULL, dims, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_READ_TEST_ATTR_NAME, ATTRIBUTE_READ_TEST_ATTR_DTYPE,
@@ -2790,7 +2790,7 @@ test_read_attribute_invalid_params(void)
     }
 
     if ((space_id =
-             generate_random_dataspace(ATTRIBUTE_READ_INVALID_PARAMS_TEST_SPACE_RANK, NULL, dims, true)) < 0)
+             generate_random_dataspace(ATTRIBUTE_READ_INVALID_PARAMS_TEST_SPACE_RANK, NULL, dims, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_READ_INVALID_PARAMS_TEST_ATTR_NAME,
@@ -2998,7 +2998,7 @@ test_read_empty_attribute(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_READ_EMPTY_SPACE_RANK, NULL, dims, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_READ_EMPTY_SPACE_RANK, NULL, dims, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_READ_EMPTY_ATTR_NAME, ATTRIBUTE_READ_EMPTY_DTYPE, space_id,
@@ -3185,10 +3185,10 @@ test_get_attribute_space_and_type(void)
     }
 
     if ((attr_space_id =
-             generate_random_dataspace(ATTRIBUTE_GET_SPACE_TYPE_TEST_SPACE_RANK, NULL, attr_dims, true)) < 0)
+             generate_random_dataspace(ATTRIBUTE_GET_SPACE_TYPE_TEST_SPACE_RANK, NULL, attr_dims, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_GET_SPACE_TYPE_TEST_ATTR_NAME, attr_dtype, attr_space_id,
@@ -3489,10 +3489,10 @@ test_get_attribute_space_and_type_invalid_params(void)
     }
 
     if ((attr_space_id = generate_random_dataspace(ATTRIBUTE_GET_SPACE_TYPE_INVALID_PARAMS_TEST_SPACE_RANK,
-                                                   NULL, NULL, true)) < 0)
+                                                   NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_GET_SPACE_TYPE_INVALID_PARAMS_TEST_ATTR_NAME, attr_dtype,
@@ -3647,12 +3647,12 @@ test_attribute_property_lists(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_PROPERTY_LIST_TEST_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_PROPERTY_LIST_TEST_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype1 = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype1 = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
-    if ((attr_dtype2 = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype2 = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((acpl_id1 = H5Pcreate(H5P_ATTRIBUTE_CREATE)) < 0) {
@@ -3948,10 +3948,10 @@ test_get_attribute_name(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_GET_NAME_TEST_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_GET_NAME_TEST_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     /* Create several attributes */
@@ -4051,8 +4051,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME);
@@ -4096,8 +4096,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name_by_idx_crt_order_increasing);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME);
@@ -4114,8 +4114,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name_by_idx_crt_order_increasing);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2);
@@ -4132,8 +4132,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name_by_idx_crt_order_increasing);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3);
@@ -4164,8 +4164,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name_by_idx_crt_order_decreasing);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME);
@@ -4182,8 +4182,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name_by_idx_crt_order_decreasing);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2);
@@ -4200,8 +4200,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name_by_idx_crt_order_decreasing);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3);
@@ -4226,8 +4226,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name_by_idx_name_order_increasing);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME);
@@ -4244,8 +4244,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name_by_idx_name_order_increasing);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2);
@@ -4262,8 +4262,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name_by_idx_name_order_increasing);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3);
@@ -4288,8 +4288,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name_by_idx_name_order_decreasing);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME);
@@ -4306,8 +4306,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name_by_idx_name_order_decreasing);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME2);
@@ -4324,8 +4324,8 @@ test_get_attribute_name(void)
                 PART_ERROR(H5Aget_name_by_idx_name_order_decreasing);
             }
 
-            if (strncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3,
-                        strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3) + 1)) {
+            if (HDstrncmp(name_buf, ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3,
+                          strlen(ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3) + 1)) {
                 H5_FAILED();
                 printf("    retrieved attribute name '%s' didn't match '%s'\n", name_buf,
                        ATTRIBUTE_GET_NAME_TEST_ATTRIBUTE_NAME3);
@@ -4432,10 +4432,10 @@ test_get_attribute_name_invalid_params(void)
     }
 
     if ((space_id = generate_random_dataspace(ATTRIBUTE_GET_NAME_INVALID_PARAMS_TEST_SPACE_RANK, NULL, NULL,
-                                              true)) < 0)
+                                              TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_GET_NAME_INVALID_PARAMS_TEST_ATTRIBUTE_NAME, attr_dtype,
@@ -4813,10 +4813,10 @@ test_get_attribute_info(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_GET_INFO_TEST_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_GET_INFO_TEST_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     /* Create several attributes */
@@ -5449,10 +5449,10 @@ test_get_attribute_info_invalid_params(void)
     }
 
     if ((space_id = generate_random_dataspace(ATTRIBUTE_GET_INFO_INVALID_PARAMS_TEST_SPACE_RANK, NULL, NULL,
-                                              true)) < 0)
+                                              TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_GET_INFO_INVALID_PARAMS_TEST_ATTR_NAME, attr_dtype,
@@ -5907,10 +5907,10 @@ test_rename_attribute(void)
         goto error;
     }
 
-    if ((attr_space_id = generate_random_dataspace(ATTRIBUTE_RENAME_TEST_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((attr_space_id = generate_random_dataspace(ATTRIBUTE_RENAME_TEST_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_RENAME_TEST_ATTR_NAME, attr_dtype, attr_space_id,
@@ -6126,10 +6126,10 @@ test_rename_attribute_invalid_params(void)
     }
 
     if ((attr_space_id = generate_random_dataspace(ATTRIBUTE_RENAME_INVALID_PARAMS_TEST_SPACE_RANK, NULL,
-                                                   NULL, true)) < 0)
+                                                   NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_RENAME_INVALID_PARAMS_TEST_ATTR_NAME, attr_dtype,
@@ -6512,17 +6512,17 @@ test_attribute_iterate_group(void)
         goto error;
     }
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
     if ((attr_space_id =
-             generate_random_dataspace(ATTRIBUTE_ITERATE_TEST_ATTR_SPACE_RANK, NULL, NULL, true)) < 0)
+             generate_random_dataspace(ATTRIBUTE_ITERATE_TEST_ATTR_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
     /* Create some attributes with a reverse-ordering naming scheme to test creation order */
     for (i = 0; i < ATTRIBUTE_ITERATE_TEST_NUM_ATTRS; i++) {
         char attr_name[ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE];
 
-        snprintf(attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE, ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d",
+        HDsnprintf(attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE, ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d",
                  (int)(ATTRIBUTE_ITERATE_TEST_NUM_ATTRS - i - 1));
 
         if ((attr_id = H5Acreate2(group_id, attr_name, attr_dtype, attr_space_id, H5P_DEFAULT, H5P_DEFAULT)) <
@@ -6908,16 +6908,16 @@ test_attribute_iterate_dataset(void)
         }
     }
 
-    if ((dset_dtype = generate_random_datatype(H5T_NO_CLASS, false)) < 0)
+    if ((dset_dtype = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0)
         TEST_ERROR;
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((dset_space_id =
-             generate_random_dataspace(ATTRIBUTE_ITERATE_TEST_DSET_SPACE_RANK, NULL, NULL, false)) < 0)
+             generate_random_dataspace(ATTRIBUTE_ITERATE_TEST_DSET_SPACE_RANK, NULL, NULL, FALSE)) < 0)
         TEST_ERROR;
     if ((attr_space_id =
-             generate_random_dataspace(ATTRIBUTE_ITERATE_TEST_ATTR_SPACE_RANK, NULL, NULL, true)) < 0)
+             generate_random_dataspace(ATTRIBUTE_ITERATE_TEST_ATTR_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
     if ((dset_id = H5Dcreate2(group_id, ATTRIBUTE_ITERATE_TEST_DSET_NAME, dset_dtype, dset_space_id,
@@ -6931,7 +6931,7 @@ test_attribute_iterate_dataset(void)
     for (i = 0; i < ATTRIBUTE_ITERATE_TEST_NUM_ATTRS; i++) {
         char attr_name[ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE];
 
-        snprintf(attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE, ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d",
+        HDsnprintf(attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE, ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d",
                  (int)(ATTRIBUTE_ITERATE_TEST_NUM_ATTRS - i - 1));
 
         if ((attr_id = H5Acreate2(dset_id, attr_name, attr_dtype, attr_space_id, H5P_DEFAULT, H5P_DEFAULT)) <
@@ -7330,13 +7330,13 @@ test_attribute_iterate_datatype(void)
         }
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0)
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0)
         TEST_ERROR;
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_space_id =
-             generate_random_dataspace(ATTRIBUTE_ITERATE_TEST_ATTR_SPACE_RANK, NULL, NULL, true)) < 0)
+             generate_random_dataspace(ATTRIBUTE_ITERATE_TEST_ATTR_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
     if (H5Tcommit2(group_id, ATTRIBUTE_ITERATE_TEST_DTYPE_NAME, type_id, H5P_DEFAULT, tcpl_id, H5P_DEFAULT) <
@@ -7350,7 +7350,7 @@ test_attribute_iterate_datatype(void)
     for (i = 0; i < ATTRIBUTE_ITERATE_TEST_NUM_ATTRS; i++) {
         char attr_name[ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE];
 
-        snprintf(attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE, ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d",
+        HDsnprintf(attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE, ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d",
                  (int)(ATTRIBUTE_ITERATE_TEST_NUM_ATTRS - i - 1));
 
         if ((attr_id = H5Acreate2(type_id, attr_name, attr_dtype, attr_space_id, H5P_DEFAULT, H5P_DEFAULT)) <
@@ -7743,11 +7743,11 @@ test_attribute_iterate_invalid_params(void)
         goto error;
     }
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_space_id = generate_random_dataspace(ATTRIBUTE_ITERATE_INVALID_PARAMS_TEST_ATTR_SPACE_RANK,
-                                                   NULL, NULL, true)) < 0)
+                                                   NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_ITERATE_INVALID_PARAMS_TEST_ATTR_NAME, attr_dtype,
@@ -8162,11 +8162,11 @@ test_attribute_iterate_0_attributes(void)
         goto error;
     }
 
-    if ((dset_dtype = generate_random_datatype(H5T_NO_CLASS, false)) < 0)
+    if ((dset_dtype = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0)
         TEST_ERROR;
 
     if ((dset_space_id = generate_random_dataspace(ATTRIBUTE_ITERATE_TEST_0_ATTRIBUTES_DSET_SPACE_RANK, NULL,
-                                                   NULL, false)) < 0)
+                                                   NULL, FALSE)) < 0)
         TEST_ERROR;
 
     if ((dset_id = H5Dcreate2(group_id, ATTRIBUTE_ITERATE_TEST_0_ATTRIBUTES_DSET_NAME, dset_dtype,
@@ -8365,10 +8365,10 @@ test_delete_attribute(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_DELETION_TEST_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_DELETION_TEST_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     PASSED();
@@ -9586,10 +9586,10 @@ test_delete_attribute_invalid_params(void)
     }
 
     if ((space_id = generate_random_dataspace(ATTRIBUTE_DELETION_INVALID_PARAMS_TEST_SPACE_RANK, NULL, NULL,
-                                              true)) < 0)
+                                              TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_DELETION_INVALID_PARAMS_TEST_ATTR_NAME, attr_dtype,
@@ -10001,10 +10001,10 @@ test_attribute_exists(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_EXISTS_TEST_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_EXISTS_TEST_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_EXISTS_TEST_ATTR_NAME, attr_dtype, space_id, H5P_DEFAULT,
@@ -10144,10 +10144,10 @@ test_attribute_exists_invalid_params(void)
     }
 
     if ((space_id = generate_random_dataspace(ATTRIBUTE_EXISTS_INVALID_PARAMS_TEST_SPACE_RANK, NULL, NULL,
-                                              true)) < 0)
+                                              TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_EXISTS_INVALID_PARAMS_TEST_ATTR_NAME, attr_dtype, space_id,
@@ -10419,15 +10419,15 @@ test_attribute_many(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_MANY_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_MANY_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     /* Create many attributes */
     for (u = 0; u < ATTRIBUTE_MANY_NUMB; u++) {
-        snprintf(attrname, sizeof(attrname), "many-%06u", u);
+        sprintf(attrname, "many-%06u", u);
 
         if ((attr_id = H5Acreate2(group_id, attrname, attr_dtype, space_id, H5P_DEFAULT, H5P_DEFAULT)) < 0) {
             H5_FAILED();
@@ -10527,10 +10527,10 @@ test_attribute_duplicate_id(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_DUPLICATE_ID_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_DUPLICATE_ID_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_DUPLICATE_ID_ATTR_NAME, attr_dtype, space_id, H5P_DEFAULT,
@@ -10645,10 +10645,10 @@ test_get_number_attributes(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_GET_NUM_ATTRS_TEST_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_GET_NUM_ATTRS_TEST_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_GET_NUM_ATTRS_TEST_ATTR_NAME, attr_dtype, space_id,
@@ -10825,10 +10825,10 @@ test_attr_shared_dtype(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(ATTRIBUTE_SHARED_DTYPE_SPACE_RANK, NULL, NULL, true)) < 0)
+    if ((space_id = generate_random_dataspace(ATTRIBUTE_SHARED_DTYPE_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
-    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, true)) < 0)
+    if ((attr_dtype = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0)
         TEST_ERROR;
 
     /* Commit datatype to file */
@@ -10953,25 +10953,25 @@ attr_iter_callback1(hid_t location_id, const char *attr_name, const H5A_info_t *
      *  - iteration by attribute name in decreasing order
      *  - iteration by attribute creation order in increasing order
      *  - iteration by attribute creation order in decreasing order
-     *
+    *
      * Based on how the test is written, this will mean that the attribute names
      * will run in increasing order on the first and fourth tests and decreasing
      * order on the second and third tests.
      */
     test_iteration = (counter_val / ATTRIBUTE_ITERATE_TEST_NUM_ATTRS);
     if (test_iteration == 0 || test_iteration == 3) {
-        snprintf(expected_attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE,
-                 ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d",
-                 (int)(counter_val % ATTRIBUTE_ITERATE_TEST_NUM_ATTRS));
+        HDsnprintf(expected_attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE,
+                   ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d",
+                   (int)(counter_val % ATTRIBUTE_ITERATE_TEST_NUM_ATTRS));
     }
     else {
-        snprintf(
+        HDsnprintf(
             expected_attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE,
             ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d",
             (int)(ATTRIBUTE_ITERATE_TEST_NUM_ATTRS - (counter_val % ATTRIBUTE_ITERATE_TEST_NUM_ATTRS) - 1));
     }
 
-    if (strncmp(attr_name, expected_attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE)) {
+    if (HDstrncmp(attr_name, expected_attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE)) {
         printf("    attribute name '%s' didn't match expected name '%s'\n", attr_name, expected_attr_name);
         ret_val = H5_ITER_ERROR;
         goto done;

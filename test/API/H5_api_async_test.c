@@ -61,7 +61,7 @@ test_one_dataset_io(void)
     hid_t   es_id    = H5I_INVALID_HID;
     hsize_t dims[2]  = {6, 10};
     size_t  num_in_progress;
-    bool    op_failed;
+    hbool_t op_failed;
     int     wbuf[6][10];
     int     rbuf[6][10];
     int     i, j;
@@ -327,7 +327,7 @@ test_multi_dataset_io(void)
     hid_t es_id      = H5I_INVALID_HID;
     hsize_t dims[2]  = {6, 10};
     size_t  num_in_progress;
-    bool    op_failed;
+    hbool_t op_failed;
     char    dset_name[32];
     int     wbuf[5][6][10];
     int     rbuf[5][6][10];
@@ -368,7 +368,7 @@ test_multi_dataset_io(void)
             /* Loop over datasets */
             for (i = 0; i < 5; i++) {
                 /* Set dataset name */
-                snprintf(dset_name, sizeof(dset_name), "dset%d", i);
+                sprintf(dset_name, "dset%d", i);
 
                 /* Create the dataset asynchronously */
                 if ((dset_id[i] = H5Dcreate_async(file_id, dset_name, H5T_NATIVE_INT, space_id, H5P_DEFAULT,
@@ -449,7 +449,7 @@ test_multi_dataset_io(void)
             /* Loop over datasets */
             for (i = 0; i < 5; i++) {
                 /* Set dataset name */
-                snprintf(dset_name, sizeof(dset_name), "dset%d", i);
+                sprintf(dset_name, "dset%d", i);
 
                 /* Open the dataset asynchronously */
                 if ((dset_id[0] = H5Dopen_async(file_id, dset_name, H5P_DEFAULT, es_id)) < 0)
@@ -478,7 +478,7 @@ test_multi_dataset_io(void)
             /* Loop over datasets */
             for (i = 0; i < 5; i++) {
                 /* Set dataset name */
-                snprintf(dset_name, sizeof(dset_name), "dset%d", i);
+                sprintf(dset_name, "dset%d", i);
 
                 /* Open the dataset asynchronously */
                 if ((dset_id[0] = H5Dopen_async(file_id, dset_name, H5P_DEFAULT, es_id)) < 0)
@@ -581,7 +581,7 @@ test_multi_file_dataset_io(void)
     hid_t es_id      = H5I_INVALID_HID;
     hsize_t dims[2]  = {6, 10};
     size_t  num_in_progress;
-    bool    op_failed;
+    hbool_t op_failed;
     char    file_name[32];
     int     wbuf[5][6][10];
     int     rbuf[5][6][10];
@@ -618,7 +618,7 @@ test_multi_file_dataset_io(void)
             /* Loop over files */
             for (i = 0; i < 5; i++) {
                 /* Set file name */
-                snprintf(file_name, sizeof(file_name), ASYNC_API_TEST_FILE_PRINTF, i);
+                sprintf(file_name, ASYNC_API_TEST_FILE_PRINTF, i);
 
                 /* Create file asynchronously */
                 if ((file_id[i] =
@@ -760,7 +760,7 @@ test_multi_file_dataset_io(void)
             /* Loop over files */
             for (i = 0; i < 5; i++) {
                 /* Set file name */
-                snprintf(file_name, sizeof(file_name), ASYNC_API_TEST_FILE_PRINTF, i);
+                sprintf(file_name, ASYNC_API_TEST_FILE_PRINTF, i);
 
                 /* Open the file asynchronously */
                 if ((file_id[0] = H5Fopen_async(file_name, H5F_ACC_RDWR, H5P_DEFAULT, es_id)) < 0)
@@ -798,7 +798,7 @@ test_multi_file_dataset_io(void)
             /* Loop over files */
             for (i = 0; i < 5; i++) {
                 /* Set file name */
-                snprintf(file_name, sizeof(file_name), ASYNC_API_TEST_FILE_PRINTF, i);
+                sprintf(file_name, ASYNC_API_TEST_FILE_PRINTF, i);
 
                 /* Open the file asynchronously */
                 if ((file_id[0] = H5Fopen_async(file_name, H5F_ACC_RDONLY, H5P_DEFAULT, es_id)) < 0)
@@ -891,7 +891,7 @@ test_multi_file_grp_dset_io(void)
     hid_t   es_id    = H5I_INVALID_HID;
     hsize_t dims[2]  = {6, 10};
     size_t  num_in_progress;
-    bool    op_failed;
+    hbool_t op_failed;
     char    file_name[32];
     int     wbuf[5][6][10];
     int     rbuf[5][6][10];
@@ -928,7 +928,7 @@ test_multi_file_grp_dset_io(void)
             /* Loop over files */
             for (i = 0; i < 5; i++) {
                 /* Set file name */
-                snprintf(file_name, sizeof(file_name), ASYNC_API_TEST_FILE_PRINTF, i);
+                sprintf(file_name, ASYNC_API_TEST_FILE_PRINTF, i);
 
                 /* Create file asynchronously */
                 if ((file_id = H5Fcreate_async(file_name, H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT, es_id)) <
@@ -980,7 +980,7 @@ test_multi_file_grp_dset_io(void)
             /* Loop over files */
             for (i = 0; i < 5; i++) {
                 /* Set file name */
-                snprintf(file_name, sizeof(file_name), ASYNC_API_TEST_FILE_PRINTF, i);
+                sprintf(file_name, ASYNC_API_TEST_FILE_PRINTF, i);
 
                 /* Open the file asynchronously */
                 if ((file_id = H5Fopen_async(file_name, H5F_ACC_RDONLY, H5P_DEFAULT, es_id)) < 0)
@@ -1038,7 +1038,7 @@ test_multi_file_grp_dset_io(void)
             /* Loop over files */
             for (i = 0; i < 5; i++) {
                 /* Set file name */
-                snprintf(file_name, sizeof(file_name), ASYNC_API_TEST_FILE_PRINTF, i);
+                sprintf(file_name, ASYNC_API_TEST_FILE_PRINTF, i);
 
                 /* Create file asynchronously */
                 if ((file_id = H5Fcreate_async(file_name, H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT, es_id)) <
@@ -1095,7 +1095,7 @@ test_multi_file_grp_dset_io(void)
             /* Loop over files */
             for (i = 0; i < 5; i++) {
                 /* Set file name */
-                snprintf(file_name, sizeof(file_name), ASYNC_API_TEST_FILE_PRINTF, i);
+                sprintf(file_name, ASYNC_API_TEST_FILE_PRINTF, i);
 
                 /* Open the file asynchronously */
                 if ((file_id = H5Fopen_async(file_name, H5F_ACC_RDONLY, H5P_DEFAULT, es_id)) < 0)
@@ -1207,7 +1207,7 @@ test_set_extent(void)
     hsize_t start[2]      = {0, 0};
     hsize_t count[2]      = {1, 10};
     size_t  num_in_progress;
-    bool    op_failed;
+    hbool_t op_failed;
     htri_t  tri_ret;
     int     wbuf[6][10];
     int     rbuf[6][10];
@@ -1412,10 +1412,10 @@ test_attribute_exists(void)
     hid_t   space_id = H5I_INVALID_HID;
     hid_t   es_id    = H5I_INVALID_HID;
     hsize_t dims[2]  = {6, 10};
-    bool    exists1;
-    bool    exists2;
+    hbool_t exists1;
+    hbool_t exists2;
     size_t  num_in_progress;
-    bool    op_failed;
+    hbool_t op_failed;
 
     TESTING("H5Aexists()");
 
@@ -1478,9 +1478,9 @@ test_attribute_exists(void)
 
     /* Check if H5Aexists returned the correct values */
     if (exists1)
-        FAIL_PUTS_ERROR("    H5Aexists returned true for an attribute that should not exist");
+        FAIL_PUTS_ERROR("    H5Aexists returned TRUE for an attribute that should not exist");
     if (!exists2)
-        FAIL_PUTS_ERROR("    H5Aexists returned false for an attribute that should exist");
+        FAIL_PUTS_ERROR("    H5Aexists returned FALSE for an attribute that should exist");
 
     /* Close */
     if (H5Aclose_async(attr_id, es_id) < 0)
@@ -1533,7 +1533,7 @@ test_attribute_io(void)
     hid_t   es_id    = H5I_INVALID_HID;
     hsize_t dims[2]  = {6, 10};
     size_t  num_in_progress;
-    bool    op_failed;
+    hbool_t  op_failed;
     int     wbuf[6][10];
     int     rbuf[6][10];
     int     i, j;
@@ -1675,7 +1675,7 @@ test_attribute_io_tconv(void)
     hid_t   es_id    = H5I_INVALID_HID;
     hsize_t dims[2]  = {6, 10};
     size_t  num_in_progress;
-    bool    op_failed;
+    hbool_t  op_failed;
     int     wbuf[6][10];
     int     rbuf[6][10];
     int     i, j;
@@ -1820,7 +1820,7 @@ test_attribute_io_compound(void)
     hid_t        es_id     = H5I_INVALID_HID;
     hsize_t      dims[2]   = {6, 10};
     size_t       num_in_progress;
-    bool         op_failed;
+    hbool_t      op_failed;
     tattr_cmpd_t wbuf[6][10];
     tattr_cmpd_t rbuf[6][10];
     tattr_cmpd_t fbuf[6][10];
@@ -2130,7 +2130,7 @@ test_group(void)
     H5G_info_t info2;
     H5G_info_t info3;
     size_t     num_in_progress;
-    bool       op_failed;
+    hbool_t    op_failed;
 
     TESTING("group operations");
 
@@ -2292,14 +2292,14 @@ test_link(void)
     hid_t  group_id        = H5I_INVALID_HID;
     hid_t  gcpl_id         = H5I_INVALID_HID;
     hid_t  es_id           = H5I_INVALID_HID;
-    bool   existsh1;
-    bool   existsh2;
-    bool   existsh3;
-    bool   existss1;
-    bool   existss2;
-    bool   existss3;
+    hbool_t existsh1;
+    hbool_t existsh2;
+    hbool_t existsh3;
+    hbool_t existss1;
+    hbool_t existss2;
+    hbool_t existss3;
     size_t num_in_progress;
-    bool   op_failed;
+    hbool_t op_failed;
 
     TESTING("link operations");
 
@@ -2430,17 +2430,17 @@ test_link(void)
 
     /* Check if existence returns were correct */
     if (!existsh1)
-        FAIL_PUTS_ERROR("    link exists returned false for link that should exist");
+        FAIL_PUTS_ERROR("    link exists returned FALSE for link that should exist");
     if (!existss1)
-        FAIL_PUTS_ERROR("    link exists returned false for link that should exist");
+        FAIL_PUTS_ERROR("    link exists returned FALSE for link that should exist");
     if (!existsh2)
-        FAIL_PUTS_ERROR("    link exists returned false for link that should exist");
+        FAIL_PUTS_ERROR("    link exists returned FALSE for link that should exist");
     if (existss2)
-        FAIL_PUTS_ERROR("    link exists returned true for link that should not exist");
+        FAIL_PUTS_ERROR("    link exists returned TRUE for link that should not exist");
     if (existsh3)
-        FAIL_PUTS_ERROR("    link exists returned true for link that should not exist");
+        FAIL_PUTS_ERROR("    link exists returned TRUE for link that should not exist");
     if (existsh3)
-        FAIL_PUTS_ERROR("    link exists returned true for link that should not exist");
+        FAIL_PUTS_ERROR("    link exists returned TRUE for link that should not exist");
 
     /* Close */
     if (H5Gclose_async(parent_group_id, es_id) < 0)
@@ -2491,7 +2491,7 @@ test_ocopy_orefresh(void)
     hid_t   es_id           = H5I_INVALID_HID;
     hsize_t dims[2]         = {6, 10};
     size_t  num_in_progress;
-    bool    op_failed;
+    hbool_t  op_failed;
 
     TESTING("H5Ocopy() and H5Orefresh()");
 
@@ -2603,7 +2603,7 @@ test_file_reopen(void)
     hid_t  reopened_file_id = H5I_INVALID_HID;
     hid_t  es_id            = H5I_INVALID_HID;
     size_t num_in_progress;
-    bool   op_failed;
+    hbool_t op_failed;
 
     TESTING("H5Freopen()");
 

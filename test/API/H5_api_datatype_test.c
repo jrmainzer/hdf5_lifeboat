@@ -95,7 +95,7 @@ test_create_committed_datatype(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype to commit\n");
         goto error;
@@ -179,7 +179,7 @@ test_create_committed_datatype_invalid_params(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype to commit\n");
         goto error;
@@ -397,7 +397,7 @@ test_create_anonymous_committed_datatype(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -480,7 +480,7 @@ test_create_anonymous_committed_datatype_invalid_params(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -782,7 +782,7 @@ error:
 static void
 test_recommit_committed_type(void)
 {
-    htri_t is_committed = false;
+    htri_t is_committed = FALSE;
     herr_t err_ret;
     hid_t  file_id         = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
@@ -839,7 +839,7 @@ test_recommit_committed_type(void)
 
     if (!is_committed) {
         H5_FAILED();
-        printf("    H5Tcommitted() returned false!\n");
+        printf("    H5Tcommitted() returned FALSE!\n");
         goto error;
     }
 
@@ -923,7 +923,7 @@ test_open_committed_datatype(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype to commit\n");
         goto error;
@@ -1015,7 +1015,7 @@ test_open_committed_datatype_invalid_params(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype to commit\n");
         goto error;
@@ -1188,7 +1188,7 @@ test_reopen_committed_datatype_indirect(void)
         goto error;
     }
 
-    if ((space_id = generate_random_dataspace(DATATYPE_REOPEN_TEST_SPACE_RANK, NULL, NULL, false)) < 0)
+    if ((space_id = generate_random_dataspace(DATATYPE_REOPEN_TEST_SPACE_RANK, NULL, NULL, FALSE)) < 0)
         TEST_ERROR;
 
     PASSED();
@@ -1711,13 +1711,13 @@ test_datatype_property_lists(void)
         goto error;
     }
 
-    if ((type_id1 = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
+    if ((type_id1 = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
     }
 
-    if ((type_id2 = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
+    if ((type_id2 = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -1926,7 +1926,7 @@ test_create_dataset_with_committed_type(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -1973,7 +1973,7 @@ test_create_dataset_with_committed_type(void)
         goto error;
     }
 
-    if ((fspace_id = generate_random_dataspace(DATATYPE_CREATE_TEST_DATASET_DIMS, NULL, NULL, false)) < 0)
+    if ((fspace_id = generate_random_dataspace(DATATYPE_CREATE_TEST_DATASET_DIMS, NULL, NULL, FALSE)) < 0)
         TEST_ERROR;
 
     if ((dset_id = H5Dcreate2(group_id, DATASET_CREATE_WITH_DATATYPE_TEST_DSET_NAME, type_id, fspace_id,
@@ -2070,7 +2070,7 @@ test_create_attribute_with_committed_type(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, true)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, TRUE)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -2093,7 +2093,7 @@ test_create_attribute_with_committed_type(void)
     }
 
     if ((space_id =
-             generate_random_dataspace(ATTRIBUTE_CREATE_WITH_DATATYPE_TEST_SPACE_RANK, NULL, NULL, true)) < 0)
+             generate_random_dataspace(ATTRIBUTE_CREATE_WITH_DATATYPE_TEST_SPACE_RANK, NULL, NULL, TRUE)) < 0)
         TEST_ERROR;
 
     if ((attr_id = H5Acreate2(group_id, ATTRIBUTE_CREATE_WITH_DATATYPE_TEST_ATTR_NAME, type_id, space_id,
@@ -2201,7 +2201,7 @@ test_delete_committed_type(void)
         goto error;
     }
 
-    if ((type_id = generate_random_datatype(H5T_NO_CLASS, false)) < 0) {
+    if ((type_id = generate_random_datatype(H5T_NO_CLASS, FALSE)) < 0) {
         H5_FAILED();
         printf("    couldn't create datatype\n");
         goto error;
@@ -2538,7 +2538,7 @@ error:
 static void
 test_cant_modify_committed_type(void)
 {
-    htri_t is_committed = false;
+    htri_t is_committed = FALSE;
     herr_t err_ret;
     hid_t  file_id         = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID;

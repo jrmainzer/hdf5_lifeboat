@@ -101,7 +101,7 @@ generate_random_datatype(H5T_class_t parent_class, hbool_t is_compact)
     return generate_random_datatype_internal(parent_class, is_compact, 0);
 }
 
-// TODO
+/* Internal helper for generate_random_datatype(). */
 static hid_t
 generate_random_datatype_internal(H5T_class_t parent_class, hbool_t is_compact, size_t depth)
 {
@@ -817,9 +817,12 @@ error:
 }
 
 /*
- * Add a thread-specific prefix to the given filename. The caller
+ * Add a prefix to the given filename. The caller
  * is responsible for freeing the returned filename
  * pointer with free().
+ * 
+ * If the API tests are being run multi-threaded,
+ * then the framework-assigned thread index will be inserted as well.
  */
 herr_t
 prefix_filename(const char *prefix, const char *filename, char **filename_out)
