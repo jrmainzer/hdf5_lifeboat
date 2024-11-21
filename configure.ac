@@ -370,6 +370,15 @@ AC_ARG_ENABLE([api-tests],
     AS_HELP_STRING([--enable-api-tests], [Enable building of API tests]),
     [enable_api_tests=$enableval], [enable_api_tests=no])
 
+## ----------------------------------------------------------------------
+## Check if we should build with async API tests
+AC_ARG_ENABLE([async],
+    AS_HELP_STRING([--enable-async], [Enable building of async library and tests]),
+    [API_TEST_HAVE_ASYNC=$enableval])
+  
+if test "X$API_TEST_HAVE_ASYNC" = "Xyes"; then
+  AC_DEFINE([API_TEST_HAVE_ASYNC], [1], [Define if async API tests are enabled])
+fi
 ##
 ## Enable/disable sanitizer checks for clang compilers, initially address sanitizer
 ##
@@ -1660,61 +1669,6 @@ if test "x$HAVE_ZLIB" = "xyes" -a "x$HAVE_ZLIB_H" = "xyes" -a "x$HAVE_COMPRESS2"
   fi
     EXTERNAL_FILTERS="${EXTERNAL_FILTERS}deflate(zlib)"
 fi
-
-## TODO - Probably this should be reworked or moved somewhere else
-
-# If the provided name corresponds to a non-empty variable,
-# create a macro with the given name and value. 
-# If the provided name does not exist, create a macro with the 
-# default value if one was provided, otherwise undefine the macro.
-m4_define([EXPORT_VARIABLE],
-  [if test -n "$$1"; then
-    AC_SUBST([$1], ["#define $1 $$1"])
-   else
-     if test -n "$2"; then
-       AC_SUBST([$1], ["#define $1 $2"])
-     else
-       AC_SUBST([$1], ["/*undef $1 */"])
-     fi
-   fi]
-)
-
-EXPORT_VARIABLE([H5_API_TEST_CONFIG_H], ["1"])
-
-# TODO: These flags are copied from a CMake equivalent H5_api_test_config.h.in 
-# and I haven't verified that the autotools define them
-EXPORT_VARIABLE([H5_API_TEST_HAVE_ASYNC], [])
-if test -n "$H5_HAVE_PARALLEL"; then 
-  EXPORT_VARIABLE([MPIEXEC_EXECUTABLE], [])
-  EXPORT_VARIABLE([MPIEXEC], [])
-
-  EXPORT_VARIABLE(MPIEXEC_NUMPROC_FLAG, [])
-  EXPORT_VARIABLE(MPIEXEC_PREFLAGS, [])
-  EXPORT_VARIABLE(MPIEXEC_POSTFLAGS, [])
-
-  EXPORT_VARIABLE(MPIEXEC_SERVER_PREFLAGS, [])
-  EXPORT_VARIABLE(MPIEXEC_SERVER_POSTFLAGS, [])
-  EXPORT_VARIABLE(MPIEXEC_MAX_NUMPROCS, [])
-fi
-
-EXPORT_VARIABLE([DART_TESTING_TIMEOUT], ["1500"])
-
-
-EXPORT_VARIABLE([H5_API_TEST_ENV_VARS], [])
-EXPORT_VARIABLE([H5_API_TEST_INIT_COMMAND], [])
-
-EXPORT_VARIABLE([H5_API_TEST_SERVER_START_MSG], [])
-EXPORT_VARIABLE([H5_API_TEST_SERVER_EXIT_COMMAND], [])
-
-EXPORT_VARIABLE([H5_API_TEST_CLIENT_HELPER_START_MSG], [])
-EXPORT_VARIABLE([H5_API_TEST_CLIENT_HELPER_EXIT_COMMAND], [])
-
-EXPORT_VARIABLE([H5_API_TEST_CLIENT_INIT_TOKEN_REGEX], [])
-EXPORT_VARIABLE([H5_API_TEST_CLIENT_INIT_TOKEN_VAR], [])
-
-
-
-
 
 ## ----------------------------------------------------------------------
 ## Is the szlib present? It has a header file `szlib.h' and a library
@@ -4326,7 +4280,6 @@ AC_CONFIG_FILES([Makefile
                  test/test_vds_env.sh
                  test/test_vds_swmr.sh
                  test/API/Makefile
-                 test/API/H5_api_test_config.h:test/API/H5_api_test_config_at.h.in
                  testpar/Makefile
                  testpar/testpflush.sh
                  utils/Makefile

@@ -2673,12 +2673,23 @@ test_file_cleanup(void)
     char file_name[64];
     int  i;
 
+    TESTING("cleanup test files");
+
+    /* Don't try to remove test files if this connector doesn't support file creation */
+    if (!(vol_cap_flags_g & H5VL_CAP_FLAG_ASYNC) || !(vol_cap_flags_g & H5VL_CAP_FLAG_FILE_BASIC) ) {
+        SKIPPED();
+        printf("    API functions for basic file, dataset, or flush aren't supported with this connector\n");
+        return;
+    }
+
     remove_test_file(NULL, ASYNC_API_TEST_FILE);
 
     for (i = 0; i <= max_printf_file; i++) {
         snprintf(file_name, sizeof(file_name), ASYNC_API_TEST_FILE_PRINTF, i);
         remove_test_file(NULL, file_name);
     }
+
+    PASSED();
 }
 
 void
