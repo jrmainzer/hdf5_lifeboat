@@ -403,7 +403,7 @@ H5TEST_DLL void        TestAlarmOn(void);
 H5TEST_DLL void        TestAlarmOff(void);
 
 #ifdef H5_HAVE_MULTITHREAD
-H5TEST_DLL void*       PerformThreadTest(void *test);
+H5TEST_DLL void*       ThreadTestWrapper(void *test);
 H5TEST_DLL int         H5_mt_test_global_setup(void);
 H5TEST_DLL int         H5_mt_test_thread_setup(int thread_idx);
 H5TEST_DLL void        H5_test_thread_info_key_destructor(void *value);

@@ -408,7 +408,7 @@ PerformTests(void)
                         thread_args[i].ThreadIndex = i;
                         thread_args[i].Call = Test[Loop].Call;
 
-                        ret = pthread_create(&threads[i], NULL, PerformThreadTest, (void*) &thread_args[i]);
+                        ret = pthread_create(&threads[i], NULL, ThreadTestWrapper, (void*) &thread_args[i]);
 
                         if (ret != 0) {
                             fprintf(stderr, "Error creating thread %d\n", i);
@@ -453,7 +453,7 @@ PerformTests(void)
  * Set up and execute a test flagged for multi-threaded
  *   execution within a single thread.
  */
-void *PerformThreadTest(void *test)
+void *ThreadTestWrapper(void *test)
 {
     TestCall test_call;
     int thread_idx;
@@ -468,9 +468,7 @@ void *PerformThreadTest(void *test)
         return (void*)-1;
     }
 
-    TestAlarmOn();
     test_call();
-    TestAlarmOff();
     return NULL;
 }
 
