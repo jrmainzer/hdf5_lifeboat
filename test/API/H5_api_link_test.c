@@ -667,7 +667,7 @@ test_create_hard_link_invalid_params(void)
         goto error;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link test file name\n");
         goto error;
@@ -1950,7 +1950,7 @@ test_create_external_link(void)
         return;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -2067,7 +2067,7 @@ test_create_external_link_dangling(void)
         return;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -2216,7 +2216,7 @@ test_create_external_link_multi(void)
         {
             TESTING_2("Create the first external file to be pointed to");
 
-            if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename1) < 0) {
+            if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename1) < 0) {
                 H5_FAILED();
                 printf("    couldn't create external link filename\n");
                 PART_ERROR(H5Lcreate_external_first_file);
@@ -2280,7 +2280,7 @@ test_create_external_link_multi(void)
         {
             TESTING_2("Create the second external file to be pointed to");
 
-            if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME2, &ext_link_filename2) < 0) {
+            if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME2, &ext_link_filename2) < 0) {
                 H5_FAILED();
                 printf("    couldn't create external link filename\n");
                 PART_ERROR(H5Lcreate_external_second_file);
@@ -2340,7 +2340,7 @@ test_create_external_link_multi(void)
         {
             TESTING_2("Create the third external file to be pointed to");
 
-            if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME3, &ext_link_filename3) < 0) {
+            if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME3, &ext_link_filename3) < 0) {
                 H5_FAILED();
                 printf("    couldn't create external link filename\n");
                 PART_ERROR(H5Lcreate_external_third_file);
@@ -2600,13 +2600,13 @@ test_create_external_link_ping_pong(void)
         return;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_PING_PONG_NAME1, &ext_link_filename1) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_PING_PONG_NAME1, &ext_link_filename1) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_PING_PONG_NAME2, &ext_link_filename2) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_PING_PONG_NAME2, &ext_link_filename2) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -2876,7 +2876,7 @@ test_create_external_link_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_INVALID_PARAMS_TEST_FILE_NAME, &ext_link_filename) <
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_INVALID_PARAMS_TEST_FILE_NAME, &ext_link_filename) <
         0) {
         H5_FAILED();
         printf("    couldn't create filename for external link test\n");
@@ -3548,7 +3548,7 @@ test_delete_link(void)
         goto error;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -7521,7 +7521,7 @@ test_copy_link(void)
         goto error;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link test file name\n");
         goto error;
@@ -8806,7 +8806,7 @@ test_copy_link_invalid_params(void)
         goto error;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -9123,7 +9123,7 @@ test_move_link(void)
         goto error;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -11014,7 +11014,7 @@ test_move_link_invalid_params(void)
         goto error;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    failed to generate external link filename\n");
         goto error;
@@ -11386,7 +11386,7 @@ test_get_link_val(void)
         goto error;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -13788,7 +13788,7 @@ test_get_link_info(void)
         goto error;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link target filename\n");
         goto error;
@@ -16757,7 +16757,7 @@ test_get_link_name(void)
         goto error;
     }
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -19900,7 +19900,7 @@ test_link_iterate_external_links(void)
 
     TESTING_2("test setup");
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -20305,7 +20305,7 @@ test_link_iterate_mixed_links(void)
 
     TESTING_2("test setup");
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -20799,7 +20799,7 @@ test_link_iterate_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -22234,7 +22234,7 @@ test_link_visit_external_links_no_cycles(void)
 
     TESTING_2("test setup");
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -22670,7 +22670,7 @@ test_link_visit_mixed_links_no_cycles(void)
 
     TESTING_2("test setup");
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -24318,7 +24318,7 @@ test_link_visit_mixed_links_cycles(void)
 
     TESTING_2("test setup");
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;
@@ -24763,7 +24763,7 @@ test_link_visit_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if (prefix_filename(test_path_prefix_g, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
+    if (prefix_filename(test_path_prefix, EXTERNAL_LINK_TEST_FILE_NAME, &ext_link_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create external link filename\n");
         goto error;

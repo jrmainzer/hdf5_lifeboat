@@ -423,7 +423,7 @@ char *generate_threadlocal_filename(const char *prefix, int thread_idx, const ch
 #define HDF5_API_TEST_PATH_PREFIX "HDF5_API_TEST_PATH_PREFIX"
 #define TEST_FILE_NAME "H5_api_test.h5"
 /* Prefix to use for filepaths in API tests */
-extern const char *test_path_prefix_g;
+extern const char *test_path_prefix;
 
 H5TEST_DLL int  GetTestMaxNumThreads(void);
 H5TEST_DLL void SetTestMaxNumThreads(int num_threads);

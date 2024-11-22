@@ -59,7 +59,7 @@ static void (*TestPrivateUsage)(void)               = NULL;
 static int (*TestPrivateParser)(int ac, char *av[]) = NULL;
 
 static int TestMaxNumThreads_g = -1; /* Max number of threads that can be spawned */
-const char *test_path_prefix_g = NULL;
+const char *test_path_prefix = NULL;
 
 /*
  * Setup a test function and add it to the list of tests.
@@ -160,9 +160,9 @@ TestInit(const char *ProgName, void (*private_usage)(void), int (*private_parser
         TestPrivateParser = private_parser;
 
     /* Set up test path prefix for filenames, with default being empty */
-    if (test_path_prefix_g == NULL) {
-        if ((test_path_prefix_g = HDgetenv(HDF5_API_TEST_PATH_PREFIX)) == NULL)
-            test_path_prefix_g = (const char *)"";
+    if (test_path_prefix == NULL) {
+        if ((test_path_prefix = HDgetenv(HDF5_API_TEST_PATH_PREFIX)) == NULL)
+            test_path_prefix = (const char *)"";
     }
 
 }
@@ -486,7 +486,7 @@ int H5_mt_test_thread_setup(int thread_idx) {
 
     /* TBD: This is currently only useful for API tests. Modification of existing testframe tests would be necessary
      * for them to use thread-local filenames to avoid conflicts during multi-threaded execution */
-    if (NULL == (tinfo->test_thread_filename = generate_threadlocal_filename(test_path_prefix_g, thread_idx, TEST_FILE_NAME))) {
+    if (NULL == (tinfo->test_thread_filename = generate_threadlocal_filename(test_path_prefix, thread_idx, TEST_FILE_NAME))) {
         TestErrPrintf("    couldn't allocate memory for test file name\n");
         goto error;
     }

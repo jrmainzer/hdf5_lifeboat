@@ -86,8 +86,6 @@ static hid_t generate_random_datatype_reference(H5T_class_t parent_class, hbool_
 static hid_t generate_random_datatype_enum(H5T_class_t parent_class, hbool_t is_compact, size_t depth);
 static hid_t generate_random_datatype_array(H5T_class_t parent_class, hbool_t is_compact, size_t depth);
 
-static int H5_api_test_create_single_container(const char *filename, uint64_t vol_cap_flags);
-
 /*
  * Helper function to generate a random HDF5 datatype in order to thoroughly
  * test support for datatypes. The parent_class parameter is to support

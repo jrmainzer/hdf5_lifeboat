@@ -4192,7 +4192,7 @@ test_object_copy_between_files(void)
     /*
      * Create the second file for the between file copying tests.
      */
-    if (prefix_filename(test_path_prefix_g, OBJECT_COPY_BETWEEN_FILES_TEST_FILE_NAME, &obj_copy_filename) < 0) {
+    if (prefix_filename(test_path_prefix, OBJECT_COPY_BETWEEN_FILES_TEST_FILE_NAME, &obj_copy_filename) < 0) {
         H5_FAILED();
         printf("    couldn't create filename for object copy test file\n");
         goto error;
