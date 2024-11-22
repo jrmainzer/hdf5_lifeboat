@@ -372,8 +372,8 @@ AC_ARG_ENABLE([api-tests],
 
 ## ----------------------------------------------------------------------
 ## Check if we should build with async API tests
-AC_ARG_ENABLE([async],
-    AS_HELP_STRING([--enable-async], [Enable building of async library and tests]),
+AC_ARG_ENABLE([api-tests-async],
+    AS_HELP_STRING([--enable-api-tests-async], [Enable building of async API tests]),
     [API_TEST_HAVE_ASYNC=$enableval])
   
 if test "X$API_TEST_HAVE_ASYNC" = "Xyes"; then
