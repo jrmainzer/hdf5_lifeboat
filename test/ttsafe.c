@@ -101,12 +101,15 @@ main(int argc, char *argv[])
 
     /* Tests are generally arranged from least to most complexity... */
     AddTest("is_threadsafe",  tts_is_threadsafe,  NULL,  "library threadsafe status",  NULL, 0);
+
+#if defined(H5_HAVE_THREADSAFE) || defined(H5_HAVE_MULTITHREAD)
+    AddTest("errstk",  tts_errstk,  NULL,  "error stack cleanup",  NULL, 0);
+#endif
+
 #ifdef H5_HAVE_THREADSAFE
     AddTest("dcreate",  tts_dcreate,  cleanup_dcreate,  "multi-dataset creation",  NULL, 0);
     AddTest("error",  tts_error,  cleanup_error,  "per-thread error stacks",  NULL, 0);
 #ifdef H5_HAVE_PTHREAD_H
-    /* TBD - Later library versions add H5TS wrapper routines for compatibility with windows threads too */
-    AddTest("tts_errstk",  tts_errstk,  NULL,  "per-thread error stack cleanup",  NULL, 0);
     /* Thread cancellability only supported with pthreads ... */
     AddTest("cancel",  tts_cancel,  cleanup_cancel,  "thread cancellation safety test",  NULL, 0);
 #endif /* H5_HAVE_PTHREAD_H */
