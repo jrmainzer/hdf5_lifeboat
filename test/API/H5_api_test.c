@@ -436,9 +436,9 @@ H5_api_test_create_containers(const char *filename, uint64_t vol_cap_flags)
                 goto error;
             }
 
+            free(tl_filename);
+            tl_filename = NULL;
         }
-
-        free(tl_filename);
 #else
         printf("    thread-specific filename requested, but multithread support not enabled\n");
         goto error;
