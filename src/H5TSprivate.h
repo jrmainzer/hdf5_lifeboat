@@ -119,6 +119,7 @@ typedef pthread_once_t  H5TS_once_t;
 #define H5TS_attr_setscope(attr_ptr, scope)     pthread_attr_setscope(attr_ptr, scope)
 #define H5TS_attr_destroy(attr_ptr)             pthread_attr_destroy(attr_ptr)
 #define H5TS_wait_for_thread(thread)            pthread_join(thread, NULL)
+#define H5TS_wait_for_thread_ret(thread, ret)   pthread_join(thread, ret)
 #define H5TS_mutex_init(mutex)                  pthread_mutex_init(mutex, NULL)
 #define H5TS_mutex_lock_simple(mutex)           pthread_mutex_lock(mutex)
 #define H5TS_mutex_unlock_simple(mutex)         pthread_mutex_unlock(mutex)

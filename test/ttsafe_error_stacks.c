@@ -11,8 +11,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 #include "ttsafe.h"
 
-/* TBD - Later library versions add H5TS wrapper routines for compatibility with windows threads too */
-#ifdef H5_HAVE_PTHREAD_H
+#if defined(H5_HAVE_THREADSAFE) || defined(H5_HAVE_MULTITHREAD)
 
 #define ERR_CLS_NAME        "Custom error class"
 #define ERR_CLS_LIB_NAME    "example_lib"
@@ -88,17 +87,15 @@ tts_errstk(void)
     /* Open library */
     H5open();
 
-    status = pthread_create(&threads[0], NULL, generate_hdf5_error, NULL);
-    CHECK(status, FAIL, "H5TS_thread_create");
+    threads[0] = H5TS_create_thread(generate_hdf5_error, NULL, NULL);
 
-    status = pthread_join(threads[0], NULL);
-    CHECK(status, FAIL, "H5TS_thread_join");
+    status = H5TS_wait_for_thread(threads[0]);
+    CHECK(status, FAIL, "H5TS_wait_for_thread");
 
-    status = pthread_create(&threads[1], NULL, generate_user_error, NULL);
-    CHECK(status, FAIL, "H5TS_thread_create");
+    threads[1] = H5TS_create_thread(generate_hdf5_error, NULL, NULL);
 
-    status = pthread_join(threads[1], (void *)&err_cls_id);
-    CHECK(status, FAIL, "H5TS_thread_join");
+    status = H5TS_wait_for_thread_ret(threads[1], (void *)&err_cls_id);
+    CHECK(status, FAIL, "H5TS_wait_for_thread");
 
     if (err_cls_id <= 0) {
         TestErrPrintf("Failed to set up user error\n");
