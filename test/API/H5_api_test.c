@@ -40,9 +40,18 @@
 #include "H5_api_async_test.h"
 #endif
 
-char H5_api_test_filename[H5_API_TEST_FILENAME_MAX_LENGTH];
+#ifdef H5_HAVE_MULTITHREAD
+#include <pthread.h>
+#endif
 
-const char *test_path_prefix;
+char H5_api_test_filename_g[H5_API_TEST_FILENAME_MAX_LENGTH];
+
+static int H5_api_test_create_containers(const char *filename, uint64_t vol_cap_flags);
+static int H5_api_test_create_single_container(const char *filename, uint64_t vol_cap_flags);
+static int H5_api_test_destroy_container_files(void);
+
+/* Margin of runtime for each subtest allocated to cleanup */
+#define API_TEST_MARGIN 1
 
 /* X-macro to define the following for each test:
  * - enum type
@@ -155,6 +164,11 @@ main(int argc, char **argv)
     char       *vol_connector_info        = NULL;
     void       *default_err_data          = NULL;
     bool        err_occurred              = false;
+    int         chars_written              = 0;
+    int         testExpress                = 0;
+
+    /* TBD */
+    UNUSED(testExpress);
 
     H5open();
 
@@ -196,10 +210,35 @@ main(int argc, char **argv)
     srand(seed);
 
     if (NULL == (test_path_prefix = HDgetenv(HDF5_API_TEST_PATH_PREFIX)))
-        test_path_prefix = "";
+        test_path_prefix = (const char *)"";
 
-    HDsnprintf(H5_api_test_filename, H5_API_TEST_FILENAME_MAX_LENGTH, "%s%s", test_path_prefix,
-               TEST_FILE_NAME);
+#ifndef H5_HAVE_MULTITHREAD
+    if (GetTestMaxNumThreads() > 1) {
+        fprintf(stderr, "HDF5 must be built with multi-thread support to run multi-threaded API tests\n");
+        err_occurred = TRUE;
+        goto done;
+    }
+#endif
+
+    if (GetTestMaxNumThreads() <= 0) {
+        SetTestMaxNumThreads(API_TESTS_DEFAULT_NUM_THREADS);
+    }
+
+    if (GetTestMaxNumThreads() == 1) {
+        /* Populate global test filename */
+        if ((chars_written = HDsnprintf(H5_api_test_filename_g, H5_API_TEST_FILENAME_MAX_LENGTH, "%s%s",test_path_prefix,
+                TEST_FILE_NAME)) < 0) {
+            fprintf(stderr, "Error while creating test file name\n");
+            err_occurred = TRUE;
+            goto done;
+        }
+
+        if ((size_t)chars_written >= H5_API_TEST_FILENAME_MAX_LENGTH) {
+            fprintf(stderr, "Test file name exceeded expected size\n");
+            err_occurred = TRUE;
+            goto done;
+        }
+    }
 
     if (NULL == (vol_connector_string = HDgetenv(HDF5_VOL_CONNECTOR))) {
         printf("No VOL connector selected; using native VOL connector\n");
@@ -231,7 +270,7 @@ main(int argc, char **argv)
     printf("Running API tests with VOL connector '%s' and info string '%s'\n\n", vol_connector_name,
            vol_connector_info ? vol_connector_info : "");
     printf("Test parameters:\n");
-    printf("  - Test file name: '%s'\n", H5_api_test_filename);
+    printf("  - Test file name: '%s'\n", TEST_FILE_NAME);
     printf("  - Test seed: %u\n", seed);
     printf("\n");
 
@@ -299,12 +338,10 @@ main(int argc, char **argv)
         goto done;
     }
 
-    /*
-     * Create the file that will be used for all of the tests,
-     * except for those which test file creation.
-     */
-    if (create_test_container(H5_api_test_filename, vol_cap_flags_g) < 0) {
-        fprintf(stderr, "Unable to create testing container file '%s'\n", H5_api_test_filename);
+    /* Create the file(s) that will be used for all of the tests,
+     * except for those which test file creation.*/
+    if (H5_api_test_create_containers(TEST_FILE_NAME, vol_cap_flags_g) < 0) {
+        fprintf(stderr, "Unable to create testing container file with basename '%s'\n", TEST_FILE_NAME);
         err_occurred = TRUE;
         goto done;
     }
@@ -322,15 +359,13 @@ main(int argc, char **argv)
     if (GetTestCleanup() && !getenv(HDF5_NOCLEANUP))
         TestCleanup();
 
-    printf("Deleting container file for tests\n\n");
+    printf("Deleting container file(s) for tests\n\n");
 
-    H5E_BEGIN_TRY
-    {
-        if (H5Fis_accessible(H5_api_test_filename, H5P_DEFAULT) > 0) {
-            H5Fdelete(H5_api_test_filename, fapl_id);
-        }
+    if (H5_api_test_destroy_container_files() < 0) {
+        fprintf(stderr, "Error cleaning up global API test info\n");
+        err_occurred = true;
+        goto done;
     }
-    H5E_END_TRY
 
     if (n_tests_run_g > 0) {
         printf("%zu/%zu (%.2f%%) API tests passed with VOL connector '%s'\n", n_tests_passed_g, n_tests_run_g,
@@ -373,4 +408,190 @@ done:
         exit(EXIT_FAILURE);
     else
         exit(EXIT_SUCCESS);
+}
+
+/* Create the API container test file(s), one per thread.
+ * Returns negative on failure, 0 on success */
+static int
+H5_api_test_create_containers(const char *filename, uint64_t vol_cap_flags)
+{
+    int max_threads = GetTestMaxNumThreads();
+    char *tl_filename = NULL;
+
+    if (!(vol_cap_flags & H5VL_CAP_FLAG_FILE_BASIC)) {
+        printf("   VOL connector doesn't support file creation\n");
+        goto error;
+    }
+
+    if (max_threads > 1) {
+#ifdef H5_HAVE_MULTITHREAD
+        for (int i = 0; i < max_threads; i++) {
+            if ((tl_filename = generate_threadlocal_filename(test_path_prefix, i, filename)) == NULL) {
+                printf("    failed to generate thread-local API test filename\n");
+                goto error;
+            }
+
+            if (H5_api_test_create_single_container((const char *)tl_filename, vol_cap_flags) < 0) {
+                printf("    failed to create thread-local API test container");
+                goto error;
+            }
+
+        }
+
+        free(tl_filename);
+#else
+        printf("    thread-specific filename requested, but multithread support not enabled\n");
+        goto error;
+#endif
+
+    } else {
+        if (H5_api_test_create_single_container((const char *)filename, vol_cap_flags) < 0) {
+            printf("    failed to create test container\n");
+            goto error;
+        }
+    }
+
+    return 0;
+
+error:
+    free(tl_filename);
+    return -1;
+}
+
+/* Helper for H5_api_test_create_containers().
+ * Returns negative on failure, 0 on success */
+static int
+H5_api_test_create_single_container(const char *filename, uint64_t vol_cap_flags) {
+    hid_t file_id  = H5I_INVALID_HID;
+    hid_t group_id = H5I_INVALID_HID;
+
+    if ((file_id = H5Fcreate(filename, H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT)) < 0) {
+        printf("    couldn't create testing container file '%s'\n", filename);
+        goto error;
+    }
+
+    printf("    created container file\n");
+
+    if (vol_cap_flags & H5VL_CAP_FLAG_GROUP_BASIC) {
+        /* Create container groups for each of the test interfaces
+         * (group, attribute, dataset, etc.).
+         */
+        if ((group_id = H5Gcreate2(file_id, GROUP_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT)) >=
+            0) {
+            H5Gclose(group_id);
+        }
+
+        if ((group_id = H5Gcreate2(file_id, ATTRIBUTE_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT,
+                                   H5P_DEFAULT)) >= 0) {
+            H5Gclose(group_id);
+        }
+
+        if ((group_id =
+                 H5Gcreate2(file_id, DATASET_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT)) >= 0) {
+            H5Gclose(group_id);
+        }
+
+        if ((group_id =
+                 H5Gcreate2(file_id, DATATYPE_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT)) >= 0) {
+            H5Gclose(group_id);
+        }
+
+        if ((group_id = H5Gcreate2(file_id, LINK_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT)) >=
+            0) {
+            H5Gclose(group_id);
+        }
+
+        if ((group_id = H5Gcreate2(file_id, OBJECT_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT)) >=
+            0) {
+            H5Gclose(group_id);
+        }
+
+        if ((group_id = H5Gcreate2(file_id, MISCELLANEOUS_TEST_GROUP_NAME, H5P_DEFAULT, H5P_DEFAULT,
+                                   H5P_DEFAULT)) >= 0) {
+            H5Gclose(group_id);
+        }
+    }
+
+    if (H5Fclose(file_id) < 0) {
+        printf("    failed to close testing container %s\n", filename);
+        goto error;
+    }
+
+    return 0;
+error:
+    H5E_BEGIN_TRY
+    {
+        H5Gclose(group_id);
+        H5Fclose(file_id);
+    }
+    H5E_END_TRY
+
+    return -1;
+
+}
+
+/* Delete the API test container file(s).
+ * Returns negative on failure, 0 on success */
+static int
+H5_api_test_destroy_container_files(void) {
+
+    int max_threads = GetTestMaxNumThreads();
+    char *filename = NULL;
+
+    if (!(vol_cap_flags_g & H5VL_CAP_FLAG_FILE_BASIC)) {
+        printf("   container should not have been created\n");
+        goto error;
+    }
+
+    if (max_threads > 1) {
+#ifndef H5_HAVE_MULTITHREAD
+        printf("    thread-specific cleanup requested, but multithread support not enabled\n");
+        goto error;
+#endif
+        
+        for (int i = 0; i < max_threads; i++) {
+            if ((filename = generate_threadlocal_filename(test_path_prefix, i, TEST_FILE_NAME)) == NULL) {
+                printf("    failed to generate thread-local API test filename\n");
+                goto error;
+            }
+
+            H5E_BEGIN_TRY {
+                if (H5Fis_accessible(filename, H5P_DEFAULT) > 0) {
+                    if (H5Fdelete(filename, H5P_DEFAULT) < 0) {
+                        printf("    failed to destroy thread-local API test container");
+                        goto error;
+                    }
+                }
+            }
+            H5E_END_TRY
+
+            free(filename);
+            filename = NULL;
+        }
+    } else {
+        H5E_BEGIN_TRY {
+            
+            if (prefix_filename(test_path_prefix, TEST_FILE_NAME, &filename) < 0) {
+                printf("    failed to prefix filename\n");
+                goto error;
+            }
+
+            if (H5Fis_accessible(filename, H5P_DEFAULT) > 0) {
+                if (H5Fdelete(filename, H5P_DEFAULT) < 0) {
+                    printf("    failed to destroy thread-local API test container");
+                    goto error;
+                }
+            }
+        }
+        H5E_END_TRY
+    }
+
+    free(filename);
+    filename = NULL;
+    return 0;
+
+error:
+    free(filename);
+    filename = NULL;
+    return -1;
 }

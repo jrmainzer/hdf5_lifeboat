@@ -51,7 +51,7 @@ test_open_link_without_leading_slash(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -86,7 +86,7 @@ test_open_link_without_leading_slash(void)
     if (H5Fclose(file_id) < 0)
         TEST_ERROR;
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -158,7 +158,7 @@ test_object_creation_by_absolute_path(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -393,7 +393,7 @@ test_absolute_vs_relative_path(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -738,9 +738,9 @@ test_dot_for_object_name(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -927,7 +927,7 @@ test_symbols_in_compound_field_name(void)
     for (i = 0; i < COMPOUND_WITH_SYMBOLS_IN_MEMBER_NAMES_TEST_NUM_SUBTYPES; i++)
         type_pool[i] = H5I_INVALID_HID;
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -1042,13 +1042,21 @@ error:
 void
 H5_api_misc_test_add(void)
 {
-    /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_misc_test_header", print_misc_test_header, NULL, "Prints header for miscellaneous tests", NULL);
+    int64_t testframe_flags = ALLOW_MULTITHREAD;
 
-    AddTest("test_open_link_without_leading_slash", test_open_link_without_leading_slash, NULL, "opening a link without a leading slash", NULL);
-    AddTest("test_object_creation_by_absolute_path", test_object_creation_by_absolute_path, NULL, "object creation by absolute path", NULL);
-    AddTest("test_absolute_vs_relative_path", test_absolute_vs_relative_path, NULL, "absolute vs. relative pathnames", NULL);
-    AddTest("test_dot_for_object_name", test_dot_for_object_name, NULL, "creating objects with \".\" as the name", NULL);
-    AddTest("test_symbols_in_compound_field_name", test_symbols_in_compound_field_name, NULL, "usage of '{', '}' and '\\\"' symbols in compound field name", NULL);
-    AddTest("test_double_init_term", test_double_init_term, NULL, "double init/term correctness", NULL);
+    /* Add a fake test to print out a header to distinguish different test interfaces */
+    AddTest("print_misc_test_header", print_misc_test_header, NULL, "Prints header for miscellaneous tests",
+            NULL, 0);
+
+    AddTest("test_open_link_without_leading_slash", test_open_link_without_leading_slash, NULL,
+            "opening a link without a leading slash", NULL, testframe_flags);
+    AddTest("test_object_creation_by_absolute_path", test_object_creation_by_absolute_path, NULL,
+            "object creation by absolute path", NULL, testframe_flags);
+    AddTest("test_absolute_vs_relative_path", test_absolute_vs_relative_path, NULL,
+            "absolute vs. relative pathnames", NULL, testframe_flags);
+    AddTest("test_dot_for_object_name", test_dot_for_object_name, NULL,
+            "creating objects with \".\" as the name", NULL, testframe_flags);
+    AddTest("test_symbols_in_compound_field_name", test_symbols_in_compound_field_name, NULL,
+            "usage of '{', '}' and '\\\"' symbols in compound field name", NULL, testframe_flags);
+    AddTest("test_double_init_term", test_double_init_term, NULL, "double init/term correctness", NULL, testframe_flags);
 }

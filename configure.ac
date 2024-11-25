@@ -364,6 +364,21 @@ while test -n "$hname"; do
   test "$hname_tmp" = "$hname" && break
 done
 
+## ----------------------------------------------------------------------
+## Check if we should build the HDF5 API tests
+AC_ARG_ENABLE([api-tests],
+    AS_HELP_STRING([--enable-api-tests], [Enable building of API tests]),
+    [enable_api_tests=$enableval], [enable_api_tests=no])
+
+## ----------------------------------------------------------------------
+## Check if we should build with async API tests
+AC_ARG_ENABLE([api-tests-async],
+    AS_HELP_STRING([--enable-api-tests-async], [Enable building of async API tests]),
+    [API_TEST_HAVE_ASYNC=$enableval])
+  
+if test "X$API_TEST_HAVE_ASYNC" = "Xyes"; then
+  AC_DEFINE([API_TEST_HAVE_ASYNC], [1], [Define if async API tests are enabled])
+fi
 ##
 ## Enable/disable sanitizer checks for clang compilers, initially address sanitizer
 ##
@@ -1654,7 +1669,6 @@ if test "x$HAVE_ZLIB" = "xyes" -a "x$HAVE_ZLIB_H" = "xyes" -a "x$HAVE_COMPRESS2"
   fi
     EXTERNAL_FILTERS="${EXTERNAL_FILTERS}deflate(zlib)"
 fi
-
 
 ## ----------------------------------------------------------------------
 ## Is the szlib present? It has a header file `szlib.h' and a library
@@ -4142,6 +4156,7 @@ AM_CONDITIONAL([BUILD_TESTS_PARALLEL_CONDITIONAL], [test -n "$TESTPARALLEL"])
 AM_CONDITIONAL([BUILD_TOOLS_CONDITIONAL], [test "X$HDF5_TOOLS" = "Xyes"])
 AM_CONDITIONAL([BUILD_TOOLS_HL_GIF_CONDITIONAL], [test "X$HDF5_HL_GIF_TOOLS" = "Xyes"])
 AM_CONDITIONAL([BUILD_DOXYGEN_CONDITIONAL], [test "X$HDF5_DOXYGEN" = "Xyes"])
+AM_CONDITIONAL([BUILD_API_TESTS], [test "x$enable_api_tests" = "xyes"])
 
 ## ----------------------------------------------------------------------
 ## Build the Makefiles.
@@ -4264,6 +4279,7 @@ AC_CONFIG_FILES([Makefile
                  test/test_use_cases.sh
                  test/test_vds_env.sh
                  test/test_vds_swmr.sh
+                 test/API/Makefile
                  testpar/Makefile
                  testpar/testpflush.sh
                  utils/Makefile

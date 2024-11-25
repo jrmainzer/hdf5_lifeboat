@@ -121,12 +121,12 @@ void H5_api_object_test_add(void);
 #define OBJECT_COPY_INVALID_PARAMS_TEST_GROUP_NAME    "object_copy_invalid_params_group"
 #define OBJECT_COPY_INVALID_PARAMS_TEST_GROUP_NAME2   "object_copy_invalid_params_group_copy"
 
-#define OBJECT_VISIT_TEST_NUM_OBJS_VISITED 4
-#define OBJECT_VISIT_TEST_SUBGROUP_NAME    "object_visit_test"
-#define OBJECT_VISIT_TEST_SPACE_RANK       2
-#define OBJECT_VISIT_TEST_GROUP_NAME       "object_visit_test_group"
-#define OBJECT_VISIT_TEST_DSET_NAME        "object_visit_test_dset"
-#define OBJECT_VISIT_TEST_TYPE_NAME        "object_visit_test_type"
+#define OBJECT_VISIT_TEST_NUM_OBJS_VISITED      4
+#define OBJECT_VISIT_TEST_SUBGROUP_NAME         "object_visit_test"
+#define OBJECT_VISIT_TEST_SPACE_RANK            2
+#define OBJECT_VISIT_TEST_GROUP_NAME            "object_visit_test_group"
+#define OBJECT_VISIT_TEST_DSET_NAME             "object_visit_test_dset"
+#define OBJECT_VISIT_TEST_TYPE_NAME             "object_visit_test_type"
 
 #define OBJECT_VISIT_SOFT_LINK_TEST_NUM_OBJS_VISITED 1
 #define OBJECT_VISIT_SOFT_LINK_TEST_SUBGROUP_NAME    "object_visit_soft_link"

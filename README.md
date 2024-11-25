@@ -1,3 +1,5 @@
+HDF5 version 1.14.2 released on 2023-08-11
+
 # Experimental
 
 [![Lifeboat hdf5 dev autotools CI](https://github.com/LifeboatLLC/hdf5_lifeboat/actions/workflows/main-auto.yml/badge.svg)](https://github.com/LifeboatLLC/hdf5_lifeboat/actions/workflows/main-auto.yml)

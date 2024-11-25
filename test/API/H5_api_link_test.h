@@ -29,9 +29,9 @@ void H5_api_link_test_add(void);
 #define HARD_LINK_TEST_GROUP_LONG_NAME "hard_link_long_name"
 #define MAX_NAME_LEN                   ((64 * 1024) + 1024)
 
-#define HARD_LINK_TEST_GROUP_MANY_NAME          "hard_link_many_name"
-#define HARD_LINK_TEST_GROUP_MANY_FINAL_NAME    "hard_link_final"
-#define HARD_LINK_TEST_GROUP_MANY_NAME_BUF_SIZE 1024
+#define HARD_LINK_TEST_GROUP_MANY_NAME           "hard_link_many_name"
+#define HARD_LINK_TEST_GROUP_MANY_FINAL_NAME     "hard_link_final"
+#define HARD_LINK_TEST_GROUP_MANY_NAME_BUF_SIZE  1024
 
 #define H5L_SAME_LOC_TEST_GROUP_NAME "h5l_same_loc_test_group"
 #define H5L_SAME_LOC_TEST_LINK_NAME1 "h5l_same_loc_test_link1"
@@ -58,9 +58,10 @@ void H5_api_link_test_add(void);
 #define SOFT_LINK_TEST_GROUP_LONG_NAME  "soft_link_long_name"
 #define SOFT_LINK_TEST_LONG_OBJECT_NAME "soft_link_object_name"
 
-#define SOFT_LINK_TEST_GROUP_MANY_NAME          "soft_link_many_name"
-#define SOFT_LINK_TEST_GROUP_MANY_FINAL_NAME    "soft_link_final"
-#define SOFT_LINK_TEST_GROUP_MANY_NAME_BUF_SIZE 1024
+#define SOFT_LINK_TEST_GROUP_MANY_NAME                 "soft_link_many_name"
+#define SOFT_LINK_TEST_GROUP_MANY_FINAL_NAME           "soft_link_final"
+#define SOFT_LINK_TEST_GROUP_MANY_NAME_BUF_SIZE        1024
+#define SOFT_LINK_TEST_GROUP_MANY_NAME_SOFT_LINK_COUNT 16
 
 #define SOFT_LINK_INVALID_PARAMS_TEST_GROUP_NAME "soft_link_creation_invalid_params_test"
 #define SOFT_LINK_INVALID_PARAMS_TEST_LINK_NAME  "soft_link_to_root"

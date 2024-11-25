@@ -2673,35 +2673,52 @@ test_file_cleanup(void)
     char file_name[64];
     int  i;
 
-    H5Fdelete(ASYNC_API_TEST_FILE, H5P_DEFAULT);
+    TESTING("cleanup test files");
+
+    /* Don't try to remove test files if this connector doesn't support file creation */
+    if (!(vol_cap_flags_g & H5VL_CAP_FLAG_ASYNC) || !(vol_cap_flags_g & H5VL_CAP_FLAG_FILE_BASIC) ) {
+        SKIPPED();
+        printf("    API functions for basic file, dataset, or flush aren't supported with this connector\n");
+        return;
+    }
+
+    remove_test_file(NULL, ASYNC_API_TEST_FILE);
+
     for (i = 0; i <= max_printf_file; i++) {
         snprintf(file_name, sizeof(file_name), ASYNC_API_TEST_FILE_PRINTF, i);
         remove_test_file(NULL, file_name);
     }
+
+    PASSED();
 }
 
 void
 H5_api_async_test_add(void)
 {
-    /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_async_test_header", print_async_test_header, NULL, "Prints header for async tests", NULL);
+    int64_t testframe_flags = ALLOW_MULTITHREAD;
 
-    AddTest("test_one_dataset_io", test_one_dataset_io, NULL, "single dataset I/O", NULL);
-    AddTest("test_multi_dataset_io", test_multi_dataset_io, NULL, "multi dataset I/O", NULL);
-    AddTest("test_multi_file_dataset_io", test_multi_file_dataset_io, NULL, "multi file dataset I/O", NULL);
-    AddTest("test_multi_file_grp_dset_io", test_multi_file_grp_dset_io, NULL, "multi file dataset I/O with groups", NULL);
-    AddTest("test_set_extent", test_set_extent, NULL, "H5Dset_extent() and H5Dget_space()", NULL);
-    AddTest("test_attribute_exists", test_attribute_exists, NULL, "H5Aexists()", NULL);
-    AddTest("test_attribute_io", test_attribute_io, NULL, "attribute I/O", NULL);
-    AddTest("test_attribute_io_tconv", test_attribute_io_tconv, NULL, "attribute I/O with type conversion", NULL);
-    AddTest("test_attribute_io_compound", test_attribute_io_compound, NULL, "attribute I/O with compound type conversion", NULL);
-    AddTest("test_group", test_group, NULL, "group operations", NULL);
-    AddTest("test_link", test_link, NULL, "link operations", NULL);
-    AddTest("test_ocopy_orefresh", test_ocopy_orefresh, NULL, "H5Ocopy() and H5Orefresh()", NULL);
-    AddTest("test_file_reopen", test_file_reopen, NULL, "H5Freopen()", NULL);
+    /* Add a fake test to print out a header to distinguish different test interfaces */
+    AddTest("print_async_test_header",  print_async_test_header,  NULL,  "Prints header for async tests",  NULL, 0);
+
+    AddTest("test_one_dataset_io", test_one_dataset_io, NULL, "single dataset I/O", NULL, testframe_flags);
+    AddTest("test_multi_dataset_io", test_multi_dataset_io, NULL, "multi dataset I/O", NULL, testframe_flags);
+    AddTest("test_multi_file_dataset_io", test_multi_file_dataset_io, NULL, "multi file dataset I/O", NULL, testframe_flags);
+    AddTest("test_multi_file_grp_dset_io", test_multi_file_grp_dset_io, NULL,
+            "multi file dataset I/O with groups", NULL, testframe_flags);
+    AddTest("test_set_extent",  test_set_extent,  NULL,  "H5Dset_extent() and H5Dget_space()",  NULL, testframe_flags);
+    AddTest("test_attribute_exists",  test_attribute_exists,  NULL,  "H5Aexists()",  NULL, testframe_flags);
+    AddTest("test_attribute_io", test_attribute_io, NULL, "attribute I/O", NULL, testframe_flags);
+    AddTest("test_attribute_io_tconv", test_attribute_io_tconv, NULL, "attribute I/O with type conversion",
+            NULL, testframe_flags);
+    AddTest("test_attribute_io_compound", test_attribute_io_compound, NULL,
+            "attribute I/O with compound type conversion", NULL, testframe_flags);
+    AddTest("test_group",  test_group,  NULL,  "group operations",  NULL, testframe_flags);
+    AddTest("test_link",  test_link,  NULL,  "link operations",  NULL, testframe_flags);
+    AddTest("test_ocopy_orefresh",  test_ocopy_orefresh,  NULL,  "H5Ocopy() and H5Orefresh()",  NULL, testframe_flags);
+    AddTest("test_file_reopen",  test_file_reopen,  NULL,  "H5Freopen()",  NULL, testframe_flags);
 
     /* Add a fake test to cleanup test files due to current test interdependencies */
-    AddTest("test_file_cleanup", test_file_cleanup, NULL, "cleanup test files", NULL);
+    AddTest("test_file_cleanup",  test_file_cleanup,  NULL,  "cleanup test files",  NULL, testframe_flags);
 }
 
 #else /* H5_API_TEST_HAVE_ASYNC */
@@ -2710,7 +2727,7 @@ void
 H5_api_async_test_add(void)
 {
     /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_async_test_header", print_async_test_header, NULL, "Prints header for async tests", NULL);
+    AddTest("print_async_test_header",  print_async_test_header,  NULL,  "Prints header for async tests",  NULL, 0);
 }
 
 #endif /* H5_API_TEST_HAVE_ASYNC */

@@ -101,9 +101,9 @@ test_create_attribute_on_root(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -245,9 +245,9 @@ test_create_attribute_on_dataset(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -429,9 +429,9 @@ test_create_attribute_on_datatype(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -599,7 +599,7 @@ test_create_attribute_with_null_space(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -710,7 +710,7 @@ test_create_attribute_with_scalar_space(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -823,7 +823,7 @@ test_create_attribute_with_space_in_name(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -928,9 +928,9 @@ test_create_attribute_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -1372,9 +1372,9 @@ test_open_attribute(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -1775,9 +1775,9 @@ test_open_attribute_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2292,7 +2292,7 @@ test_write_attribute(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -2424,9 +2424,9 @@ test_write_attribute_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2612,9 +2612,9 @@ test_read_attribute(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2770,9 +2770,9 @@ test_read_attribute_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2979,9 +2979,9 @@ test_read_empty_attribute(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -3097,9 +3097,9 @@ test_close_attribute_invalid_id(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -3165,9 +3165,9 @@ test_get_attribute_space_and_type(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -3468,9 +3468,9 @@ test_get_attribute_space_and_type_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -3628,7 +3628,7 @@ test_attribute_property_lists(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -3915,9 +3915,9 @@ test_get_attribute_name(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -4411,9 +4411,9 @@ test_get_attribute_name_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -4780,7 +4780,7 @@ test_get_attribute_info(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -5428,9 +5428,9 @@ test_get_attribute_info_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -5888,9 +5888,9 @@ test_rename_attribute(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -6106,9 +6106,9 @@ test_rename_attribute_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -6479,9 +6479,9 @@ test_attribute_iterate_group(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -6522,8 +6522,8 @@ test_attribute_iterate_group(void)
     for (i = 0; i < ATTRIBUTE_ITERATE_TEST_NUM_ATTRS; i++) {
         char attr_name[ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE];
 
-        HDsnprintf(attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE,
-                   ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d", (int)(ATTRIBUTE_ITERATE_TEST_NUM_ATTRS - i - 1));
+        HDsnprintf(attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE, ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d",
+                 (int)(ATTRIBUTE_ITERATE_TEST_NUM_ATTRS - i - 1));
 
         if ((attr_id = H5Acreate2(group_id, attr_name, attr_dtype, attr_space_id, H5P_DEFAULT, H5P_DEFAULT)) <
             0) {
@@ -6875,9 +6875,9 @@ test_attribute_iterate_dataset(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -6931,8 +6931,8 @@ test_attribute_iterate_dataset(void)
     for (i = 0; i < ATTRIBUTE_ITERATE_TEST_NUM_ATTRS; i++) {
         char attr_name[ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE];
 
-        HDsnprintf(attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE,
-                   ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d", (int)(ATTRIBUTE_ITERATE_TEST_NUM_ATTRS - i - 1));
+        HDsnprintf(attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE, ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d",
+                 (int)(ATTRIBUTE_ITERATE_TEST_NUM_ATTRS - i - 1));
 
         if ((attr_id = H5Acreate2(dset_id, attr_name, attr_dtype, attr_space_id, H5P_DEFAULT, H5P_DEFAULT)) <
             0) {
@@ -7297,9 +7297,9 @@ test_attribute_iterate_datatype(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -7350,8 +7350,8 @@ test_attribute_iterate_datatype(void)
     for (i = 0; i < ATTRIBUTE_ITERATE_TEST_NUM_ATTRS; i++) {
         char attr_name[ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE];
 
-        HDsnprintf(attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE,
-                   ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d", (int)(ATTRIBUTE_ITERATE_TEST_NUM_ATTRS - i - 1));
+        HDsnprintf(attr_name, ATTRIBUTE_ITERATE_TEST_ATTR_NAME_BUF_SIZE, ATTRIBUTE_ITERATE_TEST_ATTR_NAME "%d",
+                 (int)(ATTRIBUTE_ITERATE_TEST_NUM_ATTRS - i - 1));
 
         if ((attr_id = H5Acreate2(type_id, attr_name, attr_dtype, attr_space_id, H5P_DEFAULT, H5P_DEFAULT)) <
             0) {
@@ -7724,7 +7724,7 @@ test_attribute_iterate_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -8143,7 +8143,7 @@ test_attribute_iterate_0_attributes(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -8332,9 +8332,9 @@ test_delete_attribute(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -9565,9 +9565,9 @@ test_delete_attribute_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -9982,9 +9982,9 @@ test_attribute_exists(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -10124,9 +10124,9 @@ test_attribute_exists_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -10400,7 +10400,7 @@ test_attribute_many(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -10508,7 +10508,7 @@ test_attribute_duplicate_id(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -10626,7 +10626,7 @@ test_get_number_attributes(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -10806,7 +10806,7 @@ test_attr_shared_dtype(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -10953,7 +10953,7 @@ attr_iter_callback1(hid_t location_id, const char *attr_name, const H5A_info_t *
      *  - iteration by attribute name in decreasing order
      *  - iteration by attribute creation order in increasing order
      *  - iteration by attribute creation order in decreasing order
-     *
+    *
      * Based on how the test is written, this will mean that the attribute names
      * will run in increasing order on the first and fourth tests and decreasing
      * order on the second and third tests.
@@ -11026,46 +11026,79 @@ attr_iter_callback2(hid_t location_id, const char *attr_name, const H5A_info_t *
 void
 H5_api_attribute_test_add(void)
 {
-    /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_attribute_test_header", print_attribute_test_header, NULL, "Prints header for attribute tests", NULL);
+    int64_t testframe_flags = ALLOW_MULTITHREAD;
 
-    AddTest("test_create_attribute_on_root", test_create_attribute_on_root, NULL, "attribute creation on the root group", NULL);
-    AddTest("test_create_attribute_on_dataset", test_create_attribute_on_dataset, NULL, "attribute creation on a dataset", NULL);
-    AddTest("test_create_attribute_on_datatype", test_create_attribute_on_datatype, NULL, "attribute creation on a committed datatype", NULL);
-    AddTest("test_create_attribute_with_null_space", test_create_attribute_with_null_space, NULL, "attribute creation with a NULL dataspace", NULL);
-    AddTest("test_create_attribute_with_scalar_space", test_create_attribute_with_scalar_space, NULL, "attribute creation with a SCALAR dataspace", NULL);
-    AddTest("test_create_attribute_with_space_in_name", test_create_attribute_with_space_in_name, NULL, "attribute creation with a space in attribute's name", NULL);
-    AddTest("test_create_attribute_invalid_params", test_create_attribute_invalid_params, NULL, "attribute creation with invalid parameters", NULL);
-    AddTest("test_open_attribute", test_open_attribute, NULL, "attribute opening", NULL);
-    AddTest("test_open_attribute_invalid_params", test_open_attribute_invalid_params, NULL, "attribute opening with invalid parameters", NULL);
-    AddTest("test_write_attribute", test_write_attribute, NULL, "H5Awrite", NULL);
-    AddTest("test_write_attribute_invalid_params", test_write_attribute_invalid_params, NULL, "H5Awrite with invalid parameters", NULL);
-    AddTest("test_read_attribute", test_read_attribute, NULL, "H5Aread", NULL);
-    AddTest("test_read_attribute_invalid_params", test_read_attribute_invalid_params, NULL, "H5Aread with invalid parameters", NULL);
-    AddTest("test_read_empty_attribute", test_read_empty_attribute, NULL, "reading an empty attribute", NULL);
-    AddTest("test_close_attribute_invalid_id", test_close_attribute_invalid_id, NULL, "H5Aclose with an invalid attribute ID", NULL);
-    AddTest("test_get_attribute_space_and_type", test_get_attribute_space_and_type, NULL, "retrieval of an attribute's dataspace and datatype", NULL);
-    AddTest("test_get_attribute_space_and_type_invalid_params", test_get_attribute_space_and_type_invalid_params, NULL, "H5Aget_type/H5Aget_space with invalid parameters", NULL);
-    AddTest("test_attribute_property_lists", test_attribute_property_lists, NULL, "attribute property list operations", NULL);
-    AddTest("test_get_attribute_name", test_get_attribute_name, NULL, "retrieval of an attribute's name", NULL);
-    AddTest("test_get_attribute_name_invalid_params", test_get_attribute_name_invalid_params, NULL, "retrieval of an attribute's name with invalid parameters", NULL);
-    AddTest("test_get_attribute_storage_size", test_get_attribute_storage_size, NULL, "H5Aget_storage_size", NULL);
-    AddTest("test_get_attribute_info", test_get_attribute_info, NULL, "retrieval of attribute info", NULL);
-    AddTest("test_get_attribute_info_invalid_params", test_get_attribute_info_invalid_params, NULL, "retrieval of attribute info with invalid parameters", NULL);
-    AddTest("test_rename_attribute", test_rename_attribute, NULL, "attribute renaming", NULL);
-    AddTest("test_rename_attribute_invalid_params", test_rename_attribute_invalid_params, NULL, "attribute renaming with invalid parameters", NULL);
-    AddTest("test_attribute_iterate_group", test_attribute_iterate_group, NULL, "attribute iteration on a group", NULL);
-    AddTest("test_attribute_iterate_dataset", test_attribute_iterate_dataset, NULL, "attribute iteration on a dataset", NULL);
-    AddTest("test_attribute_iterate_datatype", test_attribute_iterate_datatype, NULL, "attribute iteration on a committed datatype", NULL);
-    AddTest("test_attribute_iterate_index_saving", test_attribute_iterate_index_saving, NULL, "attribute iteration index saving capability", NULL);
-    AddTest("test_attribute_iterate_invalid_params", test_attribute_iterate_invalid_params, NULL, "attribute iteration with invalid parameters", NULL);
-    AddTest("test_attribute_iterate_0_attributes", test_attribute_iterate_0_attributes, NULL, "attribute iteration on object with 0 attributes", NULL);
-    AddTest("test_delete_attribute", test_delete_attribute, NULL, "attribute deletion", NULL);
-    AddTest("test_delete_attribute_invalid_params", test_delete_attribute_invalid_params, NULL, "attribute deletion with invalid parameters", NULL);
-    AddTest("test_attribute_exists", test_attribute_exists, NULL, "attribute existence", NULL);
-    AddTest("test_attribute_exists_invalid_params", test_attribute_exists_invalid_params, NULL, "attribute existence with invalid parameters", NULL);
-    AddTest("test_attribute_duplicate_id", test_attribute_duplicate_id, NULL, "duplicated IDs for an attribute", NULL);
-    AddTest("test_attribute_many", test_attribute_many, NULL, "creating many attributes", NULL);
-    AddTest("test_get_number_attributes", test_get_number_attributes, NULL, "retrieval of the number of attributes on an object", NULL);
-    AddTest("test_attr_shared_dtype", test_attr_shared_dtype, NULL, "shared datatype for attributes", NULL);
+    /* Add a fake test to print out a header to distinguish different test interfaces */
+    AddTest("print_attribute_test_header", print_attribute_test_header, NULL,
+    "Prints header for attribute tests", NULL, 0);
+
+    AddTest("test_create_attribute_on_root", test_create_attribute_on_root, NULL,
+            "attribute creation on the root group", NULL, testframe_flags);
+    AddTest("test_create_attribute_on_dataset", test_create_attribute_on_dataset, NULL,
+            "attribute creation on a dataset", NULL, testframe_flags);
+    AddTest("test_create_attribute_on_datatype", test_create_attribute_on_datatype, NULL,
+            "attribute creation on a committed datatype", NULL, testframe_flags);
+    AddTest("test_create_attribute_with_null_space", test_create_attribute_with_null_space, NULL,
+            "attribute creation with a NULL dataspace", NULL, testframe_flags);
+    AddTest("test_create_attribute_with_scalar_space", test_create_attribute_with_scalar_space, NULL,
+            "attribute creation with a SCALAR dataspace", NULL, testframe_flags);
+    AddTest("test_create_attribute_with_space_in_name", test_create_attribute_with_space_in_name, NULL,
+            "attribute creation with a space in attribute's name", NULL, testframe_flags);
+    AddTest("test_create_attribute_invalid_params", test_create_attribute_invalid_params, NULL,
+            "attribute creation with invalid parameters", NULL, testframe_flags);
+    AddTest("test_open_attribute",  test_open_attribute,  NULL,  "attribute opening",  NULL, testframe_flags);
+    AddTest("test_open_attribute_invalid_params", test_open_attribute_invalid_params, NULL,
+            "attribute opening with invalid parameters", NULL, testframe_flags);
+    AddTest("test_write_attribute",  test_write_attribute,  NULL,  "H5Awrite",  NULL, testframe_flags);
+    AddTest("test_write_attribute_invalid_params", test_write_attribute_invalid_params, NULL,
+            "H5Awrite with invalid parameters", NULL, testframe_flags);
+    AddTest("test_read_attribute",  test_read_attribute,  NULL,  "H5Aread",  NULL, testframe_flags);
+    AddTest("test_read_attribute_invalid_params", test_read_attribute_invalid_params, NULL,
+            "H5Aread with invalid parameters", NULL, testframe_flags);
+    AddTest("test_read_empty_attribute",  test_read_empty_attribute,  NULL,  "reading an empty attribute",  NULL, testframe_flags);
+    AddTest("test_close_attribute_invalid_id", test_close_attribute_invalid_id, NULL,
+            "H5Aclose with an invalid attribute ID", NULL, testframe_flags);
+    AddTest("test_get_attribute_space_and_type", test_get_attribute_space_and_type, NULL,
+            "retrieval of an attribute's dataspace and datatype", NULL, testframe_flags);
+    AddTest("test_get_attribute_space_and_type_invalid_params",
+            test_get_attribute_space_and_type_invalid_params, NULL,
+            "H5Aget_type/H5Aget_space with invalid parameters", NULL, testframe_flags);
+    AddTest("test_attribute_property_lists", test_attribute_property_lists, NULL,
+            "attribute property list operations", NULL, testframe_flags);
+    AddTest("test_get_attribute_name", test_get_attribute_name, NULL, "retrieval of an attribute's name",
+            NULL, testframe_flags);
+    AddTest("test_get_attribute_name_invalid_params", test_get_attribute_name_invalid_params, NULL,
+            "retrieval of an attribute's name with invalid parameters", NULL, testframe_flags);
+    AddTest("test_get_attribute_storage_size", test_get_attribute_storage_size, NULL, "H5Aget_storage_size",
+            NULL, testframe_flags);
+    AddTest("test_get_attribute_info",  test_get_attribute_info,  NULL,  "retrieval of attribute info",  NULL, testframe_flags);
+    AddTest("test_get_attribute_info_invalid_params", test_get_attribute_info_invalid_params, NULL,
+            "retrieval of attribute info with invalid parameters", NULL, testframe_flags);
+    AddTest("test_rename_attribute",  test_rename_attribute,  NULL,  "attribute renaming",  NULL, testframe_flags);
+    AddTest("test_rename_attribute_invalid_params", test_rename_attribute_invalid_params, NULL,
+            "attribute renaming with invalid parameters", NULL, testframe_flags);
+    AddTest("test_attribute_iterate_group", test_attribute_iterate_group, NULL,
+            "attribute iteration on a group", NULL, testframe_flags);
+    AddTest("test_attribute_iterate_dataset", test_attribute_iterate_dataset, NULL,
+            "attribute iteration on a dataset", NULL, testframe_flags);
+    AddTest("test_attribute_iterate_datatype", test_attribute_iterate_datatype, NULL,
+            "attribute iteration on a committed datatype", NULL, testframe_flags);
+    AddTest("test_attribute_iterate_index_saving", test_attribute_iterate_index_saving, NULL,
+            "attribute iteration index saving capability", NULL, testframe_flags);
+    AddTest("test_attribute_iterate_invalid_params", test_attribute_iterate_invalid_params, NULL,
+            "attribute iteration with invalid parameters", NULL, testframe_flags);
+    AddTest("test_attribute_iterate_0_attributes", test_attribute_iterate_0_attributes, NULL,
+            "attribute iteration on object with 0 attributes", NULL, testframe_flags);
+    AddTest("test_delete_attribute",  test_delete_attribute,  NULL,  "attribute deletion",  NULL, testframe_flags);
+    AddTest("test_delete_attribute_invalid_params", test_delete_attribute_invalid_params, NULL,
+            "attribute deletion with invalid parameters", NULL, testframe_flags);
+    AddTest("test_attribute_exists",  test_attribute_exists,  NULL,  "attribute existence",  NULL, testframe_flags);
+    AddTest("test_attribute_exists_invalid_params", test_attribute_exists_invalid_params, NULL,
+            "attribute existence with invalid parameters", NULL, testframe_flags);
+    AddTest("test_attribute_duplicate_id", test_attribute_duplicate_id, NULL,
+            "duplicated IDs for an attribute", NULL, testframe_flags);
+    AddTest("test_attribute_many",  test_attribute_many,  NULL,  "creating many attributes",  NULL, testframe_flags);
+    AddTest("test_get_number_attributes", test_get_number_attributes, NULL,
+            "retrieval of the number of attributes on an object", NULL, testframe_flags);
+    AddTest("test_attr_shared_dtype",  test_attr_shared_dtype,  NULL,  "shared datatype for attributes",  NULL, testframe_flags);
 }

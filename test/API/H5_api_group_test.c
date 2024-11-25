@@ -62,9 +62,9 @@ test_create_group_under_root(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -116,7 +116,7 @@ test_create_group_under_existing_group(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -194,9 +194,9 @@ test_create_many_groups(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -272,9 +272,9 @@ test_create_deep_groups(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -381,9 +381,9 @@ test_create_intermediate_group(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -530,9 +530,9 @@ test_create_group_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -703,7 +703,7 @@ test_create_anonymous_group(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -765,7 +765,7 @@ test_create_anonymous_group_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -888,7 +888,7 @@ test_open_nonexistent_group(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -945,9 +945,9 @@ test_open_group_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -1118,7 +1118,7 @@ test_group_property_lists(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
         printf("    couldn't open file\n");
         goto error;
@@ -1389,9 +1389,9 @@ test_get_group_info(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -1469,7 +1469,7 @@ test_get_group_info(void)
             if (group_info.max_corder != GROUP_GET_INFO_TEST_GROUP_NUMB) {
                 H5_FAILED();
                 printf("    group's max creation order '%lld' doesn't match expected value '%lld'\n",
-                       (long long)group_info.max_corder, (long long)GROUP_GET_INFO_TEST_GROUP_NUMB);
+                        (long long)group_info.max_corder, (long long)GROUP_GET_INFO_TEST_GROUP_NUMB);
                 PART_ERROR(H5Gget_info);
             }
 
@@ -1817,9 +1817,9 @@ test_get_group_info_invalid_params(void)
 
     TESTING_2("test setup");
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2172,9 +2172,9 @@ test_flush_group(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2280,9 +2280,9 @@ test_refresh_group(void)
         return;
     }
 
-    if ((file_id = H5Fopen(H5_api_test_filename, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
+    if ((file_id = H5Fopen(H5_API_TEST_FILENAME, H5F_ACC_RDWR, H5P_DEFAULT)) < 0) {
         H5_FAILED();
-        printf("    couldn't open file '%s'\n", H5_api_test_filename);
+        printf("    couldn't open file '%s'\n", H5_API_TEST_FILENAME);
         goto error;
     }
 
@@ -2370,25 +2370,41 @@ error:
 void
 H5_api_group_test_add(void)
 {
-    /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_group_test_header", print_group_test_header, NULL, "Prints header for group tests", NULL);
+    int64_t testframe_flags = ALLOW_MULTITHREAD;
 
-    AddTest("test_create_group_under_root", test_create_group_under_root, NULL, "creation of group under the root group", NULL);
-    AddTest("test_create_group_under_existing_group", test_create_group_under_existing_group, NULL, "creation of group under existing group using a relative path", NULL);
-    AddTest("test_create_many_groups", test_create_many_groups, NULL, "H5Gcreate many groups", NULL);
-    AddTest("test_create_deep_groups", test_create_deep_groups, NULL, "H5Gcreate groups of great depths", NULL);
-    AddTest("test_create_intermediate_group", test_create_intermediate_group, NULL, "H5Gcreate group with intermediate group creation", NULL);
-    AddTest("test_create_group_invalid_params", test_create_group_invalid_params, NULL, "H5Gcreate with invalid parameters", NULL);
-    AddTest("test_create_anonymous_group", test_create_anonymous_group, NULL, "creation of anonymous group", NULL);
-    AddTest("test_create_anonymous_group_invalid_params", test_create_anonymous_group_invalid_params, NULL, "H5Gcreate_anon with invalid parameters", NULL);
-    AddTest("test_open_nonexistent_group", test_open_nonexistent_group, NULL, "for invalid opening of a nonexistent group", NULL);
-    AddTest("test_open_group_invalid_params", test_open_group_invalid_params, NULL, "H5Gopen with invalid parameters", NULL);
-    AddTest("test_close_group_invalid_id", test_close_group_invalid_id, NULL, "H5Gclose with an invalid group ID", NULL);
-    AddTest("test_group_property_lists", test_group_property_lists, NULL, "group property list operations", NULL);
-    AddTest("test_get_group_info", test_get_group_info, NULL, "retrieval of group info", NULL);
-    AddTest("test_get_group_info_invalid_params", test_get_group_info_invalid_params, NULL, "retrieval of group info with invalid parameters", NULL);
-    AddTest("test_flush_group", test_flush_group, NULL, "H5Gflush", NULL);
-    AddTest("test_flush_group_invalid_params", test_flush_group_invalid_params, NULL, "H5Gflush with invalid parameters", NULL);
-    AddTest("test_refresh_group", test_refresh_group, NULL, "H5Grefresh", NULL);
-    AddTest("test_refresh_group_invalid_params", test_refresh_group_invalid_params, NULL, "H5Grefresh with invalid parameters", NULL);
+    /* Add a fake test to print out a header to distinguish different test interfaces */
+    AddTest("print_group_test_header",  print_group_test_header,  NULL,  "Prints header for group tests",  NULL, 0);
+
+    AddTest("test_create_group_under_root", test_create_group_under_root, NULL,
+            "creation of group under the root group", NULL, testframe_flags);
+    AddTest("test_create_group_under_existing_group", test_create_group_under_existing_group, NULL,
+            "creation of group under existing group using a relative path", NULL, testframe_flags);
+    AddTest("test_create_many_groups",  test_create_many_groups,  NULL,  "H5Gcreate many groups",  NULL, testframe_flags);
+    AddTest("test_create_deep_groups", test_create_deep_groups, NULL, "H5Gcreate groups of great depths",
+            NULL, testframe_flags);
+    AddTest("test_create_intermediate_group", test_create_intermediate_group, NULL,
+            "H5Gcreate group with intermediate group creation", NULL, testframe_flags);
+    AddTest("test_create_group_invalid_params", test_create_group_invalid_params, NULL,
+            "H5Gcreate with invalid parameters", NULL, testframe_flags);
+    AddTest("test_create_anonymous_group", test_create_anonymous_group, NULL, "creation of anonymous group",
+            NULL, testframe_flags);
+    AddTest("test_create_anonymous_group_invalid_params", test_create_anonymous_group_invalid_params, NULL,
+            "H5Gcreate_anon with invalid parameters", NULL, testframe_flags);
+    AddTest("test_open_nonexistent_group", test_open_nonexistent_group, NULL,
+            "for invalid opening of a nonexistent group", NULL, testframe_flags);
+    AddTest("test_open_group_invalid_params", test_open_group_invalid_params, NULL,
+            "H5Gopen with invalid parameters", NULL, testframe_flags);
+    AddTest("test_close_group_invalid_id", test_close_group_invalid_id, NULL,
+            "H5Gclose with an invalid group ID", NULL, testframe_flags);
+    AddTest("test_group_property_lists", test_group_property_lists, NULL, "group property list operations",
+            NULL, testframe_flags);
+    AddTest("test_get_group_info",  test_get_group_info,  NULL,  "retrieval of group info",  NULL, testframe_flags);
+    AddTest("test_get_group_info_invalid_params", test_get_group_info_invalid_params, NULL,
+            "retrieval of group info with invalid parameters", NULL, testframe_flags);
+    AddTest("test_flush_group",  test_flush_group,  NULL,  "H5Gflush",  NULL, testframe_flags);
+    AddTest("test_flush_group_invalid_params", test_flush_group_invalid_params, NULL,
+            "H5Gflush with invalid parameters", NULL, testframe_flags);
+    AddTest("test_refresh_group",  test_refresh_group,  NULL,  "H5Grefresh",  NULL, testframe_flags);
+    AddTest("test_refresh_group_invalid_params", test_refresh_group_invalid_params, NULL,
+            "H5Grefresh with invalid parameters", NULL, testframe_flags);
 }
