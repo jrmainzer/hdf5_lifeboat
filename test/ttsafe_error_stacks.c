@@ -92,7 +92,7 @@ tts_errstk(void)
     status = H5TS_wait_for_thread(threads[0]);
     CHECK(status, FAIL, "H5TS_wait_for_thread");
 
-    threads[1] = H5TS_create_thread(generate_hdf5_error, NULL, NULL);
+    threads[1] = H5TS_create_thread(generate_user_error, NULL, NULL);
 
     status = H5TS_wait_for_thread_ret(threads[1], (void *)&err_cls_id);
     CHECK(status, FAIL, "H5TS_wait_for_thread");
