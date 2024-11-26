@@ -4280,6 +4280,7 @@ AC_CONFIG_FILES([Makefile
                  test/test_vds_env.sh
                  test/test_vds_swmr.sh
                  test/API/Makefile
+                 test/API/H5_api_test_config.h:test/API/H5_api_test_config_at.h.in
                  testpar/Makefile
                  testpar/testpflush.sh
                  utils/Makefile
