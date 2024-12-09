@@ -53,7 +53,7 @@ void H5_api_dataset_test_add(void);
 #define ZERO_DIM_DSET_TEST_DSET_NAME  "zero_dim_dset"
 
 #define DATASET_MANY_CREATE_GROUP_NAME "group_for_many_datasets"
-#define DSET_NAME_BUF_SIZE             64u
+#define DSET_NAME_BUF_SIZE             64
 #define DATASET_NUMB                   100u
 
 #define DATASET_SHAPE_TEST_DSET_BASE_NAME "dataset_shape_test"

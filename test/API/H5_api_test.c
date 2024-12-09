@@ -50,9 +50,6 @@ static int H5_api_test_create_containers(const char *filename, uint64_t vol_cap_
 static int H5_api_test_create_single_container(const char *filename, uint64_t vol_cap_flags);
 static int H5_api_test_destroy_container_files(void);
 
-/* Margin of runtime for each subtest allocated to cleanup */
-#define API_TEST_MARGIN 1
-
 /* X-macro to define the following for each test:
  * - enum type
  * - name
