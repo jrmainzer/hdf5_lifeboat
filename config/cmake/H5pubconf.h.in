@@ -229,7 +229,7 @@
 #cmakedefine H5_HAVE_MPI_MULTI_LANG_Info @H5_HAVE_MPI_MULTI_LANG_Info@
 
 /* Define if we have multi-thread support */
-#cmakedefine H5_HAVE_MULTITHREAD
+#cmakedefine H5_HAVE_MULTITHREAD @H5_HAVE_MULTITHREAD@
 
 /* Define to 1 if you have the <netdb.h> header file. */
 #cmakedefine H5_HAVE_NETDB_H @H5_HAVE_NETDB_H@
