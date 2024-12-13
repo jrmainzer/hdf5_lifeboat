@@ -32,6 +32,7 @@ void H5_api_link_test_add(void);
 #define HARD_LINK_TEST_GROUP_MANY_NAME           "hard_link_many_name"
 #define HARD_LINK_TEST_GROUP_MANY_FINAL_NAME     "hard_link_final"
 #define HARD_LINK_TEST_GROUP_MANY_NAME_BUF_SIZE  1024
+#define HARD_LINK_TEST_GROUP_MANY_NUM_HARD_LINKS 21
 
 #define H5L_SAME_LOC_TEST_GROUP_NAME "h5l_same_loc_test_group"
 #define H5L_SAME_LOC_TEST_LINK_NAME1 "h5l_same_loc_test_link1"
@@ -82,6 +83,7 @@ void H5_api_link_test_add(void);
 #define EXTERNAL_LINK_TEST_PING_PONG_NAME1         "ext_link_file_ping_pong_1.h5"
 #define EXTERNAL_LINK_TEST_PING_PONG_NAME2         "ext_link_file_ping_pong_2.h5"
 #define EXTERNAL_LINK_TEST_PING_PONG_NAME_BUF_SIZE 1024
+#define EXTERNAL_LINK_TEST_PING_PONG_NUM_LINKS     6
 
 #define EXTERNAL_LINK_INVALID_PARAMS_TEST_GROUP_NAME "external_link_creation_invalid_params_test"
 #define EXTERNAL_LINK_INVALID_PARAMS_TEST_FILE_NAME  "ext_link_invalid_params_file.h5"

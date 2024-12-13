@@ -144,88 +144,88 @@ extern pthread_key_t test_thread_info_key_g;
 #define TESTING(WHAT)                                                                                        \
     do {                                                                                                     \
         if (IS_MAIN_TEST_THREAD) {                                                                           \
-            printf("Testing %-62s", WHAT);                                                                       \
-            fflush(stdout);                                                                                      \
-        }                                                                                                   \
-        INCR_TEST_STAT(n_tests_run_g); \
+            printf("Testing %-62s", WHAT);                                                                   \
+            fflush(stdout);                                                                                  \
+        }                                                                                                    \
+        INCR_TEST_STAT(n_tests_run_g);                                                                       \
     } while (0)
 #define TESTING_2(WHAT)                                                                                      \
     do {                                                                                                     \
         if (IS_MAIN_TEST_THREAD) {                                                                           \
-            printf("  Testing %-60s", WHAT);                                                                     \
-            fflush(stdout);                                                                                      \
-        }                                                                                                   \
-        INCR_TEST_STAT(n_tests_run_g);                                                                                   \
+            printf("  Testing %-60s", WHAT);                                                                 \
+            fflush(stdout);                                                                                  \
+        }                                                                                                    \
+        INCR_TEST_STAT(n_tests_run_g);                                                                       \
     } while (0)
 #define PASSED()                                                                                             \
     do {                                                                                                     \
         if (IS_MAIN_TEST_THREAD) {                                                                           \
-            HDputs(" PASSED");                                                                                   \
-            fflush(stdout);                                                                                      \
-        }                                                                                                  \
-        INCR_TEST_STAT(n_tests_passed_g);                                                                                 \
+            HDputs(" PASSED");                                                                               \
+            fflush(stdout);                                                                                  \
+        }                                                                                                    \
+        INCR_TEST_STAT(n_tests_passed_g);                                                                    \
     } while (0)
 #define H5_FAILED()                                                                                          \
     do {                                                                                                     \
         if (IS_MAIN_TEST_THREAD) {                                                                           \
-            HDputs("*FAILED*");                                                                                  \
-            fflush(stdout);                                                                                      \
-        }                                                                                                  \
-        INCR_TEST_STAT(n_tests_failed_g);                                                                                  \
+            HDputs("*FAILED*");                                                                              \
+            fflush(stdout);                                                                                  \
+        }                                                                                                    \
+        INCR_TEST_STAT(n_tests_failed_g);                                                                    \
     } while (0)
 #define H5_WARNING()                                                                                         \
     do {                                                                                                     \
         if (IS_MAIN_TEST_THREAD) {                                                                           \
-            HDputs("*WARNING*");                                                                                 \
-            fflush(stdout);                                                                                      \
-        }                                                                                                  \
+            HDputs("*WARNING*");                                                                             \
+            fflush(stdout);                                                                                  \
+        }                                                                                                    \
     } while (0)
 #define SKIPPED()                                                                                            \
     do {                                                                                                     \
         if (IS_MAIN_TEST_THREAD) {                                                                           \
-            HDputs(" -SKIP-");                                                                                   \
-            fflush(stdout);                                                                                      \
-        }                                                                                                 \
-        INCR_TEST_STAT(n_tests_skipped_g);                                                                                 \
+            HDputs(" -SKIP-");                                                                               \
+            fflush(stdout);                                                                                  \
+        }                                                                                                    \
+        INCR_TEST_STAT(n_tests_skipped_g);                                                                   \
     } while (0)
 #define PUTS_ERROR(s)                                                                                        \
     do {                                                                                                     \
         if (IS_MAIN_TEST_THREAD) {                                                                           \
-            HDputs(s);                                                                                           \
-            AT();                                                                                                \
-        }                                                                                                \
+            HDputs(s);                                                                                       \
+            AT();                                                                                            \
+        }                                                                                                    \
         goto error;                                                                                          \
     } while (0)
 #define TEST_ERROR                                                                                           \
     do {                                                                                                     \
         if (IS_MAIN_TEST_THREAD) {                                                                           \
-            H5_FAILED();                                                                                         \
-            AT();                                                                                                \
-        }                                                                                                \
+            H5_FAILED();                                                                                     \
+            AT();                                                                                            \
+        }                                                                                                    \
         goto error;                                                                                          \
     } while (0)
 #define STACK_ERROR                                                                                          \
-    do {                                                                                                    \
-        if (IS_MAIN_TEST_THREAD)                                                                           \
-            H5Eprint2(H5E_DEFAULT, stdout);                                                                      \
+    do {                                                                                                     \
+        if (IS_MAIN_TEST_THREAD)                                                                             \
+            H5Eprint2(H5E_DEFAULT, stdout);                                                                  \
         goto error;                                                                                          \
     } while (0)
 #define FAIL_STACK_ERROR                                                                                     \
     do {                                                                                                     \
         if (IS_MAIN_TEST_THREAD) {                                                                           \
-            H5_FAILED();                                                                                         \
-            AT();                                                                                                \
-            H5Eprint2(H5E_DEFAULT, stdout);                                                                      \
-        }                                                                                                \
+            H5_FAILED();                                                                                     \
+            AT();                                                                                            \
+            H5Eprint2(H5E_DEFAULT, stdout);                                                                  \
+        }                                                                                                    \
         goto error;                                                                                          \
     } while (0)
 #define FAIL_PUTS_ERROR(s)                                                                                   \
     do {                                                                                                     \
         if (IS_MAIN_TEST_THREAD) {                                                                           \
-            H5_FAILED();                                                                                         \
-            AT();                                                                                                \
-            HDputs(s);                                                                                           \
-        }                                                                                                \
+            H5_FAILED();                                                                                     \
+            AT();                                                                                            \
+            HDputs(s);                                                                                       \
+        }                                                                                                    \
         goto error;                                                                                          \
     } while (0)
 /*
@@ -234,10 +234,10 @@ extern pthread_key_t test_thread_info_key_g;
 #define TESTING_MULTIPART(WHAT)                                                                              \
     do {                                                                                                     \
         if (IS_MAIN_TEST_THREAD) {                                                                           \
-            printf("Testing %-62s", WHAT);                                                                       \
-            HDputs("");                                                                                          \
-            fflush(stdout);                                                                                      \
-        }                                                                                                 \
+            printf("Testing %-62s", WHAT);                                                                   \
+            HDputs("");                                                                                      \
+            fflush(stdout);                                                                                  \
+        }                                                                                                    \
     } while (0)
 
 /*
@@ -268,16 +268,16 @@ extern pthread_key_t test_thread_info_key_g;
     part_##part_name##_end:
 #define PART_ERROR(part_name)                                                                                \
     do {                                                                                                     \
-        INCR_TEST_STAT(n_tests_failed_g);                                                                                  \
+        INCR_TEST_STAT(n_tests_failed_g);                                                                    \
         part_nerrors++;                                                                                      \
         goto part_##part_name##_end;                                                                         \
     } while (0)
 #define PART_TEST_ERROR(part_name)                                                                           \
     do {                                                                                                     \
         if (IS_MAIN_TEST_THREAD) {                                                                           \
-            H5_FAILED();                                                                                         \
-            AT();                                                                                                \
-        }                                                                                               \
+            H5_FAILED();                                                                                     \
+            AT();                                                                                            \
+        }                                                                                                    \
         part_nerrors++;                                                                                      \
         goto part_##part_name##_end;                                                                         \
     } while (0)
