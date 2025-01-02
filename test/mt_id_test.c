@@ -6299,21 +6299,22 @@ void serial_test_1(void)
                   atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
                   atomic_load(&(H5I_mt_g.type_info_fl_len)) + 1) );
 
-    /* Verify that the increments to the id info and type info reallocatable counts balance.
-     * Note that it is possible that this test will fail if increments to the free list entries
-     * reallocable fields collide just so.  This seems very improbable, but if it happens with 
-     * any regularity, the test will have to be modified to account for this.
+
+    /* Verify that the increments to all the stats for the serial numbers balance correctly.
      */
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_heap)) +
-                  atomic_load(&(H5I_mt_g.num_id_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl))));
 
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_heap)) +
-                  atomic_load(&(H5I_mt_g.num_type_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_freed))));
 
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_freed))));
 
     if ( H5close() < 0 ) {
 
@@ -6380,8 +6381,6 @@ void serial_test_2(int types_start, int types_count, int ids_start, int ids_coun
     int tid = 0;
     uint64_t init_id_info_fl_len;
     uint64_t init_type_info_fl_len;
-    uint64_t init_num_id_info_fl_entries_reallocable;
-    uint64_t init_num_type_info_fl_entries_reallocable;;
 
     TESTING("MT ID serial test #2");
     fflush(stdout);
@@ -6400,9 +6399,6 @@ void serial_test_2(int types_start, int types_count, int ids_start, int ids_coun
 
     init_id_info_fl_len   = atomic_load(&(H5I_mt_g.id_info_fl_len));
     init_type_info_fl_len = atomic_load(&(H5I_mt_g.type_info_fl_len));
-
-    init_num_id_info_fl_entries_reallocable   = atomic_load(&(H5I_mt_g.num_id_info_fl_entries_reallocable));
-    init_num_type_info_fl_entries_reallocable = atomic_load(&(H5I_mt_g.num_type_info_fl_entries_reallocable));
 
     for ( i = types_start; i < types_start + types_count; i++ ) {
 
@@ -6504,10 +6500,6 @@ void serial_test_2(int types_start, int types_count, int ids_start, int ids_coun
 
         fprintf(stderr, "init_id_info_fl_len = %lld, init_type_info_fl_len = %lld\n",
                 (unsigned long long)init_id_info_fl_len, (unsigned long long)init_type_info_fl_len);
-        fprintf(stderr, 
-                "init_num_id_info_fl_entries_reallocable = %lld, init_num_type_info_fl_entries_reallocable = %lld\n",
-                (unsigned long long)init_num_id_info_fl_entries_reallocable,
-                (unsigned long long)init_num_type_info_fl_entries_reallocable);
     }
 
     /* Sanity checks on the id info and type info free lists. */
@@ -6526,26 +6518,22 @@ void serial_test_2(int types_start, int types_count, int ids_start, int ids_coun
                   atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
                   atomic_load(&(H5I_mt_g.type_info_fl_len)) + init_type_info_fl_len) );
 
-    /* Verify that the increments to the id info and type info reallocatable counts balance.
-     *
-     * As above, we must include the initial free list lengths since the allocations and 
-     * deallocations balence in this test.
-     *
-     * Note that it is possible that this test will fail if increments to the free list entries
-     * reallocable fields collide just so.  This seems very improbable, but if it happens with 
-     * any regularity, the test will have to be modified to account for this.
+    /* Verify that the increments to all the stats for the serial numbers balance correctly.
      */
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_heap)) -
-                  init_id_info_fl_len + init_num_id_info_fl_entries_reallocable +
-                  atomic_load(&(H5I_mt_g.num_id_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl))));
 
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_heap)) -
-                  init_type_info_fl_len + init_num_type_info_fl_entries_reallocable +
-                  atomic_load(&(H5I_mt_g.num_type_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_freed))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_freed))));
+
 
     if ( H5close() < 0 ) {
 
@@ -6615,8 +6603,6 @@ void serial_test_3(void)
     int tid = 0;
     uint64_t init_id_info_fl_len;
     uint64_t init_type_info_fl_len;
-    uint64_t init_num_id_info_fl_entries_reallocable;
-    uint64_t init_num_type_info_fl_entries_reallocable;;
 
     TESTING("MT ID serial test #3");
     fflush(stdout);
@@ -6635,9 +6621,6 @@ void serial_test_3(void)
 
     init_id_info_fl_len   = atomic_load(&(H5I_mt_g.id_info_fl_len));
     init_type_info_fl_len = atomic_load(&(H5I_mt_g.type_info_fl_len));
-
-    init_num_id_info_fl_entries_reallocable   = atomic_load(&(H5I_mt_g.num_id_info_fl_entries_reallocable));
-    init_num_type_info_fl_entries_reallocable = atomic_load(&(H5I_mt_g.num_type_info_fl_entries_reallocable));
 
     err_cnt += create_types(0, 3, 3, cs, ds, rpt_failures, tid);
 
@@ -6711,10 +6694,6 @@ void serial_test_3(void)
 
         fprintf(stderr, "init_id_info_fl_len = %lld, init_type_info_fl_len = %lld\n",
                 (unsigned long long)init_id_info_fl_len, (unsigned long long)init_type_info_fl_len);
-        fprintf(stderr, 
-                "init_num_id_info_fl_entries_reallocable = %lld, init_num_type_info_fl_entries_reallocable = %lld\n",
-                (unsigned long long)init_num_id_info_fl_entries_reallocable,
-                (unsigned long long)init_num_type_info_fl_entries_reallocable);
     }
 
     /* Sanity checks on the id info and type info free lists. */
@@ -6733,26 +6712,22 @@ void serial_test_3(void)
                   atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
                   atomic_load(&(H5I_mt_g.type_info_fl_len)) + init_type_info_fl_len) );
 
-    /* Verify that the increments to the id info and type info reallocatable counts balance.
-     *
-     * As above, we must include the initial free list lengths since the allocations and 
-     * deallocations balence in this test.
-     *
-     * Note that it is possible that this test will fail if increments to the free list entries
-     * reallocable fields collide just so.  This seems very improbable, but if it happens with 
-     * any regularity, the test will have to be modified to account for this.
+    /* Verify that the increments to all the stats for the serial numbers balance correctly.
      */
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_heap)) -
-                  init_id_info_fl_len + init_num_id_info_fl_entries_reallocable +
-                  atomic_load(&(H5I_mt_g.num_id_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl))));
 
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_heap)) -
-                  init_type_info_fl_len + init_num_type_info_fl_entries_reallocable +
-                  atomic_load(&(H5I_mt_g.num_type_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_freed))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_freed))));
+
 
     if ( H5close() < 0 ) {
 
@@ -6865,8 +6840,6 @@ void serial_test_4(void)
     int tid = 0;
     uint64_t init_id_info_fl_len;
     uint64_t init_type_info_fl_len;
-    uint64_t init_num_id_info_fl_entries_reallocable;
-    uint64_t init_num_type_info_fl_entries_reallocable;;
 
     TESTING("MT ID serial test #4");
     fflush(stdout);
@@ -6885,9 +6858,6 @@ void serial_test_4(void)
 
     init_id_info_fl_len   = atomic_load(&(H5I_mt_g.id_info_fl_len));
     init_type_info_fl_len = atomic_load(&(H5I_mt_g.type_info_fl_len));
-
-    init_num_id_info_fl_entries_reallocable   = atomic_load(&(H5I_mt_g.num_id_info_fl_entries_reallocable));
-    init_num_type_info_fl_entries_reallocable = atomic_load(&(H5I_mt_g.num_type_info_fl_entries_reallocable));
 
     err_cnt += register_type(&(types_array[0]), cs, ds, rpt_failures, tid);
 
@@ -7313,10 +7283,6 @@ void serial_test_4(void)
 
         fprintf(stderr, "init_id_info_fl_len = %lld, init_type_info_fl_len = %lld\n",
                 (unsigned long long)init_id_info_fl_len, (unsigned long long)init_type_info_fl_len);
-        fprintf(stderr, 
-                "init_num_id_info_fl_entries_reallocable = %lld, init_num_type_info_fl_entries_reallocable = %lld\n",
-                (unsigned long long)init_num_id_info_fl_entries_reallocable,
-                (unsigned long long)init_num_type_info_fl_entries_reallocable);
     }
 
     /* Sanity checks on the id info and type info free lists. */
@@ -7335,26 +7301,23 @@ void serial_test_4(void)
                   atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
                   atomic_load(&(H5I_mt_g.type_info_fl_len)) + init_type_info_fl_len) );
 
-    /* Verify that the increments to the id info and type info reallocatable counts balance.
-     *
-     * As above, we must include the initial free list lengths since the allocations and 
-     * deallocations balence in this test.
-     *
-     * Note that it is possible that this test will fail if increments to the free list entries
-     * reallocable fields collide just so.  This seems very improbable, but if it happens with 
-     * any regularity, the test will have to be modified to account for this.
-     */
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_heap)) -
-                  init_id_info_fl_len + init_num_id_info_fl_entries_reallocable +
-                  atomic_load(&(H5I_mt_g.num_id_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
 
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_heap)) -
-                  init_type_info_fl_len + init_num_type_info_fl_entries_reallocable +
-                  atomic_load(&(H5I_mt_g.num_type_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
+    /* Verify that the increments to all the stats for the serial numbers balance correctly.
+     */
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_freed))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_freed))));
+
 
     if ( H5close() < 0 ) {
 
@@ -7975,20 +7938,22 @@ void mt_test_fcn_1_serial_test(void)
                   atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
                   atomic_load(&(H5I_mt_g.type_info_fl_len)) + 1) );
 
-    /* Verify that the increments to the id info and type info reallocatable counts balance.
-     * Note that it is possible that this test will fail if increments to the free list entries
-     * reallocable fields collide just so.  This seems very improbable, but if it happens with 
-     * any regularity, the test will have to be modified to account for this.
+    /* Verify that the increments to all the stats for the serial numbers balance correctly.
      */
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_heap)) +
-                  atomic_load(&(H5I_mt_g.num_id_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl))));
 
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_heap)) +
-                  atomic_load(&(H5I_mt_g.num_type_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_freed))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_freed))));
+
 
     if ( H5close() < 0 ) {
 
@@ -8159,20 +8124,23 @@ void mt_test_1(int num_threads)
                   atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
                   atomic_load(&(H5I_mt_g.type_info_fl_len)) + 1) );
 
-    /* Verify that the increments to the id info and type info reallocatable counts balance.
-     * Note that it is possible that this test will fail if increments to the free list entries
-     * reallocable fields collide just so.  This seems very improbable, but if it happens with 
-     * any regularity, the test will have to be modified to account for this.
-     */
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_heap)) +
-                  atomic_load(&(H5I_mt_g.num_id_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
 
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_heap)) +
-                  atomic_load(&(H5I_mt_g.num_type_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
+    /* Verify that the increments to all the stats for the serial numbers balance correctly.
+     */
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_freed))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_freed))));
+
 
     if ( H5close() < 0 ) {
 
@@ -8430,20 +8398,22 @@ void mt_test_2(int num_threads)
                   atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
                   atomic_load(&(H5I_mt_g.type_info_fl_len)) + 1) );
 
-    /* Verify that the increments to the id info and type info reallocatable counts balance.
-     * Note that it is possible that this test will fail if increments to the free list entries
-     * reallocable fields collide just so.  This seems very improbable, but if it happens with 
-     * any regularity, the test will have to be modified to account for this.
-     */
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_heap)) +
-                  atomic_load(&(H5I_mt_g.num_id_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
 
-    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_info_fl_num_reallocable_total)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl)) -
-                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_heap)) +
-                  atomic_load(&(H5I_mt_g.num_type_info_fl_alloc_req_denied_due_to_no_reallocable_entries))) );
+    /* Verify that the increments to all the stats for the serial numbers balance correctly.
+     */
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_added_to_fl))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_id_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_id_info_structs_freed))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_next_sn_assigned)) - 
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_added_to_fl))));
+
+    assert( 0 == (atomic_load(&(H5I_mt_g.num_type_serial_num_resets)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_alloced_from_fl)) -
+                  atomic_load(&(H5I_mt_g.num_type_info_structs_freed))));
 
     if ( H5close() < 0 ) {
 
