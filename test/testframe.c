@@ -21,22 +21,22 @@
  * Definitions for the testing structure.
  */
 typedef struct TestStruct {
-    char           Name[MAXTESTNAME];
-    char           Description[MAXTESTDESC];
-    void          (*TestFunc)(void *);
-    void          (*TestSetupFunc)(void *);
-    void          (*TestCleanupFunc)(void *);
-    void          *TestParameters;
+    char Name[MAXTESTNAME];
+    char Description[MAXTESTDESC];
+    void (*TestFunc)(void *);
+    void (*TestSetupFunc)(void *);
+    void (*TestCleanupFunc)(void *);
+    void *TestParameters;
     H5_ATOMIC(int) TestNumErrors;
-    int            TestSkipFlag;
-    int64_t        TestFrameworkFlags;
+    int     TestSkipFlag;
+    int64_t TestFrameworkFlags;
 } TestStruct;
 
 typedef struct TestThreadArgs {
-    int        ThreadIndex;
-    TestStruct *Test;
-    size_t num_tests;
-    const char **test_descriptions;
+    int             ThreadIndex;
+    TestStruct     *Test;
+    size_t          num_tests;
+    const char    **test_descriptions;
     test_outcome_t *test_outcomes;
 } TestThreadArgs;
 
@@ -55,8 +55,8 @@ static herr_t (*TestCleanupFunc_g)(void)                     = NULL;
 
 const char *test_path_prefix = NULL;
 
-static H5_ATOMIC(int) TestNumErrs_g        = 0;    /* Total number of errors that occurred for whole test program */
-static bool           TestEnableErrorStack = true; /* Whether to show error stacks from the library */
+static H5_ATOMIC(int) TestNumErrs_g = 0;    /* Total number of errors that occurred for whole test program */
+static bool TestEnableErrorStack    = true; /* Whether to show error stacks from the library */
 
 static int TestMaxNumThreads_g = -1; /* Max number of threads that can be spawned */
 
@@ -73,7 +73,7 @@ static void *ThreadTestWrapper(void *test);
 static int   H5_mt_test_thread_setup(int thread_idx);
 static int   H5_mt_test_global_setup(void);
 static void  H5_test_thread_info_key_destructor(void *value);
-static void UpdateTestStats(TestThreadArgs *test_args);
+static void  UpdateTestStats(TestThreadArgs *test_args);
 #endif
 
 /*
@@ -454,14 +454,14 @@ PerformTests(void)
 
     for (unsigned Loop = 0; Loop < TestCount; Loop++) {
         bool is_test_mt = (TestArray[Loop].TestFrameworkFlags & ALLOW_MULTITHREAD) && TEST_EXECUTION_THREADED;
-        
+
         if (TestArray[Loop].TestSkipFlag) {
             MESSAGE(2, ("Skipping -- %s (%s) \n", TestArray[Loop].Description, TestArray[Loop].Name));
             continue;
         }
 
         MESSAGE(2, ("Testing %s -- %s (%s) \n", (is_test_mt ? "(Multi-threaded)" : ""),
-            TestArray[Loop].Description, TestArray[Loop].Name));
+                    TestArray[Loop].Description, TestArray[Loop].Name));
         MESSAGE(5, ("===============================================\n"));
 
         test_num_errs = H5_ATOMIC_LOAD(TestArray[Loop].TestNumErrors);
@@ -495,7 +495,8 @@ PerformTests(void)
             TestAlarmOff();
             H5_ATOMIC_STORE(TestArray[Loop].TestNumErrors, TestNumErrs_g - test_num_errs);
             MESSAGE(5, ("===============================================\n"));
-            MESSAGE(5, ("There were %d errors detected.\n\n", (int)H5_ATOMIC_LOAD(TestArray[Loop].TestNumErrors)));
+            MESSAGE(5, ("There were %d errors detected.\n\n",
+                        (int)H5_ATOMIC_LOAD(TestArray[Loop].TestNumErrors)));
         }
     }
 
@@ -511,46 +512,48 @@ PerformTests(void)
 #ifdef H5_HAVE_MULTITHREAD
 
 static void
-PerformThreadedTest(TestStruct threaded_test) {
-    pthread_t *threads;
+PerformThreadedTest(TestStruct threaded_test)
+{
+    pthread_t      *threads;
     TestThreadArgs *thread_args;
-    int ret = 0;
- 
+    int             ret = 0;
+
     if (H5_mt_test_global_setup() < 0) {
         fprintf(stderr, "Error setting up global MT test info\n");
         exit(EXIT_FAILURE);
     }
 
-    if ((threads = (pthread_t *)calloc((size_t) GetTestMaxNumThreads(), sizeof(pthread_t))) == NULL) {
+    if ((threads = (pthread_t *)calloc((size_t)GetTestMaxNumThreads(), sizeof(pthread_t))) == NULL) {
         fprintf(stderr, "Error allocating memory for threads\n");
         exit(EXIT_FAILURE);
     }
 
-    if ((thread_args = (TestThreadArgs *)calloc((size_t) GetTestMaxNumThreads(), sizeof(TestThreadArgs))) == NULL) {
+    if ((thread_args = (TestThreadArgs *)calloc((size_t)GetTestMaxNumThreads(), sizeof(TestThreadArgs))) ==
+        NULL) {
         fprintf(stderr, "Error allocating memory for thread arguments\n");
         exit(EXIT_FAILURE);
     }
 
     for (int i = 0; i < GetTestMaxNumThreads(); i++) {
         thread_args[i].ThreadIndex = i;
-        thread_args[i].Test = &threaded_test;
-        thread_args[i].num_tests = 0;
+        thread_args[i].Test        = &threaded_test;
+        thread_args[i].num_tests   = 0;
 
         if ((thread_args[i].test_outcomes = calloc(H5_MAX_NUM_SUBTESTS, sizeof(test_outcome_t))) == NULL) {
             fprintf(stderr, "Error allocating memory for thread outcomes\n");
             exit(EXIT_FAILURE);
         }
 
-        memset(thread_args[i].test_outcomes, (int) TEST_UNINIT, H5_MAX_NUM_SUBTESTS * sizeof(test_outcome_t));
+        memset(thread_args[i].test_outcomes, (int)TEST_UNINIT, H5_MAX_NUM_SUBTESTS * sizeof(test_outcome_t));
 
-        if ((thread_args[i].test_descriptions = calloc(H5_MAX_NUM_SUBTESTS, sizeof(char*))) == NULL) {
+        if ((thread_args[i].test_descriptions = calloc(H5_MAX_NUM_SUBTESTS, sizeof(char *))) == NULL) {
             fprintf(stderr, "Error allocating memory for thread test descriptions\n");
             exit(EXIT_FAILURE);
         }
 
-        memset(thread_args[i].test_descriptions, 0, H5_MAX_NUM_SUBTESTS * sizeof(char*));
-        
-        ret = pthread_create(&threads[i], NULL, ThreadTestWrapper, (void*) &thread_args[i]);
+        memset(thread_args[i].test_descriptions, 0, H5_MAX_NUM_SUBTESTS * sizeof(char *));
+
+        ret = pthread_create(&threads[i], NULL, ThreadTestWrapper, (void *)&thread_args[i]);
 
         if (ret != 0) {
             fprintf(stderr, "Error creating thread %d\n", i);
@@ -566,31 +569,32 @@ PerformThreadedTest(TestStruct threaded_test) {
             exit(EXIT_FAILURE);
         }
     }
-    
+
     UpdateTestStats(thread_args);
-    
+
     /* Clean up */
     for (int i = 0; i < GetTestMaxNumThreads(); i++) {
         free(thread_args[i].test_outcomes);
         thread_args[i].test_outcomes = NULL;
-    
-        free(thread_args[i].test_descriptions);    
+
+        free(thread_args[i].test_descriptions);
         thread_args[i].test_descriptions = NULL;
     }
 
     free(threads);
     free(thread_args);
-    
-    threads = NULL;
+
+    threads     = NULL;
     thread_args = NULL;
 
     return;
 }
 
 static void
-UpdateTestStats(TestThreadArgs *thread_args) {
+UpdateTestStats(TestThreadArgs *thread_args)
+{
     test_outcome_t final_results[H5_MAX_NUM_SUBTESTS];
-    memset(final_results, (int) TEST_UNINIT, H5_MAX_NUM_SUBTESTS * sizeof(test_outcome_t));
+    memset(final_results, (int)TEST_UNINIT, H5_MAX_NUM_SUBTESTS * sizeof(test_outcome_t));
 
     /* If test does not publish its results information to a threadlocal variable,
      * do not track statistics */
@@ -601,7 +605,8 @@ UpdateTestStats(TestThreadArgs *thread_args) {
     /* Verify that each thread reported the same number of subtests */
     for (int i = 0; i < GetTestMaxNumThreads(); i++) {
         if (thread_args[i].num_tests != thread_args[0].num_tests) {
-            fprintf(stderr, "Thread %d reported %ld subtests, but thread 0 reported %ld\n", i, thread_args[i].num_tests, thread_args[0].num_tests);
+            fprintf(stderr, "Thread %d reported %ld subtests, but thread 0 reported %ld\n", i,
+                    thread_args[i].num_tests, thread_args[0].num_tests);
             exit(EXIT_FAILURE);
         }
     }
@@ -611,7 +616,9 @@ UpdateTestStats(TestThreadArgs *thread_args) {
 
     for (size_t j = 0; j < thread_args[0].num_tests; j++) {
         for (int i = 0; i < GetTestMaxNumThreads(); i++)
-            final_results[j] = ((final_results[j] > thread_args[i].test_outcomes[j]) ? final_results[j] : thread_args[i].test_outcomes[j]);
+            final_results[j] =
+                ((final_results[j] > thread_args[i].test_outcomes[j]) ? final_results[j]
+                                                                      : thread_args[i].test_outcomes[j]);
 
         /* Display subtest description, if result is from subtest */
         if (thread_args[0].test_descriptions[j] != NULL)
@@ -625,8 +632,9 @@ UpdateTestStats(TestThreadArgs *thread_args) {
             case TEST_FAIL:
                 H5_FAILED_DISPLAY();
                 H5_ATOMIC_ADD(n_tests_failed_g, 1);
-                /* TBD - Neither multi-threaded nor single-threaded API tests increment the testframe error count.
-                * This would deal with the multi-threaded case, but the single-threaded case is trickier. */
+                /* TBD - Neither multi-threaded nor single-threaded API tests increment the testframe error
+                 * count. This would deal with the multi-threaded case, but the single-threaded case is
+                 * trickier. */
                 /* H5_ATOMIC_ADD(num_errs_g, 1); */
                 break;
             case TEST_SKIP:
@@ -655,9 +663,9 @@ UpdateTestStats(TestThreadArgs *thread_args) {
 static void *
 ThreadTestWrapper(void *test)
 {
-    TestStruct *test_struct;
-    int         thread_idx;
-    thread_info_t *tinfo = NULL;    
+    TestStruct    *test_struct;
+    int            thread_idx;
+    thread_info_t *tinfo = NULL;
     assert(test);
 
     TestThreadArgs *test_args = (TestThreadArgs *)test;
@@ -667,16 +675,16 @@ ThreadTestWrapper(void *test)
 
     if (H5_mt_test_thread_setup(thread_idx) < 0) {
         fprintf(stderr, "Error setting up thread-local test info");
-        return (void*)-1;
+        return (void *)-1;
     }
 
     /* This setup/cleanup pattern requires that each
      * thread that delegates threading to the test framework
      * must not have any form of "shared" setup or cleanup.
-     * 
+     *
      * This is usually accomplished by having thread-specific filenames.
-     * 
-     * If a test requires shared setup/cleanup, then the test must 
+     *
+     * If a test requires shared setup/cleanup, then the test must
      * handle its own threading internally
      */
     if (test_struct->TestSetupFunc)
@@ -688,14 +696,15 @@ ThreadTestWrapper(void *test)
         test_struct->TestCleanupFunc(test_struct->TestParameters);
 
     if ((tinfo = pthread_getspecific(test_thread_info_key_g)) == NULL) {
-        memset(test_args->test_outcomes, (int) TEST_INVALID, H5_MAX_NUM_SUBTESTS * sizeof(test_outcome_t));
-        memset(test_args->test_descriptions, 0, H5_MAX_NUM_SUBTESTS * sizeof(char*));
+        memset(test_args->test_outcomes, (int)TEST_INVALID, H5_MAX_NUM_SUBTESTS * sizeof(test_outcome_t));
+        memset(test_args->test_descriptions, 0, H5_MAX_NUM_SUBTESTS * sizeof(char *));
         test_args->num_tests = 0;
-    } else {
+    }
+    else {
         memcpy(test_args->test_outcomes, tinfo->test_outcomes, H5_MAX_NUM_SUBTESTS * sizeof(test_outcome_t));
-        memcpy(test_args->test_descriptions, tinfo->test_descriptions, H5_MAX_NUM_SUBTESTS * sizeof(char*));
+        memcpy(test_args->test_descriptions, tinfo->test_descriptions, H5_MAX_NUM_SUBTESTS * sizeof(char *));
         test_args->num_tests = tinfo->num_tests;
-    }    
+    }
 
     return NULL;
 }
@@ -703,7 +712,8 @@ ThreadTestWrapper(void *test)
 /* Set up any thread-local variables for individual API tests.
  * Must be run from each individual thread in multi-thread scenarios. */
 static int
-H5_mt_test_thread_setup(int thread_idx) {
+H5_mt_test_thread_setup(int thread_idx)
+{
     thread_info_t *tinfo = NULL;
 
     if (NULL == (tinfo = (thread_info_t *)calloc(1, sizeof(thread_info_t)))) {
@@ -712,26 +722,28 @@ H5_mt_test_thread_setup(int thread_idx) {
     }
 
     tinfo->thread_idx = thread_idx;
-    tinfo->num_tests = 0;
+    tinfo->num_tests  = 0;
 
-    /* TBD: This is currently only useful for API tests. Modification of existing testframe tests would be necessary
-     * for them to use thread-local filenames to avoid conflicts during multi-threaded execution */
-    if (NULL == (tinfo->test_thread_filename = generate_threadlocal_filename(test_path_prefix, thread_idx, TEST_FILE_NAME))) {
+    /* TBD: This is currently only useful for API tests. Modification of existing testframe tests would be
+     * necessary for them to use thread-local filenames to avoid conflicts during multi-threaded execution */
+    if (NULL == (tinfo->test_thread_filename =
+                     generate_threadlocal_filename(test_path_prefix, thread_idx, TEST_FILE_NAME))) {
         TestErrPrintf("    couldn't allocate memory for test file name\n");
         goto error;
     }
 
-    if ((tinfo->test_outcomes = (test_outcome_t *)calloc(H5_MAX_NUM_SUBTESTS, sizeof(test_outcome_t))) == NULL) {
+    if ((tinfo->test_outcomes = (test_outcome_t *)calloc(H5_MAX_NUM_SUBTESTS, sizeof(test_outcome_t))) ==
+        NULL) {
         TestErrPrintf("    couldn't allocate memory for test outcomes\n");
         goto error;
     }
 
-    if ((tinfo->test_descriptions = (const char **)calloc(H5_MAX_NUM_SUBTESTS, sizeof(char*))) == NULL) {
+    if ((tinfo->test_descriptions = (const char **)calloc(H5_MAX_NUM_SUBTESTS, sizeof(char *))) == NULL) {
         TestErrPrintf("    couldn't allocate memory for test descriptions\n");
         goto error;
     }
 
-    if (pthread_setspecific(test_thread_info_key_g, (void *) tinfo) != 0) {
+    if (pthread_setspecific(test_thread_info_key_g, (void *)tinfo) != 0) {
         TestErrPrintf("    couldn't set thread-specific data\n");
         goto error;
     }
@@ -748,7 +760,8 @@ error:
 
 /* Destructor for the API-test managed threadlocal value */
 static void
-H5_test_thread_info_key_destructor(void *value) {
+H5_test_thread_info_key_destructor(void *value)
+{
     thread_info_t *tinfo = (thread_info_t *)value;
 
     if (tinfo) {
@@ -756,7 +769,7 @@ H5_test_thread_info_key_destructor(void *value) {
         free(tinfo->test_outcomes);
         free(tinfo->test_descriptions);
     }
-    
+
     free(tinfo);
 
     return;
@@ -764,8 +777,9 @@ H5_test_thread_info_key_destructor(void *value) {
 
 #else /* H5_HAVE_MULTITHREAD */
 static void
-PerformThreadedTest(TestStruct threaded_test) {
-    (void) threaded_test;
+PerformThreadedTest(TestStruct threaded_test)
+{
+    (void)threaded_test;
     MESSAGE(2, ("HDF5 was not built with multi-threaded support; Skipping test\n"));
     return;
 }
@@ -1142,7 +1156,9 @@ TestAlarmOff(void)
 
 #ifdef H5_HAVE_MULTITHREAD
 /* Set up global variables used for API tests */
-int H5_mt_test_global_setup(void) {
+int
+H5_mt_test_global_setup(void)
+{
 
     /* Set up pthread key if it doesn't exist */
     if (pthread_getspecific(test_thread_info_key_g) == NULL)

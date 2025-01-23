@@ -648,8 +648,8 @@ test_create_hard_link_invalid_params(void H5_ATTR_UNUSED *params)
     htri_t link_exists;
     hid_t  file_id         = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
-    char   *ext_link_filename = NULL;
-    hid_t  ext_file_id                                        = H5I_INVALID_HID;
+    char  *ext_link_filename = NULL;
+    hid_t  ext_file_id       = H5I_INVALID_HID;
 
     TESTING_MULTIPART("hard link creation with invalid parameters");
 
@@ -1967,8 +1967,8 @@ test_create_external_link(void H5_ATTR_UNUSED *params)
     htri_t link_exists;
     hid_t  file_id         = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
-    hid_t  root_id = H5I_INVALID_HID;
-    char   *ext_link_filename = NULL;
+    hid_t  root_id           = H5I_INVALID_HID;
+    char  *ext_link_filename = NULL;
 
     TESTING("external link creation to existing object");
 
@@ -2084,8 +2084,8 @@ test_create_external_link_dangling(void H5_ATTR_UNUSED *params)
     htri_t link_exists;
     hid_t  file_id = H5I_INVALID_HID, ext_file_id = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
-    hid_t  object_id = H5I_INVALID_HID;
-    char   *ext_link_filename = NULL;
+    hid_t  object_id         = H5I_INVALID_HID;
+    char  *ext_link_filename = NULL;
 
     TESTING("dangling external link creation");
 
@@ -2224,10 +2224,10 @@ test_create_external_link_multi(void H5_ATTR_UNUSED *params)
     hid_t file_id         = H5I_INVALID_HID;
     hid_t container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
     hid_t group_id2 = H5I_INVALID_HID, group_id3 = H5I_INVALID_HID;
-    hid_t root_id = H5I_INVALID_HID;
-    char  *ext_link_filename1 = NULL;
-    char  *ext_link_filename2 = NULL;
-    char  *ext_link_filename3 = NULL;
+    hid_t root_id            = H5I_INVALID_HID;
+    char *ext_link_filename1 = NULL;
+    char *ext_link_filename2 = NULL;
+    char *ext_link_filename3 = NULL;
     char  objname[EXTERNAL_LINK_TEST_MULTI_NAME_BUF_SIZE];
 
     TESTING_MULTIPART("external link creation to an object across several files");
@@ -2853,8 +2853,7 @@ test_create_external_link_ping_pong(void H5_ATTR_UNUSED *params)
             for (size_t i = 1; i < EXTERNAL_LINK_TEST_PING_PONG_NUM_LINKS + 1 && !valid_name_matched; i++) {
                 char name_possibility[H5_TEST_FILENAME_MAX_LENGTH];
 
-                snprintf(name_possibility, H5_TEST_FILENAME_MAX_LENGTH, "%s%zu%s", "/link", i,
-                         "/new_group");
+                snprintf(name_possibility, H5_TEST_FILENAME_MAX_LENGTH, "%s%zu%s", "/link", i, "/new_group");
 
                 valid_name_matched |= !strcmp(objname, name_possibility);
             }
@@ -3561,10 +3560,10 @@ test_delete_link(void H5_ATTR_UNUSED *params)
     htri_t link_exists;
     hid_t  file_id = H5I_INVALID_HID, ext_file_id = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
-    hid_t  subgroup_id   = H5I_INVALID_HID;
-    hid_t  nested_grp_id = H5I_INVALID_HID;
-    hid_t  gcpl_id       = H5I_INVALID_HID;
-    char   *ext_link_filename = NULL;
+    hid_t  subgroup_id       = H5I_INVALID_HID;
+    hid_t  nested_grp_id     = H5I_INVALID_HID;
+    hid_t  gcpl_id           = H5I_INVALID_HID;
+    char  *ext_link_filename = NULL;
 
     TESTING_MULTIPART("link deletion");
 
@@ -7611,7 +7610,7 @@ test_copy_link(void H5_ATTR_UNUSED *params)
     hid_t  file_id = H5I_INVALID_HID, ext_file_id = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
     hid_t  src_grp_id = H5I_INVALID_HID, dst_grp_id = H5I_INVALID_HID;
-    char   *ext_link_filename = NULL;
+    char  *ext_link_filename = NULL;
 
     TESTING_MULTIPART("link copying");
 
@@ -8877,7 +8876,7 @@ test_copy_link_invalid_params(void H5_ATTR_UNUSED *params)
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
     hid_t  src_grp_id = H5I_INVALID_HID, dst_grp_id = H5I_INVALID_HID;
     char  *ext_link_filename = NULL;
-    hid_t  ext_file_id        = H5I_INVALID_HID;
+    hid_t  ext_file_id       = H5I_INVALID_HID;
 
     TESTING_MULTIPART("H5Lcopy with invalid parameters");
 
@@ -9217,7 +9216,7 @@ test_move_link(void H5_ATTR_UNUSED *params)
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
     hid_t  src_grp_id = H5I_INVALID_HID, dst_grp_id = H5I_INVALID_HID;
     char  *ext_link_filename = NULL;
-    hid_t  ext_file_id        = H5I_INVALID_HID;
+    hid_t  ext_file_id       = H5I_INVALID_HID;
 
     TESTING_MULTIPART("link moving");
 
@@ -11074,8 +11073,8 @@ test_move_link_invalid_params(void H5_ATTR_UNUSED *params)
     hid_t  file_id         = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
     hid_t  src_grp_id = H5I_INVALID_HID, dst_grp_id = H5I_INVALID_HID;
-    char  *ext_link_filename  = NULL;
-    hid_t  ext_file_id        = H5I_INVALID_HID;
+    char  *ext_link_filename = NULL;
+    hid_t  ext_file_id       = H5I_INVALID_HID;
 
     TESTING_MULTIPART("H5Lmove with invalid parameters");
 
@@ -11171,7 +11170,7 @@ test_move_link_invalid_params(void H5_ATTR_UNUSED *params)
         printf("    couldn't create file '%s' for external link to reference\n", ext_link_filename);
         goto error;
     }
-    
+
     PASSED();
 
     BEGIN_MULTIPART
@@ -11483,8 +11482,8 @@ test_get_link_val(void H5_ATTR_UNUSED *params)
     char        link_val_buf[GET_LINK_VAL_TEST_LINK_VAL_BUF_SIZE];
     hid_t       file_id = H5I_INVALID_HID, ext_file_id = H5I_INVALID_HID;
     hid_t       container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
-    hid_t       subgroup_id = H5I_INVALID_HID;
-    hid_t       gcpl_id     = H5I_INVALID_HID;
+    hid_t       subgroup_id       = H5I_INVALID_HID;
+    hid_t       gcpl_id           = H5I_INVALID_HID;
     char       *ext_link_filename = NULL;
 
     TESTING_MULTIPART("link value retrieval");
@@ -13886,9 +13885,9 @@ test_get_link_info(void H5_ATTR_UNUSED *params)
     size_t      link_val_size;
     hid_t       file_id = H5I_INVALID_HID, ext_file_id = H5I_INVALID_HID;
     hid_t       container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
-    hid_t       subgroup_id        = H5I_INVALID_HID;
-    hid_t       gcpl_id            = H5I_INVALID_HID;
-    char        *ext_link_filename = NULL;
+    hid_t       subgroup_id       = H5I_INVALID_HID;
+    hid_t       gcpl_id           = H5I_INVALID_HID;
+    char       *ext_link_filename = NULL;
 
     TESTING_MULTIPART("link info retrieval");
 
@@ -20041,8 +20040,8 @@ test_link_iterate_external_links(void H5_ATTR_UNUSED *params)
     htri_t link_exists;
     hid_t  file_id         = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
-    hid_t  gcpl_id            = H5I_INVALID_HID;
-    char   *ext_link_filename = NULL;
+    hid_t  gcpl_id           = H5I_INVALID_HID;
+    char  *ext_link_filename = NULL;
 
     TESTING_MULTIPART("link iteration (only external links)");
 
@@ -21015,12 +21014,12 @@ test_link_iterate_invalid_params(void H5_ATTR_UNUSED *params)
     herr_t err_ret = -1;
     size_t i;
     htri_t link_exists;
-    hid_t  file_id         = H5I_INVALID_HID;
-    hid_t  container_group = H5I_INVALID_HID;
-    hid_t  group_id        = H5I_INVALID_HID;
-    hid_t  dset_id         = H5I_INVALID_HID;
-    hid_t  dset_dtype      = H5I_INVALID_HID;
-    hid_t  dset_dspace     = H5I_INVALID_HID;
+    hid_t  file_id           = H5I_INVALID_HID;
+    hid_t  container_group   = H5I_INVALID_HID;
+    hid_t  group_id          = H5I_INVALID_HID;
+    hid_t  dset_id           = H5I_INVALID_HID;
+    hid_t  dset_dtype        = H5I_INVALID_HID;
+    hid_t  dset_dspace       = H5I_INVALID_HID;
     char  *ext_link_filename = NULL;
 
     TESTING_MULTIPART("link iteration with invalid parameters");
@@ -22455,8 +22454,8 @@ test_link_visit_external_links_no_cycles(void H5_ATTR_UNUSED *params)
     htri_t link_exists;
     hid_t  file_id         = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
-    hid_t  subgroup_id = H5I_INVALID_HID;
-    hid_t  gcpl_id     = H5I_INVALID_HID;
+    hid_t  subgroup_id       = H5I_INVALID_HID;
+    hid_t  gcpl_id           = H5I_INVALID_HID;
     char  *ext_link_filename = NULL;
 
     TESTING_MULTIPART("link visiting without cycles (only external links)");
@@ -22886,10 +22885,10 @@ test_link_visit_mixed_links_no_cycles(void H5_ATTR_UNUSED *params)
     hid_t  file_id         = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
     hid_t  subgroup1 = H5I_INVALID_HID, subgroup2 = H5I_INVALID_HID;
-    hid_t  gcpl_id    = H5I_INVALID_HID;
-    hid_t  dset_id    = H5I_INVALID_HID;
-    hid_t  dset_dtype = H5I_INVALID_HID;
-    hid_t  fspace_id  = H5I_INVALID_HID;
+    hid_t  gcpl_id           = H5I_INVALID_HID;
+    hid_t  dset_id           = H5I_INVALID_HID;
+    hid_t  dset_dtype        = H5I_INVALID_HID;
+    hid_t  fspace_id         = H5I_INVALID_HID;
     char  *ext_link_filename = NULL;
 
     TESTING_MULTIPART("link visiting without cycles (mixed link types)");
@@ -24539,7 +24538,7 @@ test_link_visit_mixed_links_cycles(void H5_ATTR_UNUSED *params)
     hid_t  file_id         = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
     hid_t  subgroup1 = H5I_INVALID_HID, subgroup2 = H5I_INVALID_HID;
-    hid_t  gcpl_id = H5I_INVALID_HID;
+    hid_t  gcpl_id           = H5I_INVALID_HID;
     char  *ext_link_filename = NULL;
 
     TESTING_MULTIPART("link visiting with cycles (mixed link types)");
@@ -24983,9 +24982,9 @@ test_link_visit_invalid_params(void H5_ATTR_UNUSED *params)
     hid_t  file_id         = H5I_INVALID_HID;
     hid_t  container_group = H5I_INVALID_HID, group_id = H5I_INVALID_HID;
     hid_t  subgroup1 = H5I_INVALID_HID, subgroup2 = H5I_INVALID_HID;
-    hid_t  dset_id    = H5I_INVALID_HID;
-    hid_t  dset_dtype = H5I_INVALID_HID;
-    hid_t  fspace_id  = H5I_INVALID_HID;
+    hid_t  dset_id           = H5I_INVALID_HID;
+    hid_t  dset_dtype        = H5I_INVALID_HID;
+    hid_t  fspace_id         = H5I_INVALID_HID;
     char  *ext_link_filename = NULL;
 
     TESTING_MULTIPART("link visiting with invalid parameters");
@@ -26992,12 +26991,12 @@ H5_api_link_test_add(void)
     AddTest("print_link_test_header", print_link_test_header, NULL, NULL, NULL, 0, 0,
             "Prints header for link tests");
 
-    AddTest("test_create_hard_link", test_create_hard_link, NULL, NULL, NULL, 0,
-            testframe_flags, "hard link creation");
+    AddTest("test_create_hard_link", test_create_hard_link, NULL, NULL, NULL, 0, testframe_flags,
+            "hard link creation");
     AddTest("test_create_hard_link_long_name", test_create_hard_link_long_name, NULL, NULL, NULL, 0,
             testframe_flags, "hard link creation with a long name");
-    AddTest("test_create_hard_link_many", test_create_hard_link_many, NULL, NULL, NULL, 0,
-            testframe_flags, "hard link creation of many links");
+    AddTest("test_create_hard_link_many", test_create_hard_link_many, NULL, NULL, NULL, 0, testframe_flags,
+            "hard link creation of many links");
     AddTest("test_create_hard_link_same_loc", test_create_hard_link_same_loc, NULL, NULL, NULL, 0,
             testframe_flags, "hard link creation with H5L_SAME_LOC");
     AddTest("test_create_hard_link_invalid_params", test_create_hard_link_invalid_params, NULL, NULL, NULL, 0,
@@ -27012,12 +27011,12 @@ H5_api_link_test_add(void)
             NULL, 0, testframe_flags, "dangling soft link creation to object by absolute path");
     AddTest("test_create_soft_link_long_name", test_create_soft_link_long_name, NULL, NULL, NULL, 0,
             testframe_flags, "soft link creation with a long name");
-    AddTest("test_create_soft_link_many", test_create_soft_link_many, NULL, NULL, NULL, 0,
-            testframe_flags, "soft link creation of many links");
+    AddTest("test_create_soft_link_many", test_create_soft_link_many, NULL, NULL, NULL, 0, testframe_flags,
+            "soft link creation of many links");
     AddTest("test_create_soft_link_invalid_params", test_create_soft_link_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "soft link creation with invalid parameters");
-    AddTest("test_create_external_link", test_create_external_link, NULL, NULL, NULL, 0,
-            testframe_flags, "external link creation to existing object");
+    AddTest("test_create_external_link", test_create_external_link, NULL, NULL, NULL, 0, testframe_flags,
+            "external link creation to existing object");
     AddTest("test_create_external_link_dangling", test_create_external_link_dangling, NULL, NULL, NULL, 0,
             testframe_flags, "dangling external link creation");
     AddTest("test_create_external_link_multi", test_create_external_link_multi, NULL, NULL, NULL, 0,
@@ -27030,42 +27029,39 @@ H5_api_link_test_add(void)
             testframe_flags, "user-defined link creation");
     AddTest("test_create_user_defined_link_invalid_params", test_create_user_defined_link_invalid_params,
             NULL, NULL, NULL, 0, testframe_flags, "H5Lcreate_ud with invalid parameters");
-    AddTest("test_delete_link", test_delete_link, NULL, NULL, NULL, 0,
-            testframe_flags, "link deletion");
+    AddTest("test_delete_link", test_delete_link, NULL, NULL, NULL, 0, testframe_flags, "link deletion");
     AddTest("test_delete_link_reset_grp_max_crt_order", test_delete_link_reset_grp_max_crt_order, NULL, NULL,
             NULL, 0, testframe_flags,
             "H5Ldelete of all links in group resets group's maximum link creation order value");
     AddTest("test_delete_link_invalid_params", test_delete_link_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "H5Ldelete with invalid parameters");
-    AddTest("test_copy_link", test_copy_link, NULL, NULL, NULL, 0,
-            testframe_flags, "link copying");
+    AddTest("test_copy_link", test_copy_link, NULL, NULL, NULL, 0, testframe_flags, "link copying");
     AddTest("test_copy_links_into_group_with_links", test_copy_links_into_group_with_links, NULL, NULL, NULL,
             0, testframe_flags, "H5Lcopy adjusting creation order values for copied links");
-    AddTest("test_copy_link_across_files", test_copy_link_across_files, NULL, NULL, NULL, 0,
-            testframe_flags, "link copying across files");
+    AddTest("test_copy_link_across_files", test_copy_link_across_files, NULL, NULL, NULL, 0, testframe_flags,
+            "link copying across files");
     AddTest("test_copy_link_invalid_params", test_copy_link_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "H5Lcopy with invalid parameters");
-    AddTest("test_move_link", test_move_link, NULL, NULL, NULL, 0,
-            testframe_flags, "link moving");
+    AddTest("test_move_link", test_move_link, NULL, NULL, NULL, 0, testframe_flags, "link moving");
     AddTest("test_move_links_into_group_with_links", test_move_links_into_group_with_links, NULL, NULL, NULL,
             0, testframe_flags, "H5Lmove adjusting creation order values for moved links");
-    AddTest("test_move_link_across_files", test_move_link_across_files, NULL, NULL, NULL, 0,
-            testframe_flags, "link moving across files");
+    AddTest("test_move_link_across_files", test_move_link_across_files, NULL, NULL, NULL, 0, testframe_flags,
+            "link moving across files");
     AddTest("test_move_link_reset_grp_max_crt_order", test_move_link_reset_grp_max_crt_order, NULL, NULL,
             NULL, 0, testframe_flags,
             "H5Lmove of all links out of group resets group's maximum link creation order value");
     AddTest("test_move_link_invalid_params", test_move_link_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "H5Lmove with invalid parameters");
-    AddTest("test_get_link_val", test_get_link_val, NULL, NULL, NULL, 0,
-            testframe_flags, "link value retrieval");
+    AddTest("test_get_link_val", test_get_link_val, NULL, NULL, NULL, 0, testframe_flags,
+            "link value retrieval");
     AddTest("test_get_link_val_invalid_params", test_get_link_val_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "link value retrieval with invalid parameters");
-    AddTest("test_get_link_info", test_get_link_info, NULL, NULL, NULL, 0,
-            testframe_flags, "link info retrieval");
+    AddTest("test_get_link_info", test_get_link_info, NULL, NULL, NULL, 0, testframe_flags,
+            "link info retrieval");
     AddTest("test_get_link_info_invalid_params", test_get_link_info_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "link info retrieval with invalid parameters");
-    AddTest("test_get_link_name", test_get_link_name, NULL, NULL, NULL, 0,
-            testframe_flags, "link name retrieval");
+    AddTest("test_get_link_name", test_get_link_name, NULL, NULL, NULL, 0, testframe_flags,
+            "link name retrieval");
     AddTest("test_get_link_name_invalid_params", test_get_link_name_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "link name retrieval with invalid parameters");
     AddTest("test_link_iterate_hard_links", test_link_iterate_hard_links, NULL, NULL, NULL, 0,
@@ -27074,14 +27070,14 @@ H5_api_link_test_add(void)
             testframe_flags, "link iteration (only soft links)");
     AddTest("test_link_iterate_external_links", test_link_iterate_external_links, NULL, NULL, NULL, 0,
             testframe_flags, "link iteration (only external links)");
-    AddTest("test_link_iterate_ud_links", test_link_iterate_ud_links, NULL, NULL, NULL, 0,
-            testframe_flags, "link iteration (only user-defined links)");
+    AddTest("test_link_iterate_ud_links", test_link_iterate_ud_links, NULL, NULL, NULL, 0, testframe_flags,
+            "link iteration (only user-defined links)");
     AddTest("test_link_iterate_mixed_links", test_link_iterate_mixed_links, NULL, NULL, NULL, 0,
             testframe_flags, "link iteration (mixed link types)");
     AddTest("test_link_iterate_invalid_params", test_link_iterate_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "link iteration with invalid parameters");
-    AddTest("test_link_iterate_0_links", test_link_iterate_0_links, NULL, NULL, NULL, 0,
-            testframe_flags, "link iteration on group with 0 links");
+    AddTest("test_link_iterate_0_links", test_link_iterate_0_links, NULL, NULL, NULL, 0, testframe_flags,
+            "link iteration on group with 0 links");
     AddTest("test_link_visit_hard_links_no_cycles", test_link_visit_hard_links_no_cycles, NULL, NULL, NULL, 0,
             testframe_flags, "link visiting without cycles (only hard links)");
     AddTest("test_link_visit_soft_links_no_cycles", test_link_visit_soft_links_no_cycles, NULL, NULL, NULL, 0,
@@ -27104,6 +27100,6 @@ H5_api_link_test_add(void)
             testframe_flags, "link visiting with cycles (mixed link types)");
     AddTest("test_link_visit_invalid_params", test_link_visit_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "link visiting with invalid parameters");
-    AddTest("test_link_visit_0_links", test_link_visit_0_links, NULL, NULL, NULL, 0,
-            testframe_flags, "link visiting on group with subgroups containing 0 links");
+    AddTest("test_link_visit_0_links", test_link_visit_0_links, NULL, NULL, NULL, 0, testframe_flags,
+            "link visiting on group with subgroups containing 0 links");
 }

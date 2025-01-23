@@ -17128,8 +17128,8 @@ main(void)
     hid_t       fcpl_shared, ocpl;
     unsigned    max_compact, min_dense;
     int         configuration; /* Configuration of tests. */
-    const char *env_h5_drvr; /* File Driver value from environment */
-    hbool_t     same_file;   /* Whether to run tests that only use one file */
+    const char *env_h5_drvr;   /* File Driver value from environment */
+    hbool_t     same_file;     /* Whether to run tests that only use one file */
     hbool_t     driver_is_default_compatible;
 
     env_h5_drvr = HDgetenv(HDF5_DRIVER);

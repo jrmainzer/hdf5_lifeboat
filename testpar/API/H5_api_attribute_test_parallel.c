@@ -31,8 +31,8 @@ void
 H5_api_attribute_test_parallel_add(void)
 {
     /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_attribute_test_header", print_attribute_test_header, NULL, NULL, NULL, 0,
-            0, "Prints header for attribute tests");
+    AddTest("print_attribute_test_header", print_attribute_test_header, NULL, NULL, NULL, 0, 0,
+            "Prints header for attribute tests");
 
     /* No tests yet */
 }

@@ -450,7 +450,7 @@ test_async_multi_dataset_io(void *params)
     hid_t    file_id                               = H5I_INVALID_HID;
     hid_t    fapl_id                               = H5I_INVALID_HID;
     hid_t    dset_id[MULTI_DATASET_IO_TEST_NDSETS] = {H5I_INVALID_HID, H5I_INVALID_HID, H5I_INVALID_HID,
-                                                      H5I_INVALID_HID, H5I_INVALID_HID};
+                                                   H5I_INVALID_HID, H5I_INVALID_HID};
     hid_t    space_id                              = H5I_INVALID_HID;
     hid_t    mspace_id                             = H5I_INVALID_HID;
     hid_t    es_id                                 = H5I_INVALID_HID;
@@ -775,9 +775,9 @@ test_async_multi_file_dataset_io(void *params)
     size_t   i, j, data_size, num_in_progress;
     hid_t    fapl_id                                    = H5I_INVALID_HID;
     hid_t    file_id[MULTI_FILE_DATASET_IO_TEST_NFILES] = {H5I_INVALID_HID, H5I_INVALID_HID, H5I_INVALID_HID,
-                                                           H5I_INVALID_HID, H5I_INVALID_HID};
+                                                        H5I_INVALID_HID, H5I_INVALID_HID};
     hid_t    dset_id[MULTI_FILE_DATASET_IO_TEST_NFILES] = {H5I_INVALID_HID, H5I_INVALID_HID, H5I_INVALID_HID,
-                                                           H5I_INVALID_HID, H5I_INVALID_HID};
+                                                        H5I_INVALID_HID, H5I_INVALID_HID};
     hid_t    space_id                                   = H5I_INVALID_HID;
     hid_t    mspace_id                                  = H5I_INVALID_HID;
     hid_t    es_id                                      = H5I_INVALID_HID;
@@ -3628,26 +3628,27 @@ H5_api_async_test_parallel_add(void)
     AddTest("test_async_one_dataset_io (coll)", test_async_one_dataset_io, NULL, NULL, &coll_metadata_read,
             sizeof(coll_metadata_read), 0, "async single dataset I/O (collective metadata reads)");
     AddTest("test_async_multi_dataset_io (coll)", test_async_multi_dataset_io, NULL, NULL,
-            &coll_metadata_read, sizeof(coll_metadata_read),
-            0, "async multi dataset I/O (collective metadata reads)");
+            &coll_metadata_read, sizeof(coll_metadata_read), 0,
+            "async multi dataset I/O (collective metadata reads)");
     AddTest("test_async_multi_file_dataset_io (coll)", test_async_multi_file_dataset_io, NULL, NULL,
-            &coll_metadata_read, sizeof(coll_metadata_read),
-            0, "async multi file dataset I/O (collective metadata reads)");
+            &coll_metadata_read, sizeof(coll_metadata_read), 0,
+            "async multi file dataset I/O (collective metadata reads)");
     AddTest("test_async_multi_file_grp_dset_io (coll)", test_async_multi_file_grp_dset_io, NULL, NULL,
-            &coll_metadata_read, sizeof(coll_metadata_read),
-            0, "async multi file dataset I/O with groups (collective metadata reads)");
+            &coll_metadata_read, sizeof(coll_metadata_read), 0,
+            "async multi file dataset I/O with groups (collective metadata reads)");
     AddTest("test_async_set_extent (coll)", test_async_set_extent, NULL, NULL, &coll_metadata_read,
             sizeof(coll_metadata_read), 0, "async extending dataset (collective metadata reads)");
     AddTest("test_async_attribute_exists (coll)", test_async_attribute_exists, NULL, NULL,
-            &coll_metadata_read, sizeof(coll_metadata_read), 0, "async H5Aexists() (collective metadata reads)");
+            &coll_metadata_read, sizeof(coll_metadata_read), 0,
+            "async H5Aexists() (collective metadata reads)");
     AddTest("test_async_attribute_io (coll)", test_async_attribute_io, NULL, NULL, &coll_metadata_read,
             sizeof(coll_metadata_read), 0, "async attribute I/O (collective metadata reads)");
     AddTest("test_async_attribute_io_tconv (coll)", test_async_attribute_io_tconv, NULL, NULL,
-            &coll_metadata_read, sizeof(coll_metadata_read),
-            0, "async attribute I/O with type conversion (collective metadata reads)");
+            &coll_metadata_read, sizeof(coll_metadata_read), 0,
+            "async attribute I/O with type conversion (collective metadata reads)");
     AddTest("test_async_attribute_io_compound (coll)", test_async_attribute_io_compound, NULL, NULL,
-            &coll_metadata_read, sizeof(coll_metadata_read),
-            0, "async attribute I/O with compound type conversion (collective metadata reads)");
+            &coll_metadata_read, sizeof(coll_metadata_read), 0,
+            "async attribute I/O with compound type conversion (collective metadata reads)");
     AddTest("test_async_group (coll)", test_async_group, NULL, NULL, &coll_metadata_read,
             sizeof(coll_metadata_read), 0, "async group operations (collective metadata reads)");
     AddTest("test_async_link (coll)", test_async_link, NULL, NULL, &coll_metadata_read,
@@ -3658,8 +3659,8 @@ H5_api_async_test_parallel_add(void)
             sizeof(coll_metadata_read), 0, "async H5Freopen() (collective metadata reads)");
 
     /* Add a fake test to cleanup test files due to current test interdependencies */
-    AddTest("test_async_file_cleanup (coll)", test_async_file_cleanup, NULL, NULL, NULL, 0,
-            0, "cleanup async test files");
+    AddTest("test_async_file_cleanup (coll)", test_async_file_cleanup, NULL, NULL, NULL, 0, 0,
+            "cleanup async test files");
 
     /* Re-run tests with independent metadata reads */
     coll_metadata_read = false;
@@ -3674,11 +3675,11 @@ H5_api_async_test_parallel_add(void)
     AddTest("test_async_multi_dataset_io (ind)", test_async_multi_dataset_io, NULL, NULL, &coll_metadata_read,
             sizeof(coll_metadata_read), 0, "async multi dataset I/O (independent metadata reads)");
     AddTest("test_async_multi_file_dataset_io (ind)", test_async_multi_file_dataset_io, NULL, NULL,
-            &coll_metadata_read, sizeof(coll_metadata_read),
-            0, "async multi file dataset I/O (independent metadata reads)");
+            &coll_metadata_read, sizeof(coll_metadata_read), 0,
+            "async multi file dataset I/O (independent metadata reads)");
     AddTest("test_async_multi_file_grp_dset_io (ind)", test_async_multi_file_grp_dset_io, NULL, NULL,
-            &coll_metadata_read, sizeof(coll_metadata_read),
-            0, "async multi file dataset I/O with groups (independent metadata reads)");
+            &coll_metadata_read, sizeof(coll_metadata_read), 0,
+            "async multi file dataset I/O with groups (independent metadata reads)");
     AddTest("test_async_set_extent (ind)", test_async_set_extent, NULL, NULL, &coll_metadata_read,
             sizeof(coll_metadata_read), 0, "async extending dataset (independent metadata reads)");
     AddTest("test_async_attribute_exists (ind)", test_async_attribute_exists, NULL, NULL, &coll_metadata_read,
@@ -3686,11 +3687,11 @@ H5_api_async_test_parallel_add(void)
     AddTest("test_async_attribute_io (ind)", test_async_attribute_io, NULL, NULL, &coll_metadata_read,
             sizeof(coll_metadata_read), 0, "async attribute I/O (independent metadata reads)");
     AddTest("test_async_attribute_io_tconv (ind)", test_async_attribute_io_tconv, NULL, NULL,
-            &coll_metadata_read, sizeof(coll_metadata_read),
-            0, "async attribute I/O with type conversion (independent metadata reads)");
+            &coll_metadata_read, sizeof(coll_metadata_read), 0,
+            "async attribute I/O with type conversion (independent metadata reads)");
     AddTest("test_async_attribute_io_compound (ind)", test_async_attribute_io_compound, NULL, NULL,
-            &coll_metadata_read, sizeof(coll_metadata_read),
-            0, "async attribute I/O with compound type conversion (independent metadata reads)");
+            &coll_metadata_read, sizeof(coll_metadata_read), 0,
+            "async attribute I/O with compound type conversion (independent metadata reads)");
     AddTest("test_async_group (ind)", test_async_group, NULL, NULL, &coll_metadata_read,
             sizeof(coll_metadata_read), 0, "async group operations (independent metadata reads)");
     AddTest("test_async_link (ind)", test_async_link, NULL, NULL, &coll_metadata_read,
@@ -3701,8 +3702,8 @@ H5_api_async_test_parallel_add(void)
             sizeof(coll_metadata_read), 0, "async H5Freopen() (independent metadata reads)");
 
     /* Add a fake test to cleanup test files due to current test interdependencies */
-    AddTest("test_async_file_cleanup (ind)", test_async_file_cleanup, NULL, NULL, NULL, 0,
-            0, "cleanup async test files");
+    AddTest("test_async_file_cleanup (ind)", test_async_file_cleanup, NULL, NULL, NULL, 0, 0,
+            "cleanup async test files");
 }
 
 #else /* H5_API_TEST_HAVE_ASYNC */

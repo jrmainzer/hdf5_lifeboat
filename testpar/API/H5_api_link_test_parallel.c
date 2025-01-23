@@ -31,8 +31,8 @@ void
 H5_api_link_test_parallel_add(void)
 {
     /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_link_test_header", print_link_test_header, NULL, NULL, NULL, 0,
-            0, "Prints header for link tests");
+    AddTest("print_link_test_header", print_link_test_header, NULL, NULL, NULL, 0, 0,
+            "Prints header for link tests");
 
     /* No tests yet */
 }

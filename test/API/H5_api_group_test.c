@@ -2388,36 +2388,34 @@ H5_api_group_test_add(void)
             testframe_flags, "creation of group under the root group");
     AddTest("test_create_group_under_existing_group", test_create_group_under_existing_group, NULL, NULL,
             NULL, 0, testframe_flags, "creation of group under existing group using a relative path");
-    AddTest("test_create_many_groups", test_create_many_groups, NULL, NULL, NULL, 0,
-            testframe_flags, "H5Gcreate many groups");
-    AddTest("test_create_deep_groups", test_create_deep_groups, NULL, NULL, NULL, 0,
-            testframe_flags, "H5Gcreate groups of great depths");
+    AddTest("test_create_many_groups", test_create_many_groups, NULL, NULL, NULL, 0, testframe_flags,
+            "H5Gcreate many groups");
+    AddTest("test_create_deep_groups", test_create_deep_groups, NULL, NULL, NULL, 0, testframe_flags,
+            "H5Gcreate groups of great depths");
     AddTest("test_create_intermediate_group", test_create_intermediate_group, NULL, NULL, NULL, 0,
             testframe_flags, "H5Gcreate group with intermediate group creation");
     AddTest("test_create_group_invalid_params", test_create_group_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "H5Gcreate with invalid parameters");
-    AddTest("test_create_anonymous_group", test_create_anonymous_group, NULL, NULL, NULL, 0,
-            testframe_flags, "creation of anonymous group");
+    AddTest("test_create_anonymous_group", test_create_anonymous_group, NULL, NULL, NULL, 0, testframe_flags,
+            "creation of anonymous group");
     AddTest("test_create_anonymous_group_invalid_params", test_create_anonymous_group_invalid_params, NULL,
             NULL, NULL, 0, testframe_flags, "H5Gcreate_anon with invalid parameters");
-    AddTest("test_open_nonexistent_group", test_open_nonexistent_group, NULL, NULL, NULL, 0,
-            testframe_flags, "for invalid opening of a nonexistent group");
+    AddTest("test_open_nonexistent_group", test_open_nonexistent_group, NULL, NULL, NULL, 0, testframe_flags,
+            "for invalid opening of a nonexistent group");
     AddTest("test_open_group_invalid_params", test_open_group_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "H5Gopen with invalid parameters");
-    AddTest("test_close_group_invalid_id", test_close_group_invalid_id, NULL, NULL, NULL, 0,
-            testframe_flags, "H5Gclose with an invalid group ID");
-    AddTest("test_group_property_lists", test_group_property_lists, NULL, NULL, NULL, 0,
-            testframe_flags, "group property list operations");
-    AddTest("test_get_group_info", test_get_group_info, NULL, NULL, NULL, 0,
-            testframe_flags, "retrieval of group info");
+    AddTest("test_close_group_invalid_id", test_close_group_invalid_id, NULL, NULL, NULL, 0, testframe_flags,
+            "H5Gclose with an invalid group ID");
+    AddTest("test_group_property_lists", test_group_property_lists, NULL, NULL, NULL, 0, testframe_flags,
+            "group property list operations");
+    AddTest("test_get_group_info", test_get_group_info, NULL, NULL, NULL, 0, testframe_flags,
+            "retrieval of group info");
     AddTest("test_get_group_info_invalid_params", test_get_group_info_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "retrieval of group info with invalid parameters");
-    AddTest("test_flush_group", test_flush_group, NULL, NULL, NULL, 0,
-            testframe_flags, "H5Gflush");
+    AddTest("test_flush_group", test_flush_group, NULL, NULL, NULL, 0, testframe_flags, "H5Gflush");
     AddTest("test_flush_group_invalid_params", test_flush_group_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "H5Gflush with invalid parameters");
-    AddTest("test_refresh_group", test_refresh_group, NULL, NULL, NULL, 0,
-            testframe_flags, "H5Grefresh");
+    AddTest("test_refresh_group", test_refresh_group, NULL, NULL, NULL, 0, testframe_flags, "H5Grefresh");
     AddTest("test_refresh_group_invalid_params", test_refresh_group_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "H5Grefresh with invalid parameters");
 }

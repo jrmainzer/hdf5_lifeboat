@@ -31,8 +31,8 @@ void
 H5_api_group_test_parallel_add(void)
 {
     /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_group_test_header", print_group_test_header, NULL, NULL, NULL, 0,
-            0, "Prints header for group tests");
+    AddTest("print_group_test_header", print_group_test_header, NULL, NULL, NULL, 0, 0,
+            "Prints header for group tests");
 
     /* No tests yet */
 }

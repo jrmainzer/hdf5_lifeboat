@@ -1198,9 +1198,9 @@ test_set_extent(void H5_ATTR_UNUSED *params)
     hid_t   file_id       = H5I_INVALID_HID;
     hid_t   dset_id       = H5I_INVALID_HID;
     hid_t   fspace_id[6]  = {H5I_INVALID_HID, H5I_INVALID_HID, H5I_INVALID_HID,
-                             H5I_INVALID_HID, H5I_INVALID_HID, H5I_INVALID_HID};
+                          H5I_INVALID_HID, H5I_INVALID_HID, H5I_INVALID_HID};
     hid_t   fspace_out[6] = {H5I_INVALID_HID, H5I_INVALID_HID, H5I_INVALID_HID,
-                             H5I_INVALID_HID, H5I_INVALID_HID, H5I_INVALID_HID};
+                           H5I_INVALID_HID, H5I_INVALID_HID, H5I_INVALID_HID};
     hid_t   mspace_id     = H5I_INVALID_HID;
     hid_t   dcpl_id       = H5I_INVALID_HID;
     hid_t   es_id         = H5I_INVALID_HID;
@@ -2684,7 +2684,7 @@ test_file_cleanup(void H5_ATTR_UNUSED *params)
     TESTING("cleanup test files");
 
     /* Don't try to remove test files if this connector doesn't support file creation */
-    if (!(vol_cap_flags_g & H5VL_CAP_FLAG_ASYNC) || !(vol_cap_flags_g & H5VL_CAP_FLAG_FILE_BASIC) ) {
+    if (!(vol_cap_flags_g & H5VL_CAP_FLAG_ASYNC) || !(vol_cap_flags_g & H5VL_CAP_FLAG_FILE_BASIC)) {
         SKIPPED();
         printf("    API functions for basic file, dataset, or flush aren't supported with this connector\n");
         return;
@@ -2709,34 +2709,32 @@ H5_api_async_test_add(void)
     AddTest("print_async_test_header", print_async_test_header, NULL, NULL, NULL, 0, 0,
             "Prints header for async tests");
 
-    AddTest("test_one_dataset_io", test_one_dataset_io, NULL, NULL, NULL, 0,
-            testframe_flags, "single dataset I/O");
-    AddTest("test_multi_dataset_io", test_multi_dataset_io, NULL, NULL, NULL, 0,
-            testframe_flags, "multi dataset I/O");
-    AddTest("test_multi_file_dataset_io", test_multi_file_dataset_io, NULL, NULL, NULL, 0,
-            testframe_flags, "multi file dataset I/O");
-    AddTest("test_multi_file_grp_dset_io", test_multi_file_grp_dset_io, NULL, NULL, NULL, 0,
-            testframe_flags, "multi file dataset I/O with groups");
+    AddTest("test_one_dataset_io", test_one_dataset_io, NULL, NULL, NULL, 0, testframe_flags,
+            "single dataset I/O");
+    AddTest("test_multi_dataset_io", test_multi_dataset_io, NULL, NULL, NULL, 0, testframe_flags,
+            "multi dataset I/O");
+    AddTest("test_multi_file_dataset_io", test_multi_file_dataset_io, NULL, NULL, NULL, 0, testframe_flags,
+            "multi file dataset I/O");
+    AddTest("test_multi_file_grp_dset_io", test_multi_file_grp_dset_io, NULL, NULL, NULL, 0, testframe_flags,
+            "multi file dataset I/O with groups");
     AddTest("test_set_extent", test_set_extent, NULL, NULL, NULL, 0, testframe_flags,
             "H5Dset_extent() and H5Dget_space()");
     AddTest("test_attribute_exists", test_attribute_exists, NULL, NULL, NULL, 0, testframe_flags,
             "H5Aexists()");
-    AddTest("test_attribute_io", test_attribute_io, NULL, NULL, NULL, 0, testframe_flags,
-            "attribute I/O");
-    AddTest("test_attribute_io_tconv", test_attribute_io_tconv, NULL, NULL, NULL, 0,
-            testframe_flags, "attribute I/O with type conversion");
-    AddTest("test_attribute_io_compound", test_attribute_io_compound, NULL, NULL, NULL, 0,
-            testframe_flags, "attribute I/O with compound type conversion");
+    AddTest("test_attribute_io", test_attribute_io, NULL, NULL, NULL, 0, testframe_flags, "attribute I/O");
+    AddTest("test_attribute_io_tconv", test_attribute_io_tconv, NULL, NULL, NULL, 0, testframe_flags,
+            "attribute I/O with type conversion");
+    AddTest("test_attribute_io_compound", test_attribute_io_compound, NULL, NULL, NULL, 0, testframe_flags,
+            "attribute I/O with compound type conversion");
     AddTest("test_group", test_group, NULL, NULL, NULL, 0, testframe_flags, "group operations");
     AddTest("test_link", test_link, NULL, NULL, NULL, 0, testframe_flags, "link operations");
-    AddTest("test_ocopy_orefresh", test_ocopy_orefresh, NULL, NULL, NULL, 0,
-            testframe_flags, "H5Ocopy() and H5Orefresh()");
-    AddTest("test_file_reopen", test_file_reopen, NULL, NULL, NULL, 0, testframe_flags,
-            "H5Freopen()");
+    AddTest("test_ocopy_orefresh", test_ocopy_orefresh, NULL, NULL, NULL, 0, testframe_flags,
+            "H5Ocopy() and H5Orefresh()");
+    AddTest("test_file_reopen", test_file_reopen, NULL, NULL, NULL, 0, testframe_flags, "H5Freopen()");
 
     /* Add a fake test to cleanup test files due to current test interdependencies */
-    AddTest("test_file_cleanup", test_file_cleanup, NULL, NULL, NULL, 0,
-            testframe_flags, "cleanup test files");
+    AddTest("test_file_cleanup", test_file_cleanup, NULL, NULL, NULL, 0, testframe_flags,
+            "cleanup test files");
 }
 
 #else /* H5_API_TEST_HAVE_ASYNC */
@@ -2745,8 +2743,8 @@ void
 H5_api_async_test_add(void)
 {
     /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_async_test_header", print_async_test_header, NULL, NULL, NULL, 0,
-            0, "Prints header for async tests");
+    AddTest("print_async_test_header", print_async_test_header, NULL, NULL, NULL, 0, 0,
+            "Prints header for async tests");
 }
 
 #endif /* H5_API_TEST_HAVE_ASYNC */

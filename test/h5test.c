@@ -2313,9 +2313,11 @@ h5_driver_uses_multiple_files(const char *drv_name, unsigned flags)
 #define MAX_THREAD_IDX_LEN
 
 /* Generate a heap-allocated filename of the form <prefix><thread_idx><filename> */
-char *generate_threadlocal_filename(const char *prefix, int thread_idx, const char *filename) {
-    int chars_written = 0;
-    char *test_filename =  NULL;
+char *
+generate_threadlocal_filename(const char *prefix, int thread_idx, const char *filename)
+{
+    int   chars_written = 0;
+    char *test_filename = NULL;
 
     if (thread_idx > MAX_THREAD_IDX) {
         fprintf(stderr, "    thread index exceeded expected size\n");
@@ -2333,9 +2335,8 @@ char *generate_threadlocal_filename(const char *prefix, int thread_idx, const ch
     }
 
     /* Write prefix, thread index, and filename into buffer */
-    if ((chars_written = snprintf(test_filename,
-                                  H5_TEST_FILENAME_MAX_LENGTH, "%s%d%s",
-                                  prefix, thread_idx, filename)) < 0) {
+    if ((chars_written = snprintf(test_filename, H5_TEST_FILENAME_MAX_LENGTH, "%s%d%s", prefix, thread_idx,
+                                  filename)) < 0) {
         fprintf(stderr, "    couldn't create test file name\n");
         goto error;
     }
@@ -2385,7 +2386,6 @@ reg_opt_op_optional_verify(void *obj, H5VL_optional_args_t *args)
 
     return 0;
 } /* end reg_opt_op_optional_verify() */
-
 
 /*-------------------------------------------------------------------------
  * Function:    reg_opt_op_optional

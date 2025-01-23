@@ -31,8 +31,8 @@ void
 H5_api_object_test_parallel_add(void)
 {
     /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_object_test_header", print_object_test_header, NULL, NULL, NULL, 0,
-            0, "Prints header for object tests");
+    AddTest("print_object_test_header", print_object_test_header, NULL, NULL, NULL, 0, 0,
+            "Prints header for object tests");
 
     /* No tests yet */
 }

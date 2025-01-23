@@ -1054,10 +1054,10 @@ H5_api_misc_test_add(void)
             0, testframe_flags, "object creation by absolute path");
     AddTest("test_absolute_vs_relative_path", test_absolute_vs_relative_path, NULL, NULL, NULL, 0,
             testframe_flags, "absolute vs. relative pathnames");
-    AddTest("test_dot_for_object_name", test_dot_for_object_name, NULL, NULL, NULL, 0,
-            testframe_flags, "creating objects with \".\" as the name");
+    AddTest("test_dot_for_object_name", test_dot_for_object_name, NULL, NULL, NULL, 0, testframe_flags,
+            "creating objects with \".\" as the name");
     AddTest("test_symbols_in_compound_field_name", test_symbols_in_compound_field_name, NULL, NULL, NULL, 0,
             testframe_flags, "usage of '{', '}' and '\\\"' symbols in compound field name");
-    AddTest("test_double_init_term", test_double_init_term, NULL, NULL, NULL, 0,
-            testframe_flags, "double init/term correctness");
+    AddTest("test_double_init_term", test_double_init_term, NULL, NULL, NULL, 0, testframe_flags,
+            "double init/term correctness");
 }

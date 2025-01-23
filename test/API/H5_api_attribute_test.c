@@ -11557,8 +11557,8 @@ H5_api_attribute_test_add(void)
     int64_t testframe_flags = ALLOW_MULTITHREAD;
 
     /* Add a fake test to print out a header to distinguish different test interfaces */
-    AddTest("print_attribute_test_header", print_attribute_test_header, NULL, NULL, NULL, 0,
-            0, "Prints header for attribute tests");
+    AddTest("print_attribute_test_header", print_attribute_test_header, NULL, NULL, NULL, 0, 0,
+            "Prints header for attribute tests");
 
     AddTest("test_create_attribute_on_root", test_create_attribute_on_root, NULL, NULL, NULL, 0,
             testframe_flags, "attribute creation on the root group");
@@ -11574,41 +11574,39 @@ H5_api_attribute_test_add(void)
             NULL, 0, testframe_flags, "attribute creation with a space in attribute's name");
     AddTest("test_create_attribute_invalid_params", test_create_attribute_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "attribute creation with invalid parameters");
-    AddTest("test_open_attribute", test_open_attribute, NULL, NULL, NULL, 0,
-            testframe_flags, "attribute opening");
+    AddTest("test_open_attribute", test_open_attribute, NULL, NULL, NULL, 0, testframe_flags,
+            "attribute opening");
     AddTest("test_open_attribute_invalid_params", test_open_attribute_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "attribute opening with invalid parameters");
-    AddTest("test_write_attribute", test_write_attribute, NULL, NULL, NULL, 0,
-            testframe_flags, "H5Awrite");
+    AddTest("test_write_attribute", test_write_attribute, NULL, NULL, NULL, 0, testframe_flags, "H5Awrite");
     AddTest("test_write_attribute_invalid_params", test_write_attribute_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "H5Awrite with invalid parameters");
-    AddTest("test_read_attribute", test_read_attribute, NULL, NULL, NULL, 0,
-            testframe_flags, "H5Aread");
+    AddTest("test_read_attribute", test_read_attribute, NULL, NULL, NULL, 0, testframe_flags, "H5Aread");
     AddTest("test_read_attribute_invalid_params", test_read_attribute_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "H5Aread with invalid parameters");
-    AddTest("test_read_empty_attribute", test_read_empty_attribute, NULL, NULL, NULL, 0,
-            testframe_flags, "reading an empty attribute");
+    AddTest("test_read_empty_attribute", test_read_empty_attribute, NULL, NULL, NULL, 0, testframe_flags,
+            "reading an empty attribute");
     AddTest("test_close_attribute_invalid_id", test_close_attribute_invalid_id, NULL, NULL, NULL, 0,
             testframe_flags, "H5Aclose with an invalid attribute ID");
     AddTest("test_get_attribute_space_and_type", test_get_attribute_space_and_type, NULL, NULL, NULL, 0,
             testframe_flags, "retrieval of an attribute's dataspace and datatype");
     AddTest("test_get_attribute_space_and_type_invalid_params",
-            test_get_attribute_space_and_type_invalid_params, NULL, NULL, NULL, 0,
-            testframe_flags, "H5Aget_type/H5Aget_space with invalid parameters");
+            test_get_attribute_space_and_type_invalid_params, NULL, NULL, NULL, 0, testframe_flags,
+            "H5Aget_type/H5Aget_space with invalid parameters");
     AddTest("test_attribute_property_lists", test_attribute_property_lists, NULL, NULL, NULL, 0,
             testframe_flags, "attribute property list operations");
-    AddTest("test_get_attribute_name", test_get_attribute_name, NULL, NULL, NULL, 0,
-            testframe_flags, "retrieval of an attribute's name");
+    AddTest("test_get_attribute_name", test_get_attribute_name, NULL, NULL, NULL, 0, testframe_flags,
+            "retrieval of an attribute's name");
     AddTest("test_get_attribute_name_invalid_params", test_get_attribute_name_invalid_params, NULL, NULL,
             NULL, 0, testframe_flags, "retrieval of an attribute's name with invalid parameters");
     AddTest("test_get_attribute_storage_size", test_get_attribute_storage_size, NULL, NULL, NULL, 0,
             testframe_flags, "H5Aget_storage_size");
-    AddTest("test_get_attribute_info", test_get_attribute_info, NULL, NULL, NULL, 0,
-            testframe_flags, "retrieval of attribute info");
+    AddTest("test_get_attribute_info", test_get_attribute_info, NULL, NULL, NULL, 0, testframe_flags,
+            "retrieval of attribute info");
     AddTest("test_get_attribute_info_invalid_params", test_get_attribute_info_invalid_params, NULL, NULL,
             NULL, 0, testframe_flags, "retrieval of attribute info with invalid parameters");
-    AddTest("test_rename_attribute", test_rename_attribute, NULL, NULL, NULL, 0,
-            testframe_flags, "attribute renaming");
+    AddTest("test_rename_attribute", test_rename_attribute, NULL, NULL, NULL, 0, testframe_flags,
+            "attribute renaming");
     AddTest("test_rename_attribute_invalid_params", test_rename_attribute_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "attribute renaming with invalid parameters");
     AddTest("test_attribute_iterate_group", test_attribute_iterate_group, NULL, NULL, NULL, 0,
@@ -11624,23 +11622,24 @@ H5_api_attribute_test_add(void)
     AddTest("test_attribute_iterate_0_attributes", test_attribute_iterate_0_attributes, NULL, NULL, NULL, 0,
             testframe_flags, "attribute iteration on object with 0 attributes");
     AddTest("test_attribute_compound_subset", test_attribute_compound_subset, NULL, NULL, NULL, 0,
-            testframe_flags, "verification of attribute data using H5Awrite then H5Aread with compound type subsets");
+            testframe_flags,
+            "verification of attribute data using H5Awrite then H5Aread with compound type subsets");
     AddTest("test_attribute_string_encodings", test_attribute_string_encodings, NULL, NULL, NULL, 0,
             testframe_flags, "string encoding read/write correctness on attributes");
-    AddTest("test_delete_attribute", test_delete_attribute, NULL, NULL, NULL, 0,
-            testframe_flags, "attribute deletion");
+    AddTest("test_delete_attribute", test_delete_attribute, NULL, NULL, NULL, 0, testframe_flags,
+            "attribute deletion");
     AddTest("test_delete_attribute_invalid_params", test_delete_attribute_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "attribute deletion with invalid parameters");
-    AddTest("test_attribute_exists", test_attribute_exists, NULL, NULL, NULL, 0,
-            testframe_flags, "attribute existence");
+    AddTest("test_attribute_exists", test_attribute_exists, NULL, NULL, NULL, 0, testframe_flags,
+            "attribute existence");
     AddTest("test_attribute_exists_invalid_params", test_attribute_exists_invalid_params, NULL, NULL, NULL, 0,
             testframe_flags, "attribute existence with invalid parameters");
-    AddTest("test_attribute_duplicate_id", test_attribute_duplicate_id, NULL, NULL, NULL, 0,
-            testframe_flags, "duplicated IDs for an attribute");
-    AddTest("test_attribute_many", test_attribute_many, NULL, NULL, NULL, 0,
-            testframe_flags, "creating many attributes");
-    AddTest("test_get_number_attributes", test_get_number_attributes, NULL, NULL, NULL, 0,
-            testframe_flags, "retrieval of the number of attributes on an object");
-    AddTest("test_attr_shared_dtype", test_attr_shared_dtype, NULL, NULL, NULL, 0,
-            testframe_flags, "shared datatype for attributes");
+    AddTest("test_attribute_duplicate_id", test_attribute_duplicate_id, NULL, NULL, NULL, 0, testframe_flags,
+            "duplicated IDs for an attribute");
+    AddTest("test_attribute_many", test_attribute_many, NULL, NULL, NULL, 0, testframe_flags,
+            "creating many attributes");
+    AddTest("test_get_number_attributes", test_get_number_attributes, NULL, NULL, NULL, 0, testframe_flags,
+            "retrieval of the number of attributes on an object");
+    AddTest("test_attr_shared_dtype", test_attr_shared_dtype, NULL, NULL, NULL, 0, testframe_flags,
+            "shared datatype for attributes");
 }
